@@ -1,0 +1,85 @@
+/**app.wxss**/
+
+.flexRowBetween{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+}
+.flexRowCenter{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.flexRowBetween1{
+	display:flex;
+	justify-content:space-between;
+}
+.flexRowCenter1{
+	display:flex;
+	justify-content:conter;
+}
+.avoidOverflow{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+/*************左右编剧2.5%****************/
+.w750{
+	padding:0rpx 20rpx;
+}
+.padding30{
+	padding:0rpx 4%;
+	width:92%;
+}
+.w710{
+	width:100%;
+}
+.space1{
+	width:1%;
+}
+/***********navbar***********/
+.navbar{
+	height:120rpx;
+	width:100%;
+	position:fixed;
+	bottom:0rpx;
+	z-index:999;
+	background:#fff;
+	display:flex;
+	justify-content:center;
+	border-top:solid 1px #dbdbdb;
+	align-items:center;
+	box-shadow:5rpx 0 15rpx #f9b3b0;
+	margin-top:120rpx;
+}
+.navbar_item{
+
+	width:33.3%;
+	text-align:center;
+
+}
+.navbar .text{
+	color:#656565;
+}
+.navbar .this-text{
+	color:#f2665f;
+}
+
+.navigator-hover {
+	background:none;
+	color:#f2665f;
+}
+.submit_info{
+margin:0rpx 25rpx;
+width:700rpx;
+height:88rpx;
+line-height:88rpx;
+text-align:center;
+font-size:36rpx;
+border-radius:50rpx;
+color:#fff;
+background:#f2665f;
+border-radius:10rpx;}
+.space_bottom{
+	height:140rpx;
+}

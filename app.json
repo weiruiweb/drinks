@@ -1,0 +1,39 @@
+{
+  "pages":[
+     "pages/Index/index",
+      "pages/Dishes/dishes",
+      "pages/dishesList/dishesList",
+      "pages/User/user",
+      "pages/userPayment/userPayment",
+      "pages/userChongzhi/userChongzhi",
+      "pages/userGroup/userGroup",
+      "pages/userDiscount/userDiscount",
+      "pages/userAddress/userAddress",
+      "pages/userAddressNew/userAddressNew",
+      "pages/userOrder/userOrder",
+      "pages/userOrderComment/userOrderComment",
+      "pages/userComment/userComment",
+      "pages/userDeatil/userDeatil",
+      "pages/userTake/userTake",
+      "pages/group/group",
+      "pages/queue/queue",
+      "pages/queueTime/queueTime",
+      "pages/discount/discount",
+      "pages/coldDishes/coldDishes",
+      "pages/hotDishes/hotDishes",
+      "pages/dishes1/dishes1",
+      "pages/dishes2/dishes2",
+      "pages/dishesComfirm/dishesComfirm",
+      "pages/dishesPayment/dishesPayment",
+      "pages/takeDeatil/takeDeatil"
+
+      
+    
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#f2665f",
+    "navigationBarTitleText": "点菜",
+    "navigationBarTextStyle":"white"
+  }
+}
