@@ -1,0 +1,30 @@
+<!--indexRegular.wxml-->
+<view class="indexRegular w750">
+ 	<view class="regular_bg">
+ 		<image src="/images/regular1.png"></image>
+ 		<view class="regular1">规则1规则</view>
+ 	</view>
+ 	<view class="regular_cont">
+ 		<view class="regular_list">1. 内容内容内容内容内容内容内容内容内容内容内容内容</view>
+ 		<view class="regular_list">2. 内容内容内容内容内容内容内容内容内容内容内容内容</view>
+ 		<view class="regular_list">3. 内容内容内容内容内容内容内容内容内容内容内容内容</view>
+ 	</view>
+ 	<view class="regular_bg1">
+ 		<image src="/images/regular2.png"></image>
+ 		<view class="regular2">规则1规则</view>
+ 	</view>
+ 	<view class="regular_cont">
+ 		<view class="regular_list">1. 内容内容内容内容内容内容内容内容内容内容内容内容</view>
+ 		<view class="regular_list">2. 内容内容内容内容内容内容内容内容内容内容内容内容</view>
+ 		<view class="regular_list">3. 内容内容内容内容内容内容内容内容内容内容内容内容</view>
+ 	</view>
+ 	<view class="regular_bg2">
+ 		<image src="/images/regular3.png"></image>
+ 		<view class="regular3">规则1规则</view>
+ 	</view>
+ 	<view class="regular_cont">
+ 		<view class="regular_list">1. 内容内容内容内容内容内容内容内容内容内容内容内容</view>
+ 		<view class="regular_list">2. 内容内容内容内容内容内容内容内容内容内容内容内容</view>
+ 		<view class="regular_list">3. 内容内容内容内容内容内容内容内容内容内容内容内容</view>
+ 	</view>
+</view>

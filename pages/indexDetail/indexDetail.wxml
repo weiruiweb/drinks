@@ -1,0 +1,94 @@
+<!--index.wxml-->
+<view class="page-body">
+    <view class="page-section page-section-spacing swiper">
+      <swiper
+        indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
+        interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
+        <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+            <image src="{{item}}"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+</view> 
+<view class="w750" style="height:120rpx;align-items:center;border-bottom:solid 1px #e0e0e0;background:#fff;">
+  <view class="pro_buy flexRowBetween">
+    <view class="pro_price">
+      <view  class="flexRowBetween" style="width:80%;height:80rpx;">
+        <view class="sale_price">
+          <text class="txt1">¥</text>
+          <text class="txt2">999.00</text>
+        </view>
+        <view class="yuan">¥1999</view>
+      </view>
+    </view>
+    <view class="pro_price" bindtap="orderComfirm">
+      
+      <view class="buy">立即购买</view>
+    </view>
+  </view>
+</view>
+<view class="w750 product">
+  <view class="pro_tlt">标题标题标题标题标题标题标题标</view>
+  <view class="pro_cont">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内 容内容内容内容内容内容内容内容内容内容内容内容内容内容内容 内容</view>
+</view>
+<view class="pro_detail">
+  <view class="detail_two flexRowBetween">
+    <view class="detail_img {{isChoose ==0?'add_bg':''}}" data-id="0" bindtap="changeTab">
+        图文详情
+    </view>
+    <view class="detail_txt {{isChoose ==1?'add_bg1':''}}" data-id="1" bindtap="changeTab">
+        商品详情
+    </view>
+  </view>
+  <view class="changeCont" style="{{isChoose ==0?'display:block':''}}">
+      <view class="detail_list flexRowBetween1">
+        <image src="/images/product.jpg"></image>
+      </view>
+     
+  </view>
+  <view class="changeCont"  style="{{isChoose ==1?'display:block':''}}">
+      <view class="detail_list flexRowBetween1">
+        <view class="detail_name">【商品名称】</view>
+        <view class="detail_cont">描述描述描述描述描述描述描述描述描 述描述描述描述描述描述</view>
+      </view>
+      <view class="detail_list flexRowBetween1">
+        <view class="detail_name">【商品名称】</view>
+        <view class="detail_cont">描述描述描述描述描述描述描述描述描 述描述描述描述描述描述</view>
+      </view>
+      <view class="detail_list flexRowBetween1">
+        <view class="detail_name">【商品名称】</view>
+        <view class="detail_cont">描述描述描述描述描述描述描述描述描 述描述描述描述描述描述</view>
+      </view>
+    </view>
+  </view>
+<view class="navbar">
+    
+      <view class="navbar_item" bindtap="index">
+      
+          <view class="nav_img">
+            <image src="/images/navbar1-a.png" style="width:46rpx;height:50rpx;"></image>
+          </view>
+          <view class="text this-text" style="{{fonts[2].font}}">首页</view>
+
+      </view>
+    
+    <view class="navbar_item" bindtap="sort">
+   
+        <view class="nav_img">
+           <image src="/images/navbar2.png" style="width:46rpx;height:50rpx;"></image>
+        </view>
+        <view class="text" style="{{fonts[2].font}}">关于我们</view>
+    
+    </view>
+  
+    <view class="navbar_item"  bindtap="User">
+   
+        <view class="nav_img">
+            <image src="/images/navbar3.png" style="width:46rpx;height:50rpx;"></image>
+        </view>
+        <view class="text" style="{{fonts[2].font}}">我的</view>
+
+    </view>
+</view>

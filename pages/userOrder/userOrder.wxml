@@ -1,145 +1,154 @@
 <!--userOrder.wxml-->
+<view class="order_sort" style="{{fonts[5].font}}">
+  <view class="order_click" data-id="0" bindtap="order_click" >
+      <view class="sort_txt"  style="{{currentId == 0?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">全部</view>
+  </view>
+   <view class="order_click" data-id="1" bindtap="order_click" style="{{currentId == 1?'color:#550f0f':''}}">
+      
+      <view class="sort_txt"  style="{{currentId == 1?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">待付款</view>
+  </view>
+  <view class="order_click" data-id="2" bindtap="order_click" style="{{currentId == 2?'color:#550f0f':''}}">
+      <view class="sort_txt"  style="{{currentId == 2?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">待发货</view>
+  </view>
+  <view class="order_click" data-id="3" bindtap="order_click" style="{{currentId == 3?'color:#550f0f':''}}">
 
+      <view class="sort_txt"  style="{{currentId == 3?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">待收货货</view>
+  </view>
+</view>
 <view id="order">
   <view class="order_list">
     <view class="order_tlt">
       <view class="order_title">
         <view class="order_data" style="{{fonts[3].font}}">
-          订单号:0212315 <text class="time" style="margin-left:20rpx;color:#666;">2018-2-18</text>
+          交易时间:2018-2-18
         </view>
-        <view class="order_datas" style="{{fonts[2].font}}">
-          正在制作中
+        <view class="order_data" style="{{fonts[2].font}}">
+          等待买家发货
         </view>
       </view>
     </view>
     <view class="order_infor">
-      <view class="order_item flexRowBetween">
+      <view class="order_item">
         <view class="order_left">
           <image src="/images/product.jpg"></image>
         </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
+        <view class="order_right">
+          <view class="orderProname" style="{{fonts[3].font}}">
+            商品名称
+          </view>
+          <view class="order_attr">
+            <view class="order_number"  style="{{fonts[5].font}}">
+              X1
+            </view>
+            <view class="order_attrs"  style="{{fonts[5].font}}">
+              商品属性
+            </view>
+            <view class="order_credit"  >
+              <view class="order_credit1" style="{{fonts[2].font}}">积分</view>
+              <view class="order_credit2" style="{{fonts[3].font}}">266.00</view>
+            </view>
+          </view>
         </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-      </view>
-    </view>
-    <view class="order_numbers flexRowBetween">
-      <view class="order_time" style="color:#666;font-size:24rpx;">
-        提交订单已：10分钟
-      </view>
-      <view class="order_total">
-      <text style="margin-right:20rpx;">共8件</text>合计：<text style="color:#f2665f;">688元</text>
       </view>
     </view>
     <view class="order_handle">
       <view class="order_del">
-          <view class="del_btn order_det" style="{{fonts[3].font}}" bindtap="takeDeatil">外卖订单</view>
-          <view class="del_btn order_det" style="{{fonts[3].font}}" bindtap="userDeatil">订单详情</view>
-          <view class="del_btn" style="{{fonts[3].font}}">取消订单</view>
+          <view class="del_btn" style="{{fonts[3].font}}">删除</view>
       </view>
-    
+      <view class="order_total">
+        <text style="{{fonts[4].font}}" class="text2">合计：</text>
+        <text style="{{fonts[4].font}}" class="text1">¥3999</text>
+      </view>
     </view>
   </view>
   <view class="order_list">
     <view class="order_tlt">
       <view class="order_title">
         <view class="order_data" style="{{fonts[3].font}}">
-          订单号:0212315 <text class="time" style="margin-left:20rpx;color:#666;">2018-2-18</text>
+          交易时间:2018-2-18
         </view>
-        <view class="order_datas" style="{{fonts[2].font}}">
-          正在制作中
+        <view class="order_data" style="{{fonts[2].font}}">
+          等待买家发货
         </view>
       </view>
     </view>
     <view class="order_infor">
-      <view class="order_item flexRowBetween">
+      <view class="order_item">
         <view class="order_left">
           <image src="/images/product.jpg"></image>
         </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
+        <view class="order_right">
+          <view class="orderProname" style="{{fonts[3].font}}">
+            商品名称
+          </view>
+          <view class="order_attr">
+            <view class="order_number"  style="{{fonts[5].font}}">
+              X1
+            </view>
+            <view class="order_attrs"  style="{{fonts[5].font}}">
+              商品属性
+            </view>
+            <view class="order_credit"  >
+              <view class="order_credit1" style="{{fonts[2].font}}">积分</view>
+              <view class="order_credit2" style="{{fonts[3].font}}">266.00</view>
+            </view>
+          </view>
         </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-      </view>
-    </view>
-    <view class="order_numbers flexRowBetween">
-      <view class="order_time" style="color:#666;font-size:24rpx;">
-        提交订单已：10分钟
-      </view>
-      <view class="order_total">
-      <text style="margin-right:20rpx;">共8件</text>合计：<text style="color:#f2665f;">688元</text>
       </view>
     </view>
     <view class="order_handle">
       <view class="order_del">
-          <view class="del_btn order_det" style="{{fonts[3].font}}" bindtap="userOrderComment">去评价</view>
-          <view class="del_btn order_det" style="{{fonts[3].font}}">订单详情</view>
-          <view class="del_btn " style="{{fonts[3].font}}">取消订单</view>
-
+          <view class="del_btn" style="{{fonts[3].font}}">删除</view>
       </view>
-    
+      <view class="order_total">
+        <text style="{{fonts[4].font}}" class="text2">合计：</text>
+        <text style="{{fonts[4].font}}" class="text1">¥3999</text>
+      </view>
     </view>
   </view>
   <view class="order_list">
     <view class="order_tlt">
       <view class="order_title">
         <view class="order_data" style="{{fonts[3].font}}">
-          订单号:0212315 <text class="time" style="margin-left:20rpx;color:#666;">2018-2-18</text>
+          交易时间:2018-2-18
         </view>
-        <view class="order_datas" style="{{fonts[2].font}}">
-          正在制作中
+        <view class="order_data" style="{{fonts[2].font}}">
+          等待买家发货
         </view>
       </view>
     </view>
     <view class="order_infor">
-      <view class="order_item flexRowBetween">
+      <view class="order_item">
         <view class="order_left">
           <image src="/images/product.jpg"></image>
         </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
+        <view class="order_right">
+          <view class="orderProname" style="{{fonts[3].font}}">
+            商品名称
+          </view>
+          <view class="order_attr">
+            <view class="order_number"  style="{{fonts[5].font}}">
+              X1
+            </view>
+            <view class="order_attrs"  style="{{fonts[5].font}}">
+              商品属性
+            </view>
+            <view class="order_credit"  >
+              <view class="order_credit1" style="{{fonts[2].font}}">积分</view>
+              <view class="order_credit2" style="{{fonts[3].font}}">266.00</view>
+            </view>
+          </view>
         </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-      </view>
-    </view>
-    <view class="order_numbers flexRowBetween">
-      <view class="order_time" style="color:#666;font-size:24rpx;">
-        提交订单已：10分钟
-      </view>
-      <view class="order_total">
-      <text style="margin-right:20rpx;">共8件</text>合计：<text style="color:#f2665f;">688元</text>
       </view>
     </view>
     <view class="order_handle">
       <view class="order_del">
-          <view class="del_btn order_det" style="{{fonts[3].font}}">订单详情</view>
-          <view class="del_btn" style="{{fonts[3].font}}">取消订单</view>
+          <view class="del_btn" style="{{fonts[3].font}}">删除</view>
       </view>
-    
+      <view class="order_total">
+        <text style="{{fonts[4].font}}" class="text2">合计：</text>
+        <text style="{{fonts[4].font}}" class="text1">¥3999</text>
+      </view>
     </view>
   </view>
- </view>  
+</view>

@@ -19,13 +19,14 @@
 	justify-content:conter;
 }
 .avoidOverflow{
-	overflow:hidden;
+	overflow-y:hidden;
 	text-overflow:ellipsis;
 	white-space:nowrap;
 }
 /*************左右编剧2.5%****************/
 .w750{
-	padding:0rpx 20rpx;
+	padding:0rpx 2.6%;
+	width:94.8%;
 }
 .padding30{
 	padding:0rpx 4%;
@@ -62,7 +63,7 @@
 	color:#656565;
 }
 .navbar .this-text{
-	color:#f2665f;
+	color:#550f0f;
 }
 
 .navigator-hover {
@@ -70,16 +71,28 @@
 	color:#f2665f;
 }
 .submit_info{
-margin:0rpx 25rpx;
-width:700rpx;
-height:88rpx;
-line-height:88rpx;
-text-align:center;
-font-size:36rpx;
-border-radius:50rpx;
-color:#fff;
-background:#f2665f;
-border-radius:10rpx;}
-.space_bottom{
-	height:140rpx;
+	margin:0rpx 25rpx;
+	width:700rpx;
+	height:88rpx;
+	line-height:88rpx;
+	text-align:center;
+	font-size:36rpx;
+	border-radius:50rpx;
+	color:#fff;
+	background:linear-gradient(to right,rgba(113,36,36,1.00),rgba(169,103,103,1.00));
+	border-radius:10rpx;}
+	.space_bottom{
+		height:140rpx;
+	}
+
+.more{
+	width:180rpx;
+	height:50rpx;
+	line-height:50rpx;
+	text-align:center;
+	margin:0 auto;
+	border-radius:30rpx;
+	background:linear-gradient(to right,rgba(113,36,36,1.00),rgba(169,103,103,1.00));
+	color:#fff;
+	font-size:24rpx;
 }

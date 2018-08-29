@@ -11,8 +11,13 @@ page{
 	background:#f5f5f5}
 .address_item{
 	border-bottom:solid 1px #ececec;
-	padding:40rpx 25rpx;
+	padding:40rpx 2.6%;
 	background:#fff;
+	width:94.8%;
+}
+.address_left{
+	width:70%;
+	overflow:hidden;
 }
 .address_left .text1{
 	color:#262626;
@@ -23,6 +28,9 @@ page{
 .address_right{
 	font-size:30rpx;
 	color:#262626;
+	width:30%;
+	overflow:hidden;
+	text-align:right;
 }
 .address_set{
 	padding:20px 25rpx;
@@ -30,8 +38,14 @@ page{
 	background:#fff;
 	justify-content:center;
 	}
-.address_set text{font-size:24rpx;}
-.address_set .default{color:#f2665f;width:71%;}
+.address_set .text{font-size:24rpx; }
+.address_set .default{
+	color:#550f0f;width:71%;
+	align-items:center;
+	height:30rpx;
+	display:flex;
+	align-items:center;
+	}
 .address_set .default image{
 	margin-right:15px;
 	width:29rpx;
@@ -41,7 +55,8 @@ page{
 	height:26rpx;
 	margin-right:10rpx;
 }
-.edit{color:#7d7d7d;width:15%}
+.edit{color:#7d7d7d;width:15%;display:flex;
+	align-items:center;}
 .de_color{color:#7d7d7d}
 .submit_info{
 margin-top:0rpx;

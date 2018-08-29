@@ -1,76 +1,70 @@
-/**mygroup.wxss**/
-page{
-	background:#f5f5f5;
+.team_tlt{
+	align-items:center;
+	padding:0rpx 20rpx;
+	height:110rpx;
 }
-.mygroup{
-	height:64rpx;
-	padding:13rpx 0rpx;
-	background:#fff;
+.next_bank{
+	color:#2e2e2e;
+	border-left:solid 2px #550f0f;
+	padding-left:20rpx;
 }
-.group_success{
-	text-align:center;
-	font-size:30rpx;
+.next_number{
 	color:#666;
-	width:33.3%;
-	height:64rpx;
-	line-height:64rpx;
 }
-.this_status text{
-	color:#fe5678;
-	border-bottom:2rpx solid #fe5678;
-	padding-bottom:18rpx;
+.next_number text{
+	color:#550f0f;
 }
-.group_item{
-	margin-top:20rpx;
-	background:#fff;
-	padding:0rpx 30rpx;
-	height:220rpx;
+.date{
+	height:90rpx;
+	border-top:solid 1px #ccc;
+	border-bottom:solid 1px #ccc;
+	display:flex;
+	align-items: center;
+  	justify-content: center;
+  	color:#666;
 }
-.group_list{
-	display:none;
-	
-
+.date_left{
+	height:70rpx;
 }
-.this_group{
-	display:block;
-}
-.group_info{
-	width:65%;
-	height:142rpx;
-}
-.group_status{
-	width:35%;
+.date_item{
+	height:70rpx;
+	border-right:solid 1px #ccc;
+	width:50%;
 	text-align:center;
-	height:142rpx;
+	display:flex;
+	align-items: center;
+  	justify-content: center;
 }
-.group_info text{
-	font-size:30rpx;
-
+.date_item .text{
+	
+	height:50%;
 }
-.group_info .text1{
-	color:#999;
-}
-.group_info .text2{
-	margin-left:30rpx;
-	color:#999;
-	border-left:solid 1px #999;
-	padding-left:28rpx;
-}
-.data{
-	color:#333;
-}
-.circle{
-	width:10rpx;
+.date_item image{
+	width:17rpx;
 	height:10rpx;
-	margin-right:10rpx;
+	margin-left:10rpx;
 }
-.status{
-	width:186rpx;
-	height:145rpx;
+.team_list{
+	padding:40rpx 20rpx 20rpx;
+	border-bottom:solid 1px #ccc;
 }
-.group_top{
-	height:60%;
+.team_item{
+	height:78rpx;
+	display:flex;
+	align-items: center;
+  	justify-content: center;
 }
-.my_name{
-	height:40%;
+.team_left{
+	width:14%;
+	text-align:left;
+}
+.team_right{
+	width:86%;
+}
+.team_left image{
+	width:78rpx;
+	height:78rpx;
+}
+.teat_add{
+	color:#666;
 }

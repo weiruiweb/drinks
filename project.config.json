@@ -24,13 +24,78 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 9,
+			"list": [
+				{
+					"id": -1,
+					"name": "about",
+					"pathName": "pages/about/about",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "index",
+					"pathName": "pages/Index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "user",
+					"pathName": "pages/User/user",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "manner",
+					"pathName": "pages/userAddress/userAddress",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "order",
+					"pathName": "pages/userOrder/userOrder",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "regular",
+					"pathName": "pages/indexRegular/indexRegular",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "credit",
+					"pathName": "pages/userCredit/userCredit",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "deatil",
+					"pathName": "pages/indexDetail/indexDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "message",
+					"pathName": "pages/userMessage/userMessage",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "confirm",
+					"pathName": "pages/confirmOrder/confirmOrder",
+					"query": ""
+				}
+			]
 		}
 	}
 }

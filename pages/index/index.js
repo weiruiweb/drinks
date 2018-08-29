@@ -4,51 +4,114 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+
+    currentId:0,
+    text: '这是一条会滚动的文字滚来滚去的文字跑马灯，哈哈哈哈哈哈哈哈',
+    marqueePace: 0.5,//滚动速度
+    marqueeDistance: 0,//初始滚动距离
+    marqueeDistance2: 0,
+    marquee2copy_status: false,
+    marquee2_margin: 60,
+    size: 14,
+    orientation: 'left',//滚动方向
+    interval: 20 // 时间间隔
+    
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+ 
+   onShow: function () {
+    // 页面显示
+    var vm = this;
+    var length = vm.data.text.length * vm.data.size;//文字长度
+    var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度
+    vm.setData({
+      length: length,
+      windowWidth: windowWidth,
+      marquee2_margin: length < windowWidth ? windowWidth - length : vm.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白
+    });
+  
+    vm.run2();// 第一个字消失后立即从右边出现
+  },
+ 
+  run2: function () {
+    var vm = this;
+    var interval = setInterval(function () {
+      if (-vm.data.marqueeDistance2 < vm.data.length) {
+        // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
+        vm.setData({
+          marqueeDistance2: vm.data.marqueeDistance2 - vm.data.marqueePace,
+          marquee2copy_status: vm.data.length + vm.data.marqueeDistance2 <= vm.data.windowWidth + vm.data.marquee2_margin,
+        });
+      } else {
+        if (-vm.data.marqueeDistance2 >= vm.data.marquee2_margin) { // 当第二条文字滚动到最左边时
+          vm.setData({
+            marqueeDistance2: vm.data.marquee2_margin // 直接重新滚动
+          });
+          clearInterval(interval);
+          vm.run2();
+        } else {
+          clearInterval(interval);
+          vm.setData({
+            marqueeDistance2: -vm.data.windowWidth
+          });
+          vm.run2();
+        }
+      }
+    }, vm.data.interval);
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+     this.setData({
+          isHidden: false,
+          fonts:app.globalData.font
+        });
+        var that = this;
+        setTimeout(function(){
+          that.setData({
+              isHidden: true
+          });
+         
+        }, 2000);
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+  
+  
+  sort:function(){
+     wx.redirectTo({
+      url:'/pages/about/about'
+    })
+  },
+  index:function(){
+     wx.redirectTo({
+      url:'/pages/Index/index'
+    })
+  },
+  User:function(){
+     wx.redirectTo({
+      url:'/pages/User/user'
+    })
+  },
+  indexRegular:function(){
+     wx.navigateTo({
+      url:'/pages/indexRegular/indexRegular'
+    })
+  },
+  indexDetail:function(){
+     wx.navigateTo({
+      url:'/pages/indexDetail/indexDetail'
+    })
+  },
+  click_this:function(e){
+
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      currentId:e.currentTarget.dataset.id
+    })
+  },
+  close:function(){
+    // var isShow == !this.data.isShow
+    this.setData({
+      isShow:true
     })
   }
+ 
 })
+
+  

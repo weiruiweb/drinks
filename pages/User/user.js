@@ -5,31 +5,37 @@ const app = getApp()
 
 Page({
   data: {
-    
+    isShow:false,
   },
   onLoad: function () {
     this.setData({
       fonts:app.globalData.font
     })
   },
-  userPayment:function(){
-    wx.navigateTo({
-      url:'/pages/userPayment/userPayment'
+ tel:function () {
+    wx.makePhoneCall({
+      phoneNumber: '15888888888',
     })
   },
-   userChongzhi:function(){
+ 
+  userCredit:function(){
     wx.navigateTo({
-      url:'/pages/userChongzhi/userChongzhi'
+      url:'/pages/userCredit/userCredit'
     })
-  }, 
+  },
+  userMessage:function(){
+    wx.navigateTo({
+      url:'/pages/userMessage/userMessage'
+    })
+  },
   userGroup:function(){
     wx.navigateTo({
       url:'/pages/userGroup/userGroup'
     })
   },
-  discount:function(){
+  userContact:function(){
     wx.navigateTo({
-      url:'/pages/userDiscount/userDiscount'
+      url:'/pages/userContact/userContact'
     })
   },
   address:function(){
@@ -37,27 +43,21 @@ Page({
       url:'/pages/userAddress/userAddress'
     })
   }, 
-  userOrder:function(){
+  order:function(){
     wx.navigateTo({
       url:'/pages/userOrder/userOrder'
     })
   }, 
   
-  userComment:function(){
+  userShare:function(){
     wx.navigateTo({
-      url:'/pages/userComment/userComment'
+      url:'/pages/userShare/userShare'
     })
   }, 
-  userTakeOut:function(){
-    wx.navigateTo({
-      url:'/pages/userTake/userTake'
-    })
-  },
- 
-
-   sort:function(){
+  
+  sort:function(){
      wx.redirectTo({
-      url:'/pages/Dishes/dishes'
+      url:'/pages/about/about'
     })
   },
   index:function(){
@@ -68,6 +68,17 @@ Page({
   User:function(){
      wx.redirectTo({
       url:'/pages/User/user'
+    })
+  },
+  userContact:function(){
+    var isShow = !this.data.isShow;
+    this.setData({
+      isShow:isShow
+    })
+  },
+  cancel:function(){
+    this.setData({
+      isShow:false
     })
   }
 })

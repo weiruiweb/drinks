@@ -1,58 +1,81 @@
 <!--User.wxml-->
 
 <view class="users">
+	<view class="user_bg">
+		<image src="/images/user_banber.png"></image>
+	</view>
 	<view class="user_top flexRowBetween">
 		<view class="user_Left">
 			<view class="user_img">
 				<open-data type="userAvatarUrl"></open-data>
 			</view>
 		</view>
-		 <view class="user_word">
-		 	<view class="user_name"><open-data type="userNickName" lang="zh_CN"></open-data></view>
-		 	<view class="phone">158767678</view>
+		 <view class="user_word flexRowBetween">
+		 	<view class="top_left">
+			 	<view class="user_name"><open-data type="userNickName" lang="zh_CN"></open-data></view>
+			 	<view class="phone">
+			 
+			 		<image src="/images/user_icon11.png" class="member_bank"></image>
+			 
+			 		<view class="member_bank1">等级：普通会员</view>
+			 	</view>
+			 </view>
+			 <view class="top_right" bindtap="userCredit">
+			 	<view class="user_money">
+			 		<image src="/images/user_icon10.png"></image>
+			 		<view class="text">¥890</view>
+			 	</view>
+			 	<view class="user_comm">我的佣金</view>
+			 </view>
 		 </view>
-
+	</view>
+</view>
+<view class="order" bindtap="order">
+		<view class="user_order flexRowBetween">
+			<view class="order_left flexRowBetween">
+				<image src="/images/user_icon1.png"></image>
+				<view class="my_order">我的订单</view>
+			</view>
+			
+			<view class="check_order flexRowBetween">
+				<view style="fonts[2].font">
+					查看订单
+				</view>
+				<image src="/images/next_page.jpg"></image>
+			</view>
+		</view>
+</view>
+<view class="process ">
+	<view class="process_cont flexRowBetween">
+		<view class="peocess_item item_other" bindtap="order">
+			<image src="/images/user_icon7.png"></image>
+			<view class="text">待付款</view>
+		</view>
+		<view class="peocess_item">
+			<image src="/images/user_icon8.png"></image>
+			<view class="text">待发货</view>
+		</view>
+		<view class="peocess_item">
+			<image src="/images/user_icon9.png"></image>
+			<view class="text">待收货</view>
+		</view>
 	</view>
 </view>
 <view id="user">
-	<view class="process flexRowBetween">
-		<view class="process_left">
-			<view class="procees">
-				<view style="font-size:34rpx;color:#333;">
-					0
-				</view>
-				<view style="font-size:34rpx;color:#333">
-					我的余额
-				</view>
-			</view>
-		</view>
-		<view class="process_right flexRowBetween">
-			<view id="menus_up">
-				<view class="menus_up" bindtap="userPayment">
-					买单
-				</view>
-			</view>
-			<view id="menus_up">
-				<view class="menus_up" bindtap="userChongzhi">
-					去充值
-				</view>
-			</view>
-		</view>
-	</view>
 	<view class="user_all">
-		<view class="user_infor flexRowBetween"  bindtap="userGroup">
+		<view class="user_infor flexRowBetween"  bindtap="userMessage">
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon2.png"></image>
-				<text>我的团购</text>
+				<text>我的消息</text>
 			</view>
 			<view class="next_page">
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
-		<view class="user_infor flexRowBetween" bindtap="discount">
+		<view class="user_infor flexRowBetween"  bindtap="userGroup">
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon3.png"></image>
-				<text>我的优惠券</text>
+				<text>我的团队</text>
 			</view>
 			<view class="next_page">
 				<image src="/images/next_page.jpg"></image>
@@ -67,28 +90,19 @@
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
-		<view class="user_infor flexRowBetween" bindtap="userOrder">
+		<view class="user_infor flexRowBetween" bindtap="userContact">
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon5.png"></image>
-				<text>我的订单 </text>
+				<text>联系我们 </text>
 			</view>
 			<view class="next_page">
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
-		<view class="user_infor flexRowBetween" bindtap="userComment">
+		<view class="user_infor flexRowBetween" bindtap="userShare">
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon6.png"></image>
-				<text>我的点评</text>
-			</view>
-			<view class="next_page">
-				<image src="/images/next_page.jpg"></image>
-			</view>
-		</view>
-		<view class="user_infor flexRowBetween" bindtap="userTakeOut">
-			<view class="user_left flexRowBetween">
-				<image src="/images/user_icon6.png"></image>
-				<text>我的外卖</text>
+				<text>我的分享</text>
 			</view>
 			<view class="next_page">
 				<image src="/images/next_page.jpg"></image>
@@ -96,14 +110,30 @@
 		</view>
 	</view>
 </view>
-<view class="space_bottom" style="height:300rpx;">
+<view class="mask" style="{{isShow?'display:block':'display:none'}}">
 </view>
+<view class="contact"  style="{{isShow?'display:block':'display:none'}}">
+	<view class="contact_cont">	
+		<view class="text1">联系我们</view>
+		<view class="text2 flexRowBetween">
+			<image src="/images/phone.jpg"></image>
+			<view class="text3">18888888888</view>
+		</view>
+		<view class="call flexRowBetween">
+			<view class="call1" bindtap="tel">确定</view>
+			<view class="call1 call2" bindtap="cancel">取消</view>
+		</view>
+	</view>
+</view>
+<view class="solely" style="{{fonts[1].font}};color:#666;margin-top:30rpx;margin-bottom:150rpx;text-align:center;">
+  技术支持:西安纯粹科技有限公司
+</view> 
 <view class="navbar">
     
       <view class="navbar_item" bindtap="index">
       
           <view class="nav_img">
-            <image src="/images/navbar1-a.png" style="width:46rpx;height:50rpx;"></image>
+            <image src="/images/navbar1.png" style="width:50rpx;height:48rpx;"></image>
           </view>
           <view class="text" style="{{fonts[2].font}}">首页</view>
 
@@ -112,16 +142,16 @@
     <view class="navbar_item" bindtap="sort">
    
         <view class="nav_img">
-           <image src="/images/navbar2.png" style="width:46rpx;height:50rpx;"></image>
+           <image src="/images/navbar2.png" style="width:50rpx;height:48rpx;"></image>
         </view>
-        <view class="text" style="{{fonts[2].font}}">点菜</view>
+        <view class="text" style="{{fonts[2].font}}">关于我们</view>
     
     </view>
   
     <view class="navbar_item"  bindtap="User">
    
         <view class="nav_img">
-            <image src="/images/navbar3-a.png" style="width:46rpx;height:50rpx;"></image>
+            <image src="/images/navbar3-a.png" style="width:50rpx;height:48rpx;"></image>
         </view>
         <view class="text this-text" style="{{fonts[2].font}}">我的</view>
 

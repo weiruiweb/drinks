@@ -9,7 +9,10 @@ Page({
   },
   
   onLoad: function () {
-   
+    this.setData({
+        isHidden: false,
+        fonts:app.globalData.font
+    });
   },
   order_status:function(e){
     var current = e.currentTarget.dataset.id
@@ -17,14 +20,8 @@ Page({
       currentId:current
     })
   },
-  commentOrder:function(){
-    wx.navigateTo({
-      url:'/pages/commentOrder/commentOrder'
-    })
+ 
+  bindTimeChange: function(e) {
+    
   },
-  manageAddress:function(){
-    wx.navigateTo({
-      url:'/pages/manageAddress/manageAddress'
-    })
-  }
 })

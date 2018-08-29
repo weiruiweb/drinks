@@ -1,0 +1,57 @@
+<!--userMessage.wxml-->
+<view class="w750">
+	<view class="message_list">
+		<view class="flexRowBetween">
+		  <view class="system_mess">
+		  	<view class="system1">
+		  		公告
+		  	</view>
+		  	<view class="system2">
+		  		系统公告
+		  	</view>
+		  </view>
+		  <view class="message_right">
+		  	08-10 10:24
+		  </view>
+		</view>
+		<view class="system_cont">
+			内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内
+		</view>
+	</view>
+	<view class="message_list">
+		<view class="flexRowBetween">
+		  <view class="system_mess">
+		  	<view class="system1">
+		  		公告
+		  	</view>
+		  	<view class="system2">
+		  		系统公告
+		  	</view>
+		  </view>
+		  <view class="message_right">
+		  	08-10 10:24
+		  </view>
+		</view>
+		<view class="system_cont">
+			内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内
+		</view>
+	</view>
+	<view class="message_list">
+		<view class="flexRowBetween">
+		  <view class="system_mess">
+		  	<view class="system1">
+		  		公告
+		  	</view>
+		  	<view class="system2">
+		  		系统公告
+		  	</view>
+		  </view>
+		  <view class="message_right">
+		  	08-10 10:24
+		  </view>
+		</view>
+		<view class="system_cont">
+			内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内
+		</view>
+	</view>
+</view>

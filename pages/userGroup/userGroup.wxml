@@ -1,106 +1,85 @@
-<!--mygroup.wxml-->
-<view class="mygroup flexRowBetween">
-	<view class="group_success {{currentId == 0?'this_status':''}}" data-id="0" bindtap="order_status">
-		<text>成功</text>
+<!--userPoster.wxml-->
+<view class="team_tlt flexRowBetween">
+	<view class="next_bank" style="{{fonts[4].font}}">
+		我的下级
 	</view>
-	<view class="group_success  {{currentId == 1?'this_status':''}}"  data-id="1" bindtap="order_status" style="border-left:solid 1rpx #e2e2e2;border-right:solid 1rpx #e2e2e2">
-		<text>等待中</text>
-		
+	<view class="next_number" style="{{fonts[4].font}}">
+		总计<text >210</text>人
 	</view>
-	<view class="group_success  {{currentId == 2?'this_status':''}}"  data-id="2" bindtap="order_status">
-		<text>失败</text>
-		
-	</view>
+	
 </view>
-<view id="myGroup">
-		<view class="">
-			<view class="group_list  {{currentId == 0?'this_group':''}}">
-				<view class="flexRowBetween group_item">
-					<view class="group_info">
-						<view class="group_top">
-							<image src="/images/circle.jpg" class="circle"></image>
-							<text class="data">2018.7.28</text>
-						</view>
-						<view class="my_name">
-							<text class="text1">我是团长</text>
-							<text class="text2">花费 220.00元</text>
-						</view>
-					</view>
-					<view class="group_status">
-						<image src="/images/success.jpg" class="status"></image>
-					</view>
+<view class="date" style="{{fonts[4].font}}">
+	<view class="date_item">
+		<view class="date_left" style="color:#550f0f;">
+			<picker  mode="date" value="{{web_startTime}}" data-type="startTime" bindchange="bindTimeChange">
+			    <view class="picker text">
+			      起始日期
+			    </view>
+			    <view class="text" style="{{fonts[2].font}}">{{web_startTime}}</view>
+			</picker>
+			
+		</view>
+		<image src="/images/up_icon2.jpg"></image>
+	</view>
+	<view class="date_item">
+		<view class="date_left">
+			<picker  mode="date" value="{{web_endTime}}" data-type="endTime" bindchange="bindTimeChange">
+			    <view class="picker text">
+			      截至日期
+			    </view>
+			    <view class="text" style="{{fonts[2].font}}">{{web_endTime}}</view>
+			</picker>
+		</view>
+		<image src="/images/up_icon1.jpg"></image>
+	</view>	
+</view>
+<view class="team_all">
+	<view class="team_list">
+		<view class="team_item">
+			<view class="team_left">
+				<image src="/images/team_img.png"></image>
+			</view>
+			<view class="team_right">
+				<view class="team_user flexRowBetween">
+					<view class="tuser_name" style="{{fonts[4].font}}">米桃子</view>
+					<view class="tuser_name" style="{{fonts[2].font}};color:#444;">2018-1-8</view>
 				</view>
-				<view class="flexRowBetween group_item">
-					<view class="group_info">
-						<view class="group_top">
-							<image src="/images/circle.jpg" class="circle"></image>
-							<text class="data">2018.7.28</text>
-						</view>
-						<text class="text1">我是团长</text>
-						<text class="text2">花费 220.00元</text>
-
-					</view>
-					<image src="/images/success.jpg" class="status"></image>
+				<view class="teat_add" style="{{fonts[1].font}}">
+					通过微信分享二维码加入团队
 				</view>
 			</view>
-
 		</view>
-		<view class="">
-			<view class="group_list {{currentId == 1?'this_group':''}}">
-				<view class="flexRowBetween group_item">
-					<view class="group_info">
-						<view class="group_top">
-							<image src="/images/circle.jpg" class="circle"></image>
-							<text class="data">2018.7.28</text>
-						</view>
-						<text class="text1">我是团长</text>
-						<text class="text2">花费 220.00元</text>
-
-					</view>
-					<image src="/images/wait.jpg" class="status"></image>
+	</view>
+	<view class="team_list">
+		<view class="team_item">
+			<view class="team_left">
+				<image src="/images/team_img.png"></image>
+			</view>
+			<view class="team_right">
+				<view class="team_user flexRowBetween">
+					<view class="tuser_name" style="{{fonts[4].font}}">米桃子</view>
+					<view class="tuser_name" style="{{fonts[2].font}};color:#444;">2018-1-8</view>
 				</view>
-				<view class="flexRowBetween group_item">
-					<view class="group_info">
-						<view class="group_top">
-							<image src="/images/circle.jpg" class="circle"></image>
-							<text class="data">2018.7.28</text>
-						</view>
-						<text class="text1">我是团长</text>
-						<text class="text2">花费 220.00元</text>
-
-					</view>
-					<image src="/images/wait.jpg" class="status"></image>
+				<view class="teat_add" style="{{fonts[1].font}}">
+					通过微信分享二维码加入团队
 				</view>
 			</view>
-
 		</view>
-		<view class="">
-			<view class="group_list {{currentId == 2?'this_group':''}}">
-				<view class="flexRowBetween group_item">
-					<view class="group_info">
-						<view class="group_top">
-							<image src="/images/circle.jpg" class="circle"></image>
-							<text class="data">2018.7.28</text>
-						</view>
-						<text class="text1">我是团长</text>
-						<text class="text2">花费 220.00元</text>
-
-					</view>
-					<image src="/images/faild.jpg" class="status"></image>
+	</view>
+	<view class="team_list">
+		<view class="team_item">
+			<view class="team_left">
+				<image src="/images/team_img.png"></image>
+			</view>
+			<view class="team_right">
+				<view class="team_user flexRowBetween">
+					<view class="tuser_name" style="{{fonts[4].font}}">米桃子</view>
+					<view class="tuser_name" style="{{fonts[2].font}};color:#444;">2018-1-8</view>
 				</view>
-				<view class="flexRowBetween group_item">
-					<view class="group_info">
-						<view class="group_top">
-							<image src="/images/circle.jpg" class="circle"></image>
-							<text class="data">2018.7.28</text>
-						</view>
-						<text class="text1">我是团长</text>
-						<text class="text2">花费 220.00元</text>
-
-					</view>
-					<image src="/images/faild.jpg" class="status"></image>
+				<view class="teat_add" style="{{fonts[1].font}}">
+					通过微信分享二维码加入团队
 				</view>
 			</view>
-
 		</view>
+	</view>
 </view>

@@ -1,13 +1,187 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="banner">
+  <view class="banner_img"><image src="/images/banner.png"></image></view>
+  
+  <view class="banner_cont">
+    <view class="banner_tlt">
+      标题标题标题
+    </view>
+    <view class="banner_keywords">黄金赋活 植物精华液</view>
+    <view class="banner_desc">黄金赋活 植物精华液黄金赋活 植物精华液黄金赋活 植物精华液黄金赋活 植物精华液</view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+</view>
+<view class="news flexRowBetween" bindtap="indexRegular">
+  <view class="news_left"><image src="/images/index_icon1.png"></image></view>
+  <view style="width:2%;"></view>
+  <view class="news_right">
+   <view class="marquee_box">
+    <view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;">
+      <text>{{text}}</text>
+      <text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;">{{text}}</text>
+    </view>
   </view>
+  
+  </view>
+  <view style="width:2%;"></view>
+</view>
+
+<!--
+<view class="example">
+  <view class="marquee_box">
+    <view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;">
+      <text>{{text}}</text>
+      <text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;">{{text}}</text>
+    </view>
+  </view>
+</view>
+-->
+<view class="product w750">
+  <view class="product_tlt">
+      <image src="/images/tlt_bg.png"></image>
+  
+      <view class="tlt_cont">产品展示</view>
+  </view>
+  <view class="product_cont" bindtap="indexDetail">
+      <view class="pro_bg"><image src="/images/product_bg.png"></image></view>
+      <view class="product_show flexRowBetween">
+          <view class="product_left">
+            <image src="/images/product.png"></image>
+          </view>
+          <view class="product_right">
+            <view class="product_intro">
+              <view class="product_tlt1">产品名称 产品名称</view>
+              <view class="product_attr">产品名称 产品名称</view>
+            </view>
+            <view class="product_buy">
+                <view class="product_price">
+                  <view class="pro_price flexRowBetween">
+                    <text>原价199</text>
+                    <text>原价199</text>
+                  </view>
+                  <view class="price_bg">
+                    <image src="/images/index_icon2.png"></image>
+                    <view class="sale_price">促销价</view>
+                  </view>
+                </view>
+
+            </view>
+            <view class="go_buy flexRowBetween">
+              <view class="buy_left">¥99.00</view>
+              <view class="buy_right"><text>立即购买</text><image src="/images/index_icon3.png"></image></view>
+            </view>
+          </view>
+      </view>
+  </view>
+  <view class="pro_show flexRowBetween">
+    <view class="show_left">
+        <view class="show1">
+          <image src="/images/product.png" class="show1_img"></image>
+        </view>
+        <view class="show1">
+            <view class="product_intro">
+              <view class="product_tlt1">产品名称 产品名称</view>
+              <view class="product_attr">产品名称 产品名称</view>
+            </view>
+            <view class="product_buy">
+                <view class="product_price">
+                  <view class="pro_price flexRowBetween">
+                    <text>原价199</text>
+                    <text>原价199</text>
+                  </view>
+                  <view class="price_bg">
+                    <image src="/images/index_icon2.png"></image>
+                    <view class="sale_price">促销价</view>
+                  </view>
+                </view>
+
+            </view>
+            <view class="go_buy flexRowBetween">
+              <view class="buy_left">¥99.00</view>
+              <view class="buy_right"><text>立即购买</text><image src="/images/index_icon3.png"></image></view>
+            </view>
+        </view>
+    </view>
+    <view class="show_right">
+      <view class="show2 ">
+        <view class="show2_cont">
+          <view class="flexRowBetween">
+            <view class="show2_left">
+              <image src="/images/product.png"></image>
+            </view>
+            <view class="show2_right">
+              <view class="text1">产品名称 </view>
+              <view class="text2">产品特性 产品特性  </view>
+            </view>
+          </view>
+          <view class="flexRowBetween">
+             <view class="show2_left">
+                  ¥99.99
+              </view>
+              <view class="show2_right">
+                  <view class="buy_btn">
+                    <text>立即购买</text>
+                    <image src="/images/index_icon3.png"></image>
+                  </view>
+              </view>
+          </view>
+        </view>
+      </view>
+      <view class="show2 ">
+        <view class="show2_cont">
+          <view class="flexRowBetween">
+            <view class="show2_left">
+              <image src="/images/product.png"></image>
+            </view>
+            <view class="show2_right">
+              <view class="text1">产品名称 </view>
+              <view class="text2">产品特性 产品特性  </view>
+            </view>
+          </view>
+          <view class="flexRowBetween">
+             <view class="show2_left">
+                  ¥99.99
+              </view>
+              <view class="show2_right">
+                  <view class="buy_btn">
+                    <text>立即购买</text>
+                    <image src="/images/index_icon3.png"></image>
+                  </view>
+              </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="solely" style="{{fonts[1].font}};color:#666;margin-top:30rpx;height:60rpx;line-height:60rpx;margin-bottom:120rpx;text-align:center;background:#f2f2f2;">
+  技术支持:西安纯粹科技有限公司
+</view> 
+<view class="navbar">
+    
+      <view class="navbar_item" bindtap="index">
+      
+          <view class="nav_img">
+            <image src="/images/navbar1-a.png" style="width:50rpx;height:48rpx;"></image>
+          </view>
+          <view class="text this-text" style="{{fonts[2].font}}">首页</view>
+
+      </view>
+    
+    <view class="navbar_item" bindtap="sort">
+   
+        <view class="nav_img">
+           <image src="/images/navbar2.png" style="width:50rpx;height:48rpx;"></image>
+        </view>
+        <view class="text" style="{{fonts[2].font}}">关于我们</view>
+    
+    </view>
+  
+    <view class="navbar_item"  bindtap="User">
+   
+        <view class="nav_img">
+            <image src="/images/navbar3.png" style="width:50rpx;height:48rpx;"></image>
+        </view>
+        <view class="text" style="{{fonts[2].font}}">我的</view>
+
+    </view>
 </view>

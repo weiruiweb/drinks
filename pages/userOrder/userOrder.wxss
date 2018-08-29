@@ -26,15 +26,15 @@ page{
 	paddding:0rpx 20rpx;
 }
 
-.order_datas{
-	color:#e62c2c;
+.order_tlt{
+	border-bottom:solid 1px #e0e0e0;
 }
 .order_title{
 	height:80rpx;
 	line-height:80rpx;
 	background:#fff;
-	width:92%;
-	padding:0px 4%;
+	width:94.8%;
+	padding:0px 2.6%;
 	display:flex;
 	justify-content:space-between;
 }
@@ -46,23 +46,23 @@ page{
 }
 .order_item{
 	height:160rpx;	
-	width:92%;
-	padding:0px 4%;
+	width:96%;
+	padding:0px 2%;
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	overflow:hidden;
-	flex-wrap:wrap;
 	
 }
 .order_left{
-	width:25%;
-	text-align:center;
+	width:26%;
+	text-align:left;
 	height:160rpx;
+	line-height:160rpx;
 }
 .order_left image{
-	width:148rpx;
-	height:148rpx;
+	width:160rpx;
+	height:160rpx;
 }
 
 .order_right{
@@ -104,18 +104,21 @@ page{
 	float:right;
 }
 .order_handle{
-background:#fff;
+	background:#fff;
 	height:100rpx;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	padding:0 2.6%;
+	width:94.8%;
 }
 .order_del{
-
-	float:right;
-	margin-top:20rpx;
-	margin-right:40rpx;
+	width:65%;
 }
 .order_total{
-	width:35%;
-
+	width:33%;
+	text-align:right;
+	padding-right:2%;
 }
 .del_btn{
 	width:160rpx;
@@ -125,33 +128,8 @@ background:#fff;
 	line-height:60rpx;
 	text-align:center;
 	float:right;
-	margin-left:40rpx;
+	margin-right:40rpx;
 	color:#666;
-}
-.order_numbers{
-	height:66rpx;
-	line-height:66rpx;
-	background:#fff;
-	clear:both;
-	width:96%;
-	padding:0rpx 2%;
-	border-bottom:solid 1px #e0e0e0;
-}
-.order_time{
-	width:36%;
-	padding-left:4%;
-}
-.order_total{
-	width:54%;
-	font-size:28rpx;
-	color:#666;
-	text-align:right;
-	padding-right:4%;
-}
-.order_det{
-	background:#f2665f;
-	color:#fff;
-	border:solid 1px #f2665f;
 }
 .text1{
 	color:#e62c2c;
