@@ -153,9 +153,11 @@
     </view>
   </view>
 </view>
-<view class="solely" style="{{fonts[1].font}};color:#666;margin-top:30rpx;height:60rpx;line-height:60rpx;margin-bottom:120rpx;text-align:center;background:#f2f2f2;">
+<view class="solely" style="{{fonts[1].font}};color:#666;margin-top:30rpx;height:60rpx;line-height:60rpx;text-align:center;background:#f2f2f2;">
   技术支持:西安纯粹科技有限公司
 </view> 
+<view style="height:120rpx;width:100%;background:#f2f2f2;">
+</view>
 <view class="navbar">
     
       <view class="navbar_item" bindtap="index">

@@ -2,13 +2,13 @@
 <view class="user_input">
 	<view class="users_detail flexRowBetween">
 		<view class="input_note">收货人:</view>
-		<input placeholder="请输入收货人"></input>
+		<input placeholder="请输入收货人" value="{{web_mainData.name}}"  data-key="name" bindblur="inputChange"></input>
 	</view>
 </view>
 <view class="user_input">
 	<view class="users_detail flexRowBetween">
 		<view class="input_note">手机号码:</view>
-		<input placeholder="请输入手机号码" style="width:64%;"></input>
+		<input placeholder="请输入手机号码" style="width:64%;" value="{{web_mainData.phone}}"  data-key="phone" bindblur="inputChange"></input>
 		<view class="address_right" style="width:13%;">
 			<text>+86</text>
 			<image src="/images/next_page.jpg"></image>
@@ -30,16 +30,17 @@
 <view class="user_input">
 	<view class="users_detail flexRowBetween">
 		<view class="input_note">详细地址:</view>
-		<input placeholder="如街道，门牌号"></input>
+		<input placeholder="如街道，门牌号" value="{{web_mainData.detail}}"  data-key="detail" bindblur="inputChange"></input>
 	</view>
 </view>
 <view class="user_input flexRowBetween">
 	<view class="input_note address_set">设为默认地址</view>
 	<view class="body-view">
-		<switch bindchange="switch2Change"/>
+		<switch bindchange="switch2Change" />
 	</view>
 </view>
-<view class="submit_info" bindtap="backAddress" style="border-radius:50rpx;">
+
+<view class="submit_info" bindtap="submit" style="border-radius:50rpx;">
 	保存
 </view>
 

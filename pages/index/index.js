@@ -59,6 +59,7 @@ Page({
       }
     }, vm.data.interval);
   },
+
   onLoad: function () {
      this.setData({
           isHidden: false,
@@ -99,12 +100,13 @@ Page({
       url:'/pages/indexDetail/indexDetail'
     })
   },
-  click_this:function(e){
 
+  click_this:function(e){
     this.setData({
       currentId:e.currentTarget.dataset.id
     })
   },
+  
   close:function(){
     // var isShow == !this.data.isShow
     this.setData({

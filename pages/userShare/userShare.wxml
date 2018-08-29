@@ -4,6 +4,6 @@
      分享二维码，领取佣金
   </view>
   <view class="poster_img">
-    <image src="/images/qcored.png"></image>
+    <image src="{{web_QrData.info.url}}"></image>
   </view>
 </view>

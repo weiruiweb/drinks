@@ -36,8 +36,8 @@
 	font-size:22rpx;
 }
 .user_cres{
-	font-size:40rpx;
-	color:#00c6f7;
+	font-size:32rpx;
+	color:#2e2e2e;
 }
 
 .date{

@@ -1,39 +1,49 @@
 //index.js
 //获取应用实例
+import {Api} from '../../utils/api.js';
+var api = new Api();
 const app = getApp()
 
+
 Page({
+
+
   data: {
-    isChoose:1,
-  },
   
-  onLoad: function () {
-   
+    QrData:[]
+
   },
-  userInfo:function(){
-    wx.navigateTo({
-      url:'/pages/userInfo/userInfo'
-    })
-  },
-   bindDateChange: function(e) {
+    
+
+  onLoad(){
+    const self = this;
+    self.getQrData();
     this.setData({
-      date: e.detail.value
+      fonts:app.globalData.font
     })
   },
- 
-  newAddress:function(){
-    wx.navigateTo({
-      url:'/pages/newAddress/newAddress'
-    })
-  },
-  discount:function(){
-    wx.navigateTo({
-      url:'/pages/discount/discount'
-    })
-  },
-  choosePay:function(e){
-    this.setData({
-      isChoose:e.currentTarget.dataset.id
-    })
-  }
+
+
+  getQrData(){
+    const self = this;
+    const postData = {};
+    postData.token = wx.getStorageSync('token');
+    postData.qrInfo = {
+      scene:wx.getStorageSync('info').user_no,
+      path:'pages/index/index',
+    };
+    postData.output = 'url';
+    postData.ext = 'png';
+    const callback = (res)=>{
+      console.log(res);
+      self.data.QrData = res;
+      self.setData({
+        web_QrData:self.data.QrData,
+      });
+     
+      wx.hideLoading();
+    };
+    api.getQrCode(postData,callback);
+ },
+
 })
