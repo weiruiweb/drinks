@@ -1,6 +1,6 @@
 {
   "pages":[
-     "pages/Index/index",
+     "pages/index/index",
      "pages/indexRegular/indexRegular",
      "pages/indexDetail/indexDetail",
      "pages/confirmOrder/confirmOrder",

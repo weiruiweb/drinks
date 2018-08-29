@@ -37,7 +37,7 @@
 }
 .user_cres{
 	font-size:40rpx;
-	color:#550f0f;
+	color:#00c6f7;
 }
 
 .date{
@@ -55,7 +55,7 @@
 .date_item{
 	height:70rpx;
 	border-right:solid 1px #ccc;
-	width:33.33%;
+	width:50%;
 	text-align:center;
 	display:flex;
 	align-items: center;
@@ -119,6 +119,6 @@
 .credit_right{
 	width:50%;
 	text-align:right;
-	color:#550f0f;
+	color:#00c6f7;
 
 }

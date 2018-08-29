@@ -62,7 +62,7 @@ Page({
   },
   index:function(){
      wx.redirectTo({
-      url:'/pages/Index/index'
+      url:'/pages/index/index'
     })
   },
   User:function(){

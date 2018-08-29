@@ -20,7 +20,7 @@ Page({
     const self = this;
     self.setData({
      fonts:app.globalData.font
-    })
+    });
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     self.getMainData();
     self.getComputeData()
@@ -104,11 +104,14 @@ Page({
     };
     self.getMainData(true);   
   },
+
+
   userInfo:function(){
     wx.navigateTo({
       url:'/pages/userInfo/userInfo'
     })
   },
+
    bindDateChange: function(e) {
     this.setData({
       date: e.detail.value
@@ -125,6 +128,7 @@ Page({
       url:'/pages/discount/discount'
     })
   },
+  
   choosePay:function(e){
     this.setData({
       isChoose:e.currentTarget.dataset.id
