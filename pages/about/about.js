@@ -26,4 +26,9 @@ Page({
       url:'/pages/User/user'
     })
   },
+  detail:function(){
+     wx.navigateTo({
+      url:'/pages/detail/detail'
+    })
+  }
 })

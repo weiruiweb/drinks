@@ -3,6 +3,7 @@
      "pages/index/index",
      "pages/indexRegular/indexRegular",
      "pages/indexDetail/indexDetail",
+     "pages/detail/detail",
      "pages/confirmOrder/confirmOrder",
       "pages/about/about",
       "pages/User/user",

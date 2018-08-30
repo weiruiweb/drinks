@@ -9,7 +9,7 @@
 			<view class="tlt_cont">公司简介</view>
 			<view class="left_line"></view>
 		</view>
-		<view class="about_cont">
+		<view class="about_cont" bindtap="detail">
 			<view class="about_txt">
 				内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内
 			</view>
