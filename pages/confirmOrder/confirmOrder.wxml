@@ -1,56 +1,54 @@
 <!--manageAddress.wxml-->
-<view id="confirmOrder">
-<view class="confirm_address" bindtap="manageAddress">
+<view id="confirmOrder" wx:if="{{web_addressData.info.data[0].name}}" bindtap="intoPath" data-path="/pages/userAddress/userAddress">
+<view class="confirm_address" style="height:200rpx;border-bottom:solid 1px #ececec">
 	<view class="order_user flexRowBetween">
-		
 			<view class="user_name">
 				<text class="text1">收货人:</text>
-				<text class="text1">米桃子</text>
+				<text class="text1">{{web_addressData.info.data[0].name}}</text>
 			</view>
 			<view class="user_phone">
-				18888888888
+				{{web_addressData.info.data[0].phone}}
 			</view>
 	</view>
+
 	<view class="user_address">
 		<view class="recive flexRowBetween">
 			<view class="map_icon" style="width:7%;text-align:left;align-items:center;height:50rpx;">
 				<image class="address_icon" src="/images/user_icon4.png"></image>
 			</view>
-			<view class="detail_address" style="width:86%;{{fonts[3].font}};height:50rpx;line-height:50rpx;">收货地址：陕西省西安市高新大都荟</view>
+			<view class="detail_address" style="width:86%;{{fonts[3].font}};height:66rpx;line-height:50rpx;">收货地址：{{web_addressData.info.data[0].province+web_addressData.info.data[0].city+web_addressData.info.data[0].country+web_addressData.info.data[0].detail}}</view>
 			<view class="next_page" style="height:50rpx;">
-				<image class="" src="/images/next_page.jpg"></image>
+				<image  src="/images/next_page.jpg"></image>
 			</view>
 		</view>
 	</view>
+	</view>
 </view>
+
+<view class="confirm" wx:else style="display:flex;align-items:center;border-bottom:solid 1px #ececec" bindtap="intoPath" data-path="/pages/userAddress/userAddress">
+	<view class="order_user"  style="{{fonts[5].font}};padding:0 50rpx" >
+		<view class="order_left" >
+			请选择收货地址
+		</view>
+	</view>
+	<view class="next_page" style="text-align:center;margin-left:360rpx" >
+		<image src="/images/next_page.jpg"></image>
+	</view>
+</view>
+
 <view class="order_list">
 	<view class="order_confirm">
 		<view class="flexRowBetween orderlistShow">
-			<view class="img_left"><image src="/images/product.jpg"></image></view>
+			<view class="img_left"><image src="{{web_mainData.mainImg[0].url}}"></image></view>
 			<view class="order_name">
-				<view class="text1">高端网站建设(含小程序）</view>
-				<view class="order_type">个性化定制</view>
+				<view class="text1">{{web_mainData.title}}</view>
+				<view class="order_type">{{web_mainData.description}}</view>
 				<view class="orders flexRowBetween">
-					<text class="order_price">¥4999</text>
+					<text class="order_price">¥{{web_mainData.price}}</text>
 					<view class="edit_number flexRowBetween">
-						<view class="minus" style="font-size:50rpx;line-height:20rpx;">-</view>
-						<view class="number" style="font-size:30rpx;">1</view>
-						<view class="add">+</view>
-					</view>
-				</view>
-			</view>
-		</view>
-		<view class="flexRowBetween orderlistShow">
-			<view class="img_left"><image src="/images/product.jpg"></image></view>
-			<view class="order_name">
-				<view class="text1">高端网站建设(含小程序）</view>
-				<view class="order_type">个性化定制</view>
-				<view class="orders flexRowBetween">
-					<text class="order_price">¥4999</text>
-					<view class="edit_number flexRowBetween">
-						<view class="minus" style="font-size:50rpx;line-height:20rpx;">-</view>
-						<view class="number" style="font-size:30rpx;">1</view>
-						<view class="add">+</view>
+						<view class="minus" style="height:45rpx;font-size:50rpx;line-height:40rpx;width:30%;text-align:center;border-right:1px solid #e0e0e0" data-type="-" bindtap="counter" data-id="{{web_mainData.id}}" >-</view>
+						<input type="number" bindchange="bindManual" value="{{web_mainData.count}}" style="width:40px;text-align:center" />
+						<view class="add" data-type="+" bindtap="counter" data-id="{{web_mainData.id}}" style="width:30%;text-align:center;height:45rpx;line-height:40rpx;border-left:1px solid #e0e0e0">+</view>
 					</view>
 				</view>
 			</view>
@@ -64,13 +62,13 @@
 		</textarea>
 	</view>
 </view>
-</view>
+
 <view class="pay_footer">
 	<view class="pay_order flexRowBetween">
 		<view class="total_money">
 			<view class="heji" style="">
 				<text>合计 :</text>
-				<text class="text2"> ¥4999</text>
+				<text class="text2">¥{{web_totalPrice}}</text>
 			</view>
 		</view>
 		<view class="submit_order">

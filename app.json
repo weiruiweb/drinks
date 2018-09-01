@@ -1,26 +1,26 @@
 {
-  "pages":[
-     "pages/index/index",
-     "pages/indexRegular/indexRegular",
-     "pages/indexDetail/indexDetail",
-     "pages/detail/detail",
-     "pages/confirmOrder/confirmOrder",
-      "pages/about/about",
-      "pages/User/user",
-      "pages/userGroup/userGroup",
-      "pages/userContact/userContact",
-      "pages/userAddress/userAddress",
-      "pages/userAddressNew/userAddressNew",
-      "pages/userOrder/userOrder",
-      "pages/userShare/userShare",
-      "pages/userMessage/userMessage",
-      "pages/userCredit/userCredit"
-      
+  "pages": [
+    "pages/index/index",
+    "pages/indexRegular/indexRegular",
+    "pages/indexDetail/indexDetail",
+    "pages/detail/detail",
+    "pages/confirmOrder/confirmOrder",
+    "pages/about/about",
+    "pages/User/user",
+    "pages/userGroup/userGroup",
+    "pages/userContact/userContact",
+    "pages/userAddress/userAddress",
+    "pages/userAddressNew/userAddressNew",
+    "pages/userOrder/userOrder",
+    "pages/userShare/userShare",
+    "pages/userMessage/userMessage",
+    "pages/userCredit/userCredit",
+    "pages/viewMore/viewMore"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#550f0f",
     "navigationBarTitleText": "首页",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }

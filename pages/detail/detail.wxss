@@ -1,4 +1,33 @@
+@import "../../wxParse/wxParse.wxss"; 
+
 .banner_detail image{
+
 	width:100%;
 	height:300rpx;
+}
+.about{
+	width:92%;
+	border-radius:30rpx;
+	background:#fff;
+	position:relative;
+	bottom:40rpx;
+	padding:40rpx 4%;
+}
+.about_tlt{
+	width:60%;
+	height:28rpx;
+	margin:24rpx auto 24rpx;
+}
+.left_line,.tlt_cont{
+	width:33.33%;
+}
+.left_line{
+	height:1px;
+	background:#999;
+}
+.tlt_cont{
+	height:29rpx;
+	background:#fff;
+	text-align:center;
+	font-size:28rpx;
 }

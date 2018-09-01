@@ -9,17 +9,14 @@
 			<view class="tlt_cont">公司简介</view>
 			<view class="left_line"></view>
 		</view>
-		<view class="about_cont" bindtap="detail">
-			<view class="about_txt">
-				内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内
-			</view>
+		<view class="about_cont" bindtap="intoPath" data-path="/pages/detail/detail?id={{web_artData.info.data[0].id}}">
 			<view class="about_img">
-				<image src="/images/about1.jpg"></image>
+				<image src="{{web_artData.info.data[0].mainImg[0].url}}"></image>
 			</view>
-			<view class="about_txt">
-				内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内
+			<view class="about_txt avoidOverflow" style="height:103rpx;white-space:normal">
+				{{web_artData.info.data[0].description}}
 			</view>
-			<view class="more">查看更多</view>
+			<view class="more">查看详情</view>
 		</view>
 	</view>
 	<view class="about_detail">
@@ -28,27 +25,19 @@
 			<view class="tlt_cont">公司动态</view>
 			<view class="left_line"></view>
 		</view>
-		<view class="about_list flexRowBetween">
-			<view class="about_left">
-				<image src="/images/about2.jpg"></image>
+		<block wx:for="{{web_artTwoData}}" wx:key="id">
+			<view class="about_list flexRowBetween" bindtap="intoPath" data-path="/pages/detail/detail?id={{item.id}}">
+				<view class="about_left">
+					<image src="{{item.mainImg[0].url}}"></image>
+				</view>
+				<view class="about_right">
+					<view class="right_tlt">{{item.title}}</view>
+					<view class="right_cont avoidOverflow">{{item.description}}</view>
+					<view class="right_time">{{item.create_time}}</view>
+				</view>
 			</view>
-			<view class="about_right">
-				<view class="right_tlt">标题标题标题标题</view>
-				<view class="right_cont avoidOverflow">容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
-				<view class="right_time">2018-08-08</view>
-			</view>
-		</view>
-		<view class="about_list flexRowBetween">
-			<view class="about_left">
-				<image src="/images/about2.jpg"></image>
-			</view>
-			<view class="about_right">
-				<view class="right_tlt">标题标题标题标题</view>
-				<view class="right_cont avoidOverflow">容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
-				<view class="right_time">2018-08-08</view>
-			</view>
-		</view>
-		<view class="more">查看更多</view>
+		</block>
+		<view class="more" bindtap="intoPath" data-path="/pages/viewMore/viewMore">查看更多</view>
 	</view>
 </view>
 
@@ -58,25 +47,24 @@
 <view style="height:150rpx;width:100%;background:#f2f2f2;">
 </view>
 <view class="navbar">
-      <view class="navbar_item" bindtap="index">
-      
+      <view class="navbar_item" data-path="/pages/index/index" bindtap="intoPathRedi">
           <view class="nav_img">
             <image src="/images/navbar1.png" style="width:50rpx;height:48rpx;"></image>
           </view>
-          <view class="text" style="{{fonts[2].font}}">首页</view>
+          <view class="text this-text" style="{{fonts[2].font}}">首页</view>
 
       </view>
     
-    <view class="navbar_item" bindtap="sort">
+    <view class="navbar_item">
    
         <view class="nav_img">
            <image src="/images/navbar2-a.png" style="width:50rpx;height:48rpx;"></image>
         </view>
-        <view class="text this-text" style="{{fonts[2].font}}">关于我们</view>
+        <view class="text" style="{{fonts[2].font}}">关于我们</view>
     
     </view>
   
-    <view class="navbar_item"  bindtap="User">
+    <view class="navbar_item"  data-path="/pages/User/user" bindtap="intoPathRedi">
    
         <view class="nav_img">
             <image src="/images/navbar3.png" style="width:50rpx;height:48rpx;"></image>

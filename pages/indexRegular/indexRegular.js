@@ -1,39 +1,46 @@
 //index.js
 //获取应用实例
-const app = getApp()
+import {Api} from '../../utils/api.js';
+var api = new Api();
+var app = getApp();
 
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    isChoose:1,
+    
+    mainData:[]
+    
+  },
+    
+
+  onLoad(options){
+    const self = this;
+    self.data.paginate = api.cloneForm(getApp().globalData.paginate);
+    self.data.id = options.id;
+    self.getMainData();
+  },
+
+
+  getMainData(){
+    const self = this;
+    const postData = {};
+    postData.searchItem = {
+      thirdapp_id:getApp().globalData.thirdapp_id,
+    };
+    postData.searchItem.id = self.data.id;
+    const callback = (res)=>{
+      self.data.mainData = res
+      wx.hideLoading();
+      self.data.mainData.content = api.wxParseReturn(res.info.data[0].content).nodes;
+      self.setData({
+        web_mainData:self.data.mainData,
+      });  
+    };
+    api.articleGet(postData,callback);
   },
   
-  onLoad: function () {
-   
-  },
-  userInfo:function(){
-    wx.navigateTo({
-      url:'/pages/userInfo/userInfo'
-    })
-  },
-   bindDateChange: function(e) {
-    this.setData({
-      date: e.detail.value
-    })
-  },
- 
-  newAddress:function(){
-    wx.navigateTo({
-      url:'/pages/newAddress/newAddress'
-    })
-  },
-  discount:function(){
-    wx.navigateTo({
-      url:'/pages/discount/discount'
-    })
-  },
-  choosePay:function(e){
-    this.setData({
-      isChoose:e.currentTarget.dataset.id
-    })
-  }
+
 })

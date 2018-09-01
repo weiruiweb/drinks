@@ -119,6 +119,6 @@
 .credit_right{
 	width:50%;
 	text-align:right;
-	color:#00c6f7;
+	color:#550f0f;
 
 }

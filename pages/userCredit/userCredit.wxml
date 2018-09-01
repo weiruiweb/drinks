@@ -11,7 +11,7 @@
 		</view>
 		<view class="user_cre">
 			<view class="user_cres">
-				总佣金:¥{{web_computeData.info.FlowLog.countsum}}	
+				总佣金:¥{{web_userData.info.data[0].balance}}	
 			</view>
 		</view>
 	</view>
@@ -19,7 +19,7 @@
 <view class="date" style="{{fonts[4].font}}">
 	<view class="date_item">
 		<view style="width:45%;display:flex;align-items:center;">
-			<view class="date_left" style="color:#2e2e2e;width:100%;">
+			<view class="date_left" style="color:#550f0f;width:100%;">
 				<picker  mode="date" value="{{web_startTime}}" data-type="startTime" bindchange="bindTimeChange" >
 					<view style="display:flex;align-items:center;width:100%;height:100%;">
 						<view style="width:85%;height:70rpx;">
@@ -40,7 +40,7 @@
 	</view>
 	<view class="date_item">
 		<view style="width:45%;display:flex;align-items:center;">
-			<view class="date_left" style="color:#2e2e2e;width:100%;">
+			<view class="date_left" style="color:#550f0f;width:100%;">
 				<picker  mode="date" value="{{web_endTime}}" data-type="endTime" bindchange="bindTimeChange" >
 					<view style="display:flex;align-items:center;width:100%;height:100%;">
 						<view style="width:85%;height:70rpx;">
@@ -71,7 +71,7 @@
 						{{item.create_time}}
 					</view>
 				</view>
-				<view class="credit_right"  style="{{fonts[3].font}};color:#f6be23;">
+				<view class="credit_right"  style="{{fonts[3].font}};color:#550f0f;">
 					{{item.count}}
 				</view>
 			</view>

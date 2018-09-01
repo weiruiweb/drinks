@@ -14,7 +14,7 @@ Page({
     startTime:'',
     endTime:'',
     searchItem:{
-      thirdapp_id:'59',
+      thirdapp_id:getApp().globalData.thirdapp_id,
       user_type:'0',
       parent_no:wx.getStorageSync('info').user_no
     }

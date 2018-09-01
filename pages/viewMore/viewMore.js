@@ -5,7 +5,7 @@ const app = getApp();
 
 Page({
   data: {
-    mainData:[],
+    artTwoData:[],
   },
 
   onLoad(options) {
@@ -14,10 +14,10 @@ Page({
       fonts:app.globalData.font
     });
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
-    self.getMainData()
+    self.getArtTwoData()
   },
 
- getMainData(){
+ getArtTwoData(){
     const self = this;
     const postData = {};
     postData.paginate = api.cloneForm(self.data.paginate);
@@ -28,7 +28,7 @@ Page({
       article:{
         tableName:'label',
         searchItem:{
-          title:['=',['系统公告']],
+          title:['=',['公司动态']],
         },
         middleKey:'menu_id',
         key:'id',
@@ -37,13 +37,13 @@ Page({
     };
     const callback = (res)=>{
       if(res.info.data.length>0){
-        self.data.mainData.push.apply(self.data.mainData,res.info.data);
+        self.data.artTwoData.push.apply(self.data.artTwoData,res.info.data);
       }else{
         self.data.isLoadAll = true;
         api.showToast('没有更多了','fail');
       };
       self.setData({
-        web_mainData:self.data.mainData,
+        web_artTwoData:self.data.artTwoData,
       });  
     };
     api.articleGet(postData,callback);
@@ -58,7 +58,7 @@ Page({
     const self = this;
     if(!self.data.isLoadAll){
       self.data.paginate.currentPage++;
-      self.getMainData();
+      self.getArtTwoData();
     };
   },
 

@@ -6,11 +6,11 @@ Page({
   data: {
 
     mainData:[],
-    computeData:[],
+    userData:[],
     startTime:'',
     endTime:'',
     searchItem:{
-      type:3
+      type:2
         
     },
   },
@@ -23,34 +23,25 @@ Page({
     });
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     self.getMainData();
-    self.getComputeData()
+    self.getUserInfoData()
   },
 
-  getComputeData(){
+  getUserInfoData(){
     const self = this;
     const postData = {};
-    postData.data = {
-      FlowLog:{
-        compute:{
-          count:'sum',
-        },
-        
-        searchItem:{
-          user_no:wx.getStorageSync('info').user_no,
-          type:3,
-        }
-      }
-    };
+    postData.token = wx.getStorageSync('token');
     const callback = (res)=>{
-      console.log(res);
-      self.data.computeData = res;
+      self.data.userData = res;
       self.setData({
-        web_computeData:self.data.computeData,
+        web_userData:self.data.userData,
       });
+     
       wx.hideLoading();
     };
-    api.flowLogCompute(postData,callback);
+    api.userInfoGet(postData,callback);   
   },
+
+  
 
   getMainData(isNew){
     const self = this;

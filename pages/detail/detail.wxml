@@ -1,8 +1,16 @@
 <!--index.wxml-->
 <view class="banner_detail">
-  <image src="/images/about1.jpg"></image>
+  <image src="{{web_mainData.info.data[0].bannerImg[0].url}}"></image>
+</view>
+<view class="about_tlt flexRowBetween">
+	<view class="left_line"></view>
+	<view class="tlt_cont">{{web_mainData.info.data[0].title}}</view>
+	<view class="left_line"></view>
 </view>
 <view class="w750" style="font-size:24rpx;color:#666;line-height:34rpx;margin-top:20rpx;">
-  内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+ <view class="content ql-editor">
+		<import src="../../wxParse/wxParse.wxml"/>
+	    <template is="wxParse" data="{{wxParseData:web_mainData.content}}"/>
+	</view>	
 </view>
  

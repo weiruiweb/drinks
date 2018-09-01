@@ -82,7 +82,7 @@ class Token {
                 };
 
                 wx.request({
-                    url: 'https://dmgnm.com/scoreshop/public/index.php/api/v1/Base/ProgrameToken/get',
+                    url: 'https://dselling.yisuiyanghuoguo.com/public/index.php/api/v1/Base/ProgrameToken/get',
                     method:'POST',
                     data:postData,
                     success:function(res){

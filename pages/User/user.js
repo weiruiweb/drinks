@@ -1,21 +1,47 @@
-//logs.js
-const util = require('../../utils/util.js')
+import {Api} from '../../utils/api.js';
+const api = new Api();
 const app = getApp()
-
 
 Page({
   data: {
-    isShow:false,
+
+    userData:[],
+    startTime:'',
+    endTime:'',
+    searchItem:{
+      type:2
+        
+    },
   },
-  onLoad: function () {
-    this.setData({
-      fonts:app.globalData.font
-    })
+
+  
+  onLoad(){
+    const self = this;
+    self.setData({
+     fonts:app.globalData.font
+    });
+    self.getUserInfoData()
   },
+
  tel:function () {
     wx.makePhoneCall({
       phoneNumber: '15888888888',
     })
+  },
+
+  getUserInfoData(){
+    const self = this;
+    const postData = {};
+    postData.token = wx.getStorageSync('token');
+    const callback = (res)=>{
+      self.data.userData = res;
+      self.setData({
+        web_userData:self.data.userData,
+      });
+     
+      wx.hideLoading();
+    };
+    api.userInfoGet(postData,callback);   
   },
  
   userCredit:function(){

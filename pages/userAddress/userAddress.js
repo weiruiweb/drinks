@@ -2,6 +2,8 @@
 //获取应用实例
 import {Api} from '../../utils/api.js';
 const api = new Api();
+const app = getApp()
+
 Page({
 
   /**
@@ -16,6 +18,9 @@ Page({
 
   onLoad(){
     const self = this;
+    self.setData({
+      fonts:app.globalData.font
+    });
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     self.getMainData();
   },

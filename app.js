@@ -12,7 +12,7 @@ App({
 },
 
   globalData: {
-    thirdapp_id:59,
+    thirdapp_id:60,
     address_id:'',
     coupon:{},
     paginate: {

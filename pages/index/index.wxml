@@ -4,19 +4,19 @@
   
   <view class="banner_cont">
     <view class="banner_tlt">
-      标题标题标题
+      {{web_artData.info.data[0].title}}
     </view>
-    <view class="banner_keywords">黄金赋活 植物精华液</view>
-    <view class="banner_desc">黄金赋活 植物精华液黄金赋活 植物精华液黄金赋活 植物精华液黄金赋活 植物精华液</view>
+    <view class="banner_keywords"> {{web_artData.info.data[0].description}}</view>
+    <view class="banner_desc"> {{web_artData.info.data[0].contactPhone}}</view>
   </view>
 </view>
-<view class="news flexRowBetween" bindtap="indexRegular">
+<view class="news flexRowBetween"  data-path="/pages/indexRegular/indexRegular?id={{web_artTwoData.info.data[0].id}}" bindtap="intoPath">
   <view class="news_left"><image src="/images/index_icon1.png"></image></view>
   <view style="width:2%;"></view>
   <view class="news_right">
    <view class="marquee_box">
     <view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;">
-      <text>{{text}}</text>
+      <text>{{web_artTwoData.info.data[0].description}}</text>
       <text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;">{{text}}</text>
     </view>
   </view>
@@ -25,38 +25,27 @@
   <view style="width:2%;"></view>
 </view>
 
-<!--
-<view class="example">
-  <view class="marquee_box">
-    <view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;">
-      <text>{{text}}</text>
-      <text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;">{{text}}</text>
-    </view>
-  </view>
-</view>
--->
 <view class="product w750">
   <view class="product_tlt">
       <image src="/images/tlt_bg.png"></image>
-  
       <view class="tlt_cont">产品展示</view>
   </view>
-  <view class="product_cont" bindtap="indexDetail">
+  <view class="product_cont" >
       <view class="pro_bg"><image src="/images/product_bg.png"></image></view>
       <view class="product_show flexRowBetween">
           <view class="product_left">
-            <image src="/images/product.png"></image>
+            <image src="{{web_mainData.info.data[0].mainImg[0].url}}"></image>
           </view>
           <view class="product_right">
             <view class="product_intro">
-              <view class="product_tlt1">产品名称 产品名称</view>
-              <view class="product_attr">产品名称 产品名称</view>
+              <view class="product_tlt1">{{web_mainData.info.data[0].title}}</view>
+              <view class="product_attr">{{web_mainData.info.data[0].description}}</view>
             </view>
             <view class="product_buy">
                 <view class="product_price">
                   <view class="pro_price flexRowBetween">
-                    <text>原价199</text>
-                    <text>原价199</text>
+                    <text>原价{{web_mainData.info.data[0].passage1}}</text>
+                    <text>原价{{web_mainData.info.data[0].passage1}}</text>
                   </view>
                   <view class="price_bg">
                     <image src="/images/index_icon2.png"></image>
@@ -65,8 +54,8 @@
                 </view>
 
             </view>
-            <view class="go_buy flexRowBetween">
-              <view class="buy_left">¥99.00</view>
+            <view class="go_buy flexRowBetween" data-path="/pages/indexDetail/indexDetail?id={{web_mainData.info.data[0].id}}" bindtap="intoPath">
+              <view class="buy_left">¥{{web_mainData.info.data[0].price}}</view>
               <view class="buy_right"><text>立即购买</text><image src="/images/index_icon3.png"></image></view>
             </view>
           </view>
@@ -75,18 +64,18 @@
   <view class="pro_show flexRowBetween">
     <view class="show_left">
         <view class="show1">
-          <image src="/images/product.png" class="show1_img"></image>
+          <image src="{{web_mainData.info.data[1].mainImg[0].url}}" class="show1_img"></image>
         </view>
         <view class="show1">
             <view class="product_intro">
-              <view class="product_tlt1">产品名称 产品名称</view>
-              <view class="product_attr">产品名称 产品名称</view>
+              <view class="product_tlt1">{{web_mainData.info.data[1].title}}</view>
+              <view class="product_attr">{{web_mainData.info.data[1].description}}</view>
             </view>
             <view class="product_buy">
                 <view class="product_price">
                   <view class="pro_price flexRowBetween">
-                    <text>原价199</text>
-                    <text>原价199</text>
+                    <text>原价{{web_mainData.info.data[1].passage1}}</text>
+                    <text>原价{{web_mainData.info.data[1].passage1}}</text>
                   </view>
                   <view class="price_bg">
                     <image src="/images/index_icon2.png"></image>
@@ -95,8 +84,8 @@
                 </view>
 
             </view>
-            <view class="go_buy flexRowBetween">
-              <view class="buy_left">¥99.00</view>
+            <view class="go_buy flexRowBetween" data-path="/pages/indexDetail/indexDetail?id={{web_mainData.info.data[1].id}}" bindtap="intoPath">
+              <view class="buy_left">¥{{web_mainData.info.data[1].price}}</view>
               <view class="buy_right"><text>立即购买</text><image src="/images/index_icon3.png"></image></view>
             </view>
         </view>
@@ -106,16 +95,16 @@
         <view class="show2_cont">
           <view class="flexRowBetween">
             <view class="show2_left">
-              <image src="/images/product.png"></image>
+              <image src="{{web_mainData.info.data[2].mainImg[0].url}}"></image>
             </view>
             <view class="show2_right">
-              <view class="text1">产品名称 </view>
-              <view class="text2">产品特性 产品特性  </view>
+              <view class="text1">{{web_mainData.info.data[2].title}}</view>
+              <view class="text2">{{web_mainData.info.data[2].description}}</view>
             </view>
           </view>
-          <view class="flexRowBetween">
+          <view class="flexRowBetween" data-path="/pages/indexDetail/indexDetail?id={{web_mainData.info.data[2].id}}" bindtap="intoPath">
              <view class="show2_left">
-                  ¥99.99
+                  ¥{{web_mainData.info.data[2].price}}
               </view>
               <view class="show2_right">
                   <view class="buy_btn">
@@ -130,16 +119,16 @@
         <view class="show2_cont">
           <view class="flexRowBetween">
             <view class="show2_left">
-              <image src="/images/product.png"></image>
+              <image src="{{web_mainData.info.data[3].mainImg[0].url}}"></image>
             </view>
             <view class="show2_right">
-              <view class="text1">产品名称 </view>
-              <view class="text2">产品特性 产品特性  </view>
+              <view class="text1">{{web_mainData.info.data[3].title}}</view>
+              <view class="text2">{{web_mainData.info.data[3].description}}</view>
             </view>
           </view>
-          <view class="flexRowBetween">
+          <view class="flexRowBetween" data-path="/pages/indexDetail/indexDetail?id={{web_mainData.info.data[3].id}}" bindtap="intoPath">
              <view class="show2_left">
-                  ¥99.99
+                  ¥{{web_mainData.info.data[3].price}}
               </view>
               <view class="show2_right">
                   <view class="buy_btn">
@@ -159,9 +148,7 @@
 <view style="height:120rpx;width:100%;background:#f2f2f2;">
 </view>
 <view class="navbar">
-    
-      <view class="navbar_item" bindtap="index">
-      
+      <view class="navbar_item" >
           <view class="nav_img">
             <image src="/images/navbar1-a.png" style="width:50rpx;height:48rpx;"></image>
           </view>
@@ -169,7 +156,7 @@
 
       </view>
     
-    <view class="navbar_item" bindtap="sort">
+    <view class="navbar_item" data-path="/pages/about/about" bindtap="intoPathRedi">
    
         <view class="nav_img">
            <image src="/images/navbar2.png" style="width:50rpx;height:48rpx;"></image>
@@ -178,7 +165,7 @@
     
     </view>
   
-    <view class="navbar_item"  bindtap="User">
+    <view class="navbar_item"  data-path="/pages/User/user" bindtap="intoPathRedi">
    
         <view class="nav_img">
             <image src="/images/navbar3.png" style="width:50rpx;height:48rpx;"></image>

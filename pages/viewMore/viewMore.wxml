@@ -1,0 +1,13 @@
+<!--viewMore.wxml-->
+<block wx:for="{{web_artTwoData}}" wx:key="id">
+	<view class="about_list flexRowBetween" bindtap="intoPath" data-path="/pages/detail/detail?id={{item.id}}">
+		<view class="about_left">
+			<image src="{{item.mainImg[0].url}}"></image>
+		</view>
+		<view class="about_right">
+			<view class="right_tlt">{{item.title}}</view>
+			<view class="right_cont avoidOverflow">{{item.description}}</view>
+			<view class="right_time">{{item.create_time}}</view>
+		</view>
+	</view>
+</block>

@@ -1,12 +1,13 @@
-//index.js
-//获取应用实例
-const app = getApp()
+import {Api} from '../../utils/api.js';
+var api = new Api();
+const app = getApp();
+import {Token} from '../../utils/token.js';
+const token = new Token();
 
 Page({
   data: {
-
+    text:'',
     currentId:0,
-    text: '这是一条会滚动的文字滚来滚去的文字跑马灯，哈哈哈哈哈哈哈哈',
     marqueePace: 0.5,//滚动速度
     marqueeDistance: 0,//初始滚动距离
     marqueeDistance2: 0,
@@ -21,98 +22,149 @@ Page({
  
    onShow: function () {
     // 页面显示
-    var vm = this;
-    var length = vm.data.text.length * vm.data.size;//文字长度
+    var self = this;
+    var length = self.data.text.length * self.data.size;//文字长度
     var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度
-    vm.setData({
+    self.setData({
       length: length,
       windowWidth: windowWidth,
-      marquee2_margin: length < windowWidth ? windowWidth - length : vm.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白
+      marquee2_margin: length < windowWidth ? windowWidth - length : self.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白
     });
   
-    vm.run2();// 第一个字消失后立即从右边出现
+    self.run2();// 第一个字消失后立即从右边出现
   },
  
   run2: function () {
-    var vm = this;
+    var self = this;
     var interval = setInterval(function () {
-      if (-vm.data.marqueeDistance2 < vm.data.length) {
+      if (-self.data.marqueeDistance2 < self.data.length) {
         // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示
-        vm.setData({
-          marqueeDistance2: vm.data.marqueeDistance2 - vm.data.marqueePace,
-          marquee2copy_status: vm.data.length + vm.data.marqueeDistance2 <= vm.data.windowWidth + vm.data.marquee2_margin,
+        self.setData({
+          marqueeDistance2: self.data.marqueeDistance2 - self.data.marqueePace,
+          marquee2copy_status: self.data.length + self.data.marqueeDistance2 <= self.data.windowWidth + self.data.marquee2_margin,
         });
       } else {
-        if (-vm.data.marqueeDistance2 >= vm.data.marquee2_margin) { // 当第二条文字滚动到最左边时
-          vm.setData({
-            marqueeDistance2: vm.data.marquee2_margin // 直接重新滚动
+        if (-self.data.marqueeDistance2 >= self.data.marquee2_margin) { // 当第二条文字滚动到最左边时
+          self.setData({
+            marqueeDistance2: self.data.marquee2_margin // 直接重新滚动
           });
           clearInterval(interval);
-          vm.run2();
+          self.run2();
         } else {
           clearInterval(interval);
-          vm.setData({
-            marqueeDistance2: -vm.data.windowWidth
+          self.setData({
+            marqueeDistance2: -self.data.windowWidth
           });
-          vm.run2();
+          self.run2();
         }
       }
-    }, vm.data.interval);
+    }, self.data.interval);
   },
 
-  onLoad: function () {
-     this.setData({
-          isHidden: false,
-          fonts:app.globalData.font
-        });
-        var that = this;
-        setTimeout(function(){
-          that.setData({
-              isHidden: true
-          });
-         
-        }, 2000);
+  onLoad(options) {
+    const self = this;
+    self.setData({
+      fonts:app.globalData.font
+    });
+    self.data.paginate = api.cloneForm(getApp().globalData.paginate);
+    self.getMainData();
+    self.getArtData();
+    self.getArtTwoData()
+    if(options.scene){
+      var scene = decodeURIComponent(options.scene)
+    };
+    if(scene){
+      var token = new Token({parent_no:scene});
+      token.getUserInfo();
+    }
   },
   
   
-  sort:function(){
-     wx.redirectTo({
-      url:'/pages/about/about'
-    })
-  },
-  index:function(){
-     wx.redirectTo({
-      url:'/pages/Index/index'
-    })
-  },
-  User:function(){
-     wx.redirectTo({
-      url:'/pages/User/user'
-    })
-  },
-  indexRegular:function(){
-     wx.navigateTo({
-      url:'/pages/indexRegular/indexRegular'
-    })
-  },
-  indexDetail:function(){
-     wx.navigateTo({
-      url:'/pages/indexDetail/indexDetail'
-    })
+  getMainData(isNew){
+    const self = this;
+    if(isNew){
+      api.clearPageIndex(self); 
+      self.setData({
+        web_mainData:self.data.mainData
+      }); 
+    };
+    const postData = {};
+    postData.paginate = api.cloneForm(self.data.paginate);
+    postData.searchItem = {
+      thirdapp_id:getApp().globalData.thirdapp_id
+    };
+    const callback = (res)=>{
+      self.data.mainData = res;
+      wx.hideLoading();
+      self.setData({
+        web_mainData:self.data.mainData,
+      });     
+    };
+    api.productGet(postData,callback);
   },
 
-  click_this:function(e){
-    this.setData({
-      currentId:e.currentTarget.dataset.id
-    })
+  getArtData(){
+    const self = this;
+    const postData = {};
+    postData.searchItem = {
+      thirdapp_id:getApp().globalData.thirdapp_id
+    };
+    postData.getBefore = {
+      article:{
+        tableName:'label',
+        searchItem:{
+          title:['=',['首页主图']],
+        },
+        middleKey:'menu_id',
+        key:'id',
+        condition:'in',
+      },
+    };
+    const callback = (res)=>{
+      self.data.artData = res;
+      self.data.text = res.info.data[0].description;
+      self.setData({
+        web_artData:self.data.artData,
+      });  
+    };
+    api.articleGet(postData,callback);
   },
-  
-  close:function(){
-    // var isShow == !this.data.isShow
-    this.setData({
-      isShow:true
-    })
-  }
+
+  getArtTwoData(){
+    const self = this;
+    const postData = {};
+    postData.searchItem = {
+      thirdapp_id:getApp().globalData.thirdapp_id
+    };
+    postData.getBefore = {
+      article:{
+        tableName:'label',
+        searchItem:{
+          title:['=',['规则说明']],
+        },
+        middleKey:'menu_id',
+        key:'id',
+        condition:'in',
+      },
+    };
+    const callback = (res)=>{
+      self.data.artTwoData = res;
+      self.setData({
+        web_artTwoData:self.data.artTwoData,
+      });  
+    };
+    api.articleGet(postData,callback);
+  },
+
+  intoPath(e){
+    const self = this;
+    api.pathTo(api.getDataSet(e,'path'),'nav');
+  },
+
+  intoPathRedi(e){
+    const self = this;
+    api.pathTo(api.getDataSet(e,'path'),'redi');
+  },
  
 })
 

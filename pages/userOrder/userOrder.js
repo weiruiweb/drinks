@@ -9,7 +9,7 @@ Page({
    num:1,
    mainData:[],
    searchItem:{
-      thirdapp_id:'59',
+      thirdapp_id:getApp().globalData.thirdapp_id,
     },
   },
 
@@ -130,8 +130,6 @@ Page({
       self.data.searchItem.pay_status = '1';
       self.data.searchItem.transport_status = '1';
       self.data.searchItem.order_step = '0';
-    }else if(num=='5'){
-      self.data.searchItem.order_step = '3';
     }
     self.setData({
       web_mainData:[],

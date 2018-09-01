@@ -4,9 +4,9 @@
       <swiper
         indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
         interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
-        <block wx:for="{{background}}" wx:key="*this">
+        <block wx:for="{{web_mainData.bannerImg}}" wx:key="*this">
           <swiper-item>
-            <image src="{{item}}"></image>
+            <image src="{{item.url}}"></image>
           </swiper-item>
         </block>
       </swiper>
@@ -18,77 +18,46 @@
       <view  class="flexRowBetween" style="width:80%;height:80rpx;">
         <view class="sale_price">
           <text class="txt1">¥</text>
-          <text class="txt2">999.00</text>
+          <text class="txt2">{{web_mainData.price}}</text>
         </view>
-        <view class="yuan">¥1999</view>
+        <view class="yuan">¥{{web_mainData.passage1}}</view>
       </view>
     </view>
-    <view class="pro_price" bindtap="orderComfirm">
-      
-      <view class="buy">立即购买</view>
+    <view class="pro_price" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}" bindtap="intoPath">
+      <view class="buy" >立即购买</view>
     </view>
   </view>
 </view>
 <view class="w750 product">
-  <view class="pro_tlt">标题标题标题标题标题标题标题标</view>
-  <view class="pro_cont">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内 容内容内容内容内容内容内容内容内容内容内容内容内容内容内容 内容</view>
+  <view class="pro_tlt">{{web_mainData.title}}</view>
+  <view class="pro_cont">{{web_mainData.description}}</view>
 </view>
 <view class="pro_detail">
   <view class="detail_two flexRowBetween">
-    <view class="detail_img {{isChoose ==0?'add_bg':''}}" data-id="0" bindtap="changeTab">
-        图文详情
-    </view>
-    <view class="detail_txt {{isChoose ==1?'add_bg1':''}}" data-id="1" bindtap="changeTab">
+    <view class="detail_img {{ web_num ==0?'add_bg':''}}" data-num="0" bindtap="menuClick">
         商品详情
     </view>
-  </view>
-  <view class="changeCont" style="{{isChoose ==0?'display:block':''}}">
-      <view class="detail_list flexRowBetween1">
-        <image src="/images/product.jpg"></image>
-      </view>
-     
-  </view>
-  <view class="changeCont"  style="{{isChoose ==1?'display:block':''}}">
-      <view class="detail_list flexRowBetween1">
-        <view class="detail_name">【商品名称】</view>
-        <view class="detail_cont">描述描述描述描述描述描述描述描述描 述描述描述描述描述描述</view>
-      </view>
-      <view class="detail_list flexRowBetween1">
-        <view class="detail_name">【商品名称】</view>
-        <view class="detail_cont">描述描述描述描述描述描述描述描述描 述描述描述描述描述描述</view>
-      </view>
-      <view class="detail_list flexRowBetween1">
-        <view class="detail_name">【商品名称】</view>
-        <view class="detail_cont">描述描述描述描述描述描述描述描述描 述描述描述描述描述描述</view>
-      </view>
+    <view class="detail_txt {{ web_num ==1?'add_bg1':''}}" data-num="1" bindtap="menuClick">
+        购买须知
     </view>
   </view>
-<view class="navbar">
-    
-      <view class="navbar_item" bindtap="index">
-      
-          <view class="nav_img">
-            <image src="/images/navbar1-a.png" style="width:46rpx;height:50rpx;"></image>
-          </view>
-          <view class="text this-text" style="{{fonts[2].font}}">首页</view>
 
-      </view>
-    
-    <view class="navbar_item" bindtap="sort">
-   
-        <view class="nav_img">
-           <image src="/images/navbar2.png" style="width:46rpx;height:50rpx;"></image>
-        </view>
-        <view class="text" style="{{fonts[2].font}}">关于我们</view>
-    
-    </view>
-  
-    <view class="navbar_item"  bindtap="User">
-   
-        <view class="nav_img">
-            <image src="/images/navbar3.png" style="width:46rpx;height:50rpx;"></image>
-        </view>
-        <view class="text" style="{{fonts[2].font}}">我的</view>
+  <view class="changeCont" style="{{web_num ==0?'display:block':''}}">
+      <view class="detail_list flexRowBetween1">
+        <view class="content ql-editor" style="color:#666;font-size:26rpx">
+          <import src="../../wxParse/wxParse.wxml"/>
+          <template is="wxParse" data="{{wxParseData:web_mainData.content}}"/>
+        </view> 
+      </view>  
+  </view>
 
-    </view>
+  <view class="changeCont" style="{{web_num ==1?'display:block':''}}">
+      <view class="detail_list flexRowBetween1">
+        <view class="content ql-editor" style="color:#666;font-size:26rpx">
+          <import src="../../wxParse/wxParse.wxml"/>
+          <template is="wxParse" data="{{wxParseData:web_artData.content}}"/>
+        </view> 
+      </view>  
+  </view>
 </view>
+

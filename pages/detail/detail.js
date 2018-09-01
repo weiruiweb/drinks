@@ -1,52 +1,50 @@
 //index.js
 //获取应用实例
-const app = getApp()
+import {Api} from '../../utils/api.js';
+var api = new Api();
+var app = getApp();
 
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    background: ['/images/banner1.jpg', '/images/banner1.jpg', '/images/banner1.jpg'],
-    indicatorDots: true,
-    vertical: false,
-    autoplay: true,
-    circular: true,
-    interval: 2000,
-    duration: 500,
-    previousMargin: 0,
-    nextMargin: 0,
-    currentId:0,
-    isChoose:0,
+    
+    mainData:[]
     
   },
-  //事件处理函数
- 
-  onLoad: function () {
-     this.setData({
-          isHidden: false,
-          fonts:app.globalData.font
-        });
-        var that = this;
-        setTimeout(function(){
-          that.setData({
-              isHidden: true
-          });
-         
-        }, 2000);
-  }, 
-  sort:function(){
-     wx.redirectTo({
-      url:'/pages/about/about'
-    })
+    
+
+  onLoad(options){
+    const self = this;
+    self.data.paginate = api.cloneForm(getApp().globalData.paginate);
+    self.data.id = options.id;
+    self.getMainData();
   },
-  index:function(){
-     wx.redirectTo({
-      url:'/pages/Index/index'
-    })
+
+
+  getMainData(){
+    const self = this;
+    const postData = {};
+    postData.searchItem = {
+      thirdapp_id:getApp().globalData.thirdapp_id,
+    };
+    postData.searchItem.id = self.data.id;
+    const callback = (res)=>{
+      self.data.mainData = res
+      wx.hideLoading();
+      self.data.mainData.content = api.wxParseReturn(res.info.data[0].content).nodes;
+      self.setData({
+        web_mainData:self.data.mainData,
+      });  
+    };
+    api.articleGet(postData,callback);
   },
-  User:function(){
-     wx.redirectTo({
-      url:'/pages/User/user'
-    })
-  },
+  
+
 })
+
+
 
   

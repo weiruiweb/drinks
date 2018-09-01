@@ -2,6 +2,7 @@
 //获取应用实例
 import {Api} from '../../utils/api.js';
 const api = new Api();
+const app = getApp()
 
 Page({
 
@@ -10,9 +11,8 @@ Page({
     region: ['陕西省', '西安市', '雁塔区'],
     sForm:{
       name:'',
-      province:'陕西省',
-      city:'西安市',
-      country:'雁塔区',
+      latitude:'',
+      longitude:'',
       phone:'',
       detail:'',
     },
@@ -21,6 +21,9 @@ Page({
 
   onLoad: function (options) {
     const self=this;
+    self.setData({
+      fonts:app.globalData.font
+    });
     if(options.id){
       self.data.id = options.id
       self.getMainData(self.data.id); 
@@ -29,7 +32,6 @@ Page({
         web_region:self.data.region
       })
     };
-    self.switch2Change()  
   },
 
   getMainData(id){
@@ -83,7 +85,9 @@ Page({
     const postData = {};
     postData.token = wx.getStorageSync('token');
     postData.searchItem = {};
-    postData.searchItem.id = api.getDataSet(e,'id');
+    postData.searchItem.id = self.data.id;
+    postData.data = {};
+    postData.data = api.cloneForm(self.data.sForm);
     const callback = (data)=>{
       wx.hideLoading();
       api.dealRes(data);
@@ -130,10 +134,37 @@ Page({
     };
   },
 
+  chooseLocation:function(e){
+    var self = this;
+    wx.chooseLocation({
+      success: function(res){
+        self.data.sForm.detail = res.address,
+        self.data.sForm.longitude = res.longitude,
+        self.data.sForm.latitude = res.latitude,
+        self .setData({
+          hasLocation:true,
+          location:{
+            longitude:res.longitude,
+            latitude:res.latitude
+          },
+          web_mainData:self.data.sForm,
+          web_name:res.name,
+        })
+      },
+      fail: function() {
+      // fail
+      },
+      complete: function() {
+      // complete
+      }
+    })
+  },
 
 
-  switch2Change: function (e){
+
+  switch2Change(e){
     const self = this;
+    console.log(e)
     if( e.detail.value == true){
       self.data.sForm.isdefault = 1
     }else{

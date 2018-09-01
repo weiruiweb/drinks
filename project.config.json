@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 11,
 			"list": [
 				{
 					"id": -1,
@@ -44,7 +44,7 @@
 				{
 					"id": 1,
 					"name": "index",
-					"pathName": "pages/Index/index",
+					"pathName": "pages/index/index",
 					"query": ""
 				},
 				{
@@ -94,6 +94,18 @@
 					"name": "confirm",
 					"pathName": "pages/confirmOrder/confirmOrder",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "添加地址",
+					"pathName": "pages/userAddressNew/userAddressNew",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "确认订单",
+					"pathName": "pages/confirmOrder/confirmOrder",
+					"query": "id=6"
 				}
 			]
 		}
