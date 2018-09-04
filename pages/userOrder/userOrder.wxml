@@ -15,7 +15,57 @@
   </view>
 </view>
 <view id="order">
-  <view class="order_list">
+
+  <block wx:for="{{web_mainData}}" wx:key="id">
+    <view class="order_list">
+      <view class="order_tlt">
+        <view class="order_title">
+          <view class="order_data" style="{{fonts[3].font}}">
+            交易时间:{{item.create_time}}
+          </view>
+          <view class="order_data" style="{{fonts[2].font}}">
+            等待买家发货
+          </view>
+        </view>
+      </view>
+      <view class="order_infor">
+        <view class="order_item">
+          <view class="order_left">
+            <image src="/images/product.jpg"></image>
+          </view>
+          <view class="order_right">
+            <view class="orderProname" style="{{fonts[3].font}}">
+              商品名称{{item.title}}
+            </view>
+            <view class="order_attr">
+              <view class="order_number"  style="{{fonts[5].font}}">
+                X1
+              </view>
+              <view class="order_attrs"  style="{{fonts[5].font}}">
+                商品属性
+              </view>
+              <view class="order_credit"  >
+                <view class="order_credit1" style="{{fonts[2].font}}">积分</view>
+                <view class="order_credit2" style="{{fonts[3].font}}">266.00</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order_handle">
+        <view class="order_del" data-id="{{item.id}}" data-price="{{item.price}}" bindtap="pay">
+            <view class="del_btn" style="{{fonts[3].font}}">支付</view>
+        </view>
+        <view class="order_total">
+          <text style="{{fonts[4].font}}" class="text2">合计：</text>
+          <text style="{{fonts[4].font}}" class="text1">{{item.price}}</text>
+        </view>
+      </view>
+    </view>
+
+  </block>
+  
+  <!--<view class="order_list">
     <view class="order_tlt">
       <view class="order_title">
         <view class="order_data" style="{{fonts[3].font}}">
@@ -104,50 +154,5 @@
         <text style="{{fonts[4].font}}" class="text1">¥3999</text>
       </view>
     </view>
-  </view>
-  <view class="order_list">
-    <view class="order_tlt">
-      <view class="order_title">
-        <view class="order_data" style="{{fonts[3].font}}">
-          交易时间:2018-2-18
-        </view>
-        <view class="order_data" style="{{fonts[2].font}}">
-          等待买家发货
-        </view>
-      </view>
-    </view>
-    <view class="order_infor">
-      <view class="order_item">
-        <view class="order_left">
-          <image src="/images/product.jpg"></image>
-        </view>
-        <view class="order_right">
-          <view class="orderProname" style="{{fonts[3].font}}">
-            商品名称
-          </view>
-          <view class="order_attr">
-            <view class="order_number"  style="{{fonts[5].font}}">
-              X1
-            </view>
-            <view class="order_attrs"  style="{{fonts[5].font}}">
-              商品属性
-            </view>
-            <view class="order_credit"  >
-              <view class="order_credit1" style="{{fonts[2].font}}">积分</view>
-              <view class="order_credit2" style="{{fonts[3].font}}">266.00</view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="order_handle">
-      <view class="order_del">
-          <view class="del_btn" style="{{fonts[3].font}}">删除</view>
-      </view>
-      <view class="order_total">
-        <text style="{{fonts[4].font}}" class="text2">合计：</text>
-        <text style="{{fonts[4].font}}" class="text1">¥3999</text>
-      </view>
-    </view>
-  </view>
+  </view>-->
 </view>

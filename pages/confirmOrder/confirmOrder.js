@@ -93,8 +93,9 @@ Page({
         product:[
           {id:self.data.id,count:1}
         ],
-        pay:{score:self.data.mainData.price},
-        snap_address:self.data.addressData.info.data[0]
+        pay:{wxPay:self.data.mainData.price},
+        snap_address:self.data.addressData.info.data[0],
+        type:1,
       };
       const callback = (res)=>{
         if(res&&res.solely_code==100000){
@@ -102,10 +103,11 @@ Page({
             self.setData({
               buttonClicked: false
             })
-          }, 1000)         
+          }, 1000);
+          self.data.order_id = res.info.id
+          self.pay(self.data.order_id);         
         }; 
-        self.data.order_id = res.info
-        self.pay(self.data.order_id);     
+             
       };
       api.addOrder(postData,callback);
     }else{
@@ -123,17 +125,22 @@ Page({
       searchItem:{
         id:order_id
       },
-      score:self.data.mainData.price
+      wxPay:self.data.mainData.price,
+      wxPayStatus:0
     };
     const callback = (res)=>{
       wx.hideLoading();
-      api.showToast('订单已兑换','fail')
+
       if(res.solely_code==100000){
-        setTimeout(function(){
-          api.pathTo('/pages/userOrder/userOrder','redi');
-        },800) 
+        const payCallback=(payData)=>{
+            setTimeout(function(){
+              api.pathTo('/pages/userOrder/userOrder','redi');
+            },800)  
+        };
+        api.realPay(res.info,payCallback); 
+        
       }else{
-        api.showToast('支付失败','fail')
+        api.showToast('发起微信支付失败','fail')
       }
          
     };
@@ -164,12 +171,12 @@ Page({
   countTotalPrice(){  
     const self = this;
     var totalPrice = 0;
-    totalPrice += self.data.mainData.count*parseInt(self.data.mainData.price);
+    totalPrice += self.data.mainData.count*parseFloat(self.data.mainData.price);
     self.setData({
       web_totalPrice:totalPrice.toFixed(2)
     });
     console.log(self.data.mainData.count) 
-    console.log(parseInt(self.data.mainData.price))
+    console.log(parseFloat(self.data.mainData.price))
   },
 
   getartData(){

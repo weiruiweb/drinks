@@ -71,7 +71,7 @@
 				<text class="text2">¥{{web_totalPrice}}</text>
 			</view>
 		</view>
-		<view class="submit_order">
+		<view class="submit_order" bindtap="addOrder" >
 			提交订单
 		</view>
 	</view>

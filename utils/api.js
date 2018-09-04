@@ -15,7 +15,8 @@ class Api extends Base{
             'package': param.package,
             'signType': param.signType,
             'paySign': param.paySign,
-            success: function () {
+            success: function (res) {
+                console.log(res);
                 wx.showToast({
                     title: '支付成功',
                     icon: 'success',
@@ -25,7 +26,8 @@ class Api extends Base{
                   
                 callback && callback(1);
             },
-            fail: function () {
+            fail: function (res) {
+                console.log(res);
                 wx.showToast({
                     title: '支付失败',
                     icon: 'success',
@@ -35,7 +37,6 @@ class Api extends Base{
                 callback && callback(0);
             }
         });
-
     }
   
 

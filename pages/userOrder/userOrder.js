@@ -89,17 +89,22 @@ Page({
   pay(e){
     const self = this;
     var id = api.getDataSet(e,'id');
-    var score = api.getDataSet(e,'score')
+    var price = api.getDataSet(e,'price')
     const postData = {
       token:wx.getStorageSync('token'),
       searchItem:{
         id:id
       },
-      score:score
+      wxPay:price,
+      wxPayStatus:0
     };
     const callback = (res)=>{
       wx.hideLoading();
-      self.getMainData(true)   
+      
+      const payCallback=(payData)=>{
+          self.getMainData(true)  
+      };
+      api.realPay(res.info,payCallback);   
     };
     api.pay(postData,callback);
   },
