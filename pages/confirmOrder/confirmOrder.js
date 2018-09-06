@@ -147,16 +147,43 @@ Page({
       wxPay:self.data.mainData.price,
       wxPayStatus:0
     };
-    
     const callback = (res)=>{
       wx.hideLoading();
-      res.info.saveAfter = [];
+      
       if(res.solely_code==100000){
-        if(self.data.distributionData.info.data.length>0){
-          var transitionArray = self.data.distributionData.info.data;
-          for (var i = 0; i < transitionArray.length; i++) {
-            if(transitionArray[i].level==1){
-              res.info.saveAfter.push(
+        const payCallback=(payData)=>{
+          if(payData==1){
+              self.getCashData();
+              setTimeout(function(){
+                api.pathTo('/pages/userOrder/userOrder','redi');
+              },800)  
+            };   
+        };
+        api.realPay(res.info,payCallback); 
+        
+      }else{
+        api.showToast('发起微信支付失败','fail')
+      }
+         
+    };
+    api.pay(postData,callback);
+  },
+
+
+
+  getCashData(){
+    const self = this;
+    const postData = {};
+    postData.token = wx.getStorageSync('token');
+    postData.searchItem = {
+      type:2
+    }
+    postData.saveAfter = [];
+    if(self.data.distributionData.info.data.length>0){
+      var transitionArray = self.data.distributionData.info.data;
+        for (var i = 0; i < transitionArray.length; i++){
+          if(transitionArray[i].level==1){
+              postData.saveAfter.push(
                 {
                   tableName:'FlowLog',
                   FuncName:'add',
@@ -169,36 +196,27 @@ Page({
                   }
                 }
               );
-            }else if(transitionArray[i].level==2){
-              res.info.saveAfter.push(
-                {
-                  tableName:'flowlog',
-                  FuncName:'add',
-                  data:{
-                    count:wx.getStorageSync('info').thirdApp.custom_rule.secondClass,
-                    trade_info:'下级消费佣金奖励',
-                    user_no:transitionArray[i].parent_no,
-                    type:2,
-                    thirdapp_id:getApp().globalData.thirdapp_id
+              }else if(transitionArray[i].level==2){
+                postData.saveAfter.push(
+                  {
+                    tableName:'flowlog',
+                    FuncName:'add',
+                    data:{
+                      count:wx.getStorageSync('info').thirdApp.custom_rule.secondClass,
+                      trade_info:'下级消费佣金奖励',
+                      user_no:transitionArray[i].parent_no,
+                      type:2,
+                      thirdapp_id:getApp().globalData.thirdapp_id
+                    }
                   }
-                }
-              );
-            }
-          }       
-        };
-        const payCallback=(payData)=>{
-            setTimeout(function(){
-              api.pathTo('/pages/userOrder/userOrder','redi');
-            },800)  
-        };
-        api.realPay(res.info,payCallback); 
-        
-      }else{
-        api.showToast('发起微信支付失败','fail')
-      }
-         
+                );
+              }
+            }       
+          };
+      const callback = (res)=>{
+      wx.hideLoading();
     };
-    api.pay(postData,callback);
+    api.flowLogGet(postData,callback);
   },
 
   counter(e){
