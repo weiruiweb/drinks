@@ -106,5 +106,10 @@ Page({
     this.setData({
       isShow:false
     })
-  }
+  },
+
+  intoPath(e){
+    const self = this;
+    api.pathTo(api.getDataSet(e,'path'),'nav');
+  },
 })

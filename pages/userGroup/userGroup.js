@@ -31,6 +31,17 @@ Page({
     });
   },
 
+  onPullDownRefresh(){
+    const self = this;
+    wx.showNavigationBarLoading(); 
+    delete self.data.searchItem.create_time;
+    self.setData({
+      web_startTime:'',
+      web_endTime:'',
+    });
+    self.getMainData(true);
+  },
+
   getMainData(isNew){
     const self = this;
     if(isNew){
@@ -62,6 +73,11 @@ Page({
         self.data.isLoadAll = true;
         api.showToast('没有更多了','fail');
       };
+      setTimeout(function()
+      {
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
+      },300);
       wx.hideLoading();
       self.setData({
         web_mainData:self.data.mainData,

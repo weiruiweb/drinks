@@ -15,7 +15,9 @@ Page({
     marquee2_margin: 60,
     size: 14,
     orientation: 'left',//滚动方向
-    interval: 20 // 时间间隔
+    interval: 20,
+    shareBtn:'',
+    isshare:''// 时间间隔
     
   },
   //事件处理函数
@@ -66,6 +68,9 @@ Page({
     self.setData({
       fonts:app.globalData.font
     });
+    wx.showShareMenu({
+      withShareTicket: true
+    });
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     self.getMainData();
     self.getArtData();
@@ -73,6 +78,10 @@ Page({
     if(options.scene){
       var scene = decodeURIComponent(options.scene)
     };
+    if(options.parentNo){
+      var scene = options.parentNo
+    };
+    console.log(scene)
     if(scene){
       var token = new Token({parent_no:scene});
       token.getUserInfo();
@@ -165,7 +174,20 @@ Page({
     const self = this;
     api.pathTo(api.getDataSet(e,'path'),'redi');
   },
- 
+
+
+  onShareAppMessage(res){
+    const self = this;
+    return {
+      title: '积分商城',
+      path: 'pages/index/index?parentNo='+wx.getStorageSync('info').user_no,
+      success: function (res){
+        console.log(res);
+      }
+    }
+  }
+
+
 })
 
   

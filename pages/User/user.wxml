@@ -30,7 +30,7 @@
 		 </view>
 	</view>
 </view>
-<view class="order" bindtap="order">
+<view class="order" bindtap="intoPath" data-path="/pages/userOrder/userOrder">
 		<view class="user_order flexRowBetween">
 			<view class="order_left flexRowBetween">
 				<image src="/images/user_icon1.png"></image>
@@ -47,23 +47,23 @@
 </view>
 <view class="process ">
 	<view class="process_cont flexRowBetween">
-		<view class="peocess_item item_other" bindtap="order">
+		<view class="peocess_item item_other"  bindtap="intoPath" data-path="/pages/userOrder/userOrder?num=2">
 			<image src="/images/user_icon7.png"></image>
 			<view class="text">待付款</view>
 		</view>
-		<view class="peocess_item">
+		<view class="peocess_item" bindtap="intoPath" data-path="/pages/userOrder/userOrder?num=3">
 			<image src="/images/user_icon8.png"></image>
-			<view class="text">待发货</view>
-		</view>
-		<view class="peocess_item">
-			<image src="/images/user_icon9.png"></image>
 			<view class="text">待收货</view>
+		</view>
+		<view class="peocess_item" bindtap="intoPath" data-path="/pages/userOrder/userOrder?num=4">
+			<image src="/images/user_icon9.png"></image>
+			<view class="text">已完成</view>
 		</view>
 	</view>
 </view>
 <view id="user">
 	<view class="user_all">
-		<view class="user_infor flexRowBetween"  bindtap="userMessage">
+		<view class="user_infor flexRowBetween" bindtap="intoPath" data-path="/pages/userMessage/userMessage">
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon2.png"></image>
 				<text>我的消息</text>
@@ -72,7 +72,7 @@
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
-		<view class="user_infor flexRowBetween"  bindtap="userGroup">
+		<view class="user_infor flexRowBetween" bindtap="intoPath" data-path="/pages/userGroup/userGroup" >
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon3.png"></image>
 				<text>我的团队</text>
@@ -81,7 +81,7 @@
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
-		<view class="user_infor flexRowBetween" bindtap="address">
+		<view class="user_infor flexRowBetween"  bindtap="intoPath" data-path="/pages/address/address">
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon4.png"></image>
 				<text>收货地址</text>
@@ -90,7 +90,7 @@
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
-		<view class="user_infor flexRowBetween" bindtap="userContact">
+		<view class="user_infor flexRowBetween"  bindtap="intoPath" data-path="/pages/userContact/userContact">
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon5.png"></image>
 				<text>联系我们 </text>
@@ -99,7 +99,7 @@
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
-		<view class="user_infor flexRowBetween" bindtap="userShare">
+		<view class="user_infor flexRowBetween" bindtap="intoPath" data-path="/pages/userShare/userShare">
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon6.png"></image>
 				<text>我的分享</text>

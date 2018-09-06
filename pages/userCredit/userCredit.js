@@ -26,6 +26,20 @@ Page({
     self.getUserInfoData()
   },
 
+
+  onPullDownRefresh(){
+    const self = this;
+    wx.showNavigationBarLoading(); 
+    delete self.data.searchItem.create_time;
+    self.setData({
+      web_startTime:'',
+      web_endTime:'',
+    });
+    self.getMainData(true);
+
+  },
+
+
   getUserInfoData(){
     const self = this;
     const postData = {};
@@ -65,6 +79,11 @@ Page({
       self.setData({
         web_mainData:self.data.mainData,
       });
+      setTimeout(function()
+      {
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
+      },300);
       wx.hideLoading();
     };
     api.flowLogGet(postData,callback);
@@ -97,32 +116,5 @@ Page({
   },
 
 
-  userInfo:function(){
-    wx.navigateTo({
-      url:'/pages/userInfo/userInfo'
-    })
-  },
 
-   bindDateChange: function(e) {
-    this.setData({
-      date: e.detail.value
-    })
-  },
- 
-  newAddress:function(){
-    wx.navigateTo({
-      url:'/pages/newAddress/newAddress'
-    })
-  },
-  discount:function(){
-    wx.navigateTo({
-      url:'/pages/discount/discount'
-    })
-  },
-  
-  choosePay:function(e){
-    this.setData({
-      isChoose:e.currentTarget.dataset.id
-    })
-  }
 })

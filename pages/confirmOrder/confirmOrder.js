@@ -24,6 +24,7 @@ Page({
       });
     self.data.id = options.id;
     self.getMainData();
+    self.distributionGet();
     getApp().globalData.address_id = '';
   },
 
@@ -91,9 +92,9 @@ Page({
       const postData = {
         token:wx.getStorageSync('token'),
         product:[
-          {id:self.data.id,count:1}
+          {id:self.data.id,count:self.data.mainData.count}
         ],
-        pay:{wxPay:self.data.mainData.price},
+        pay:{wxPay:self.data.totalPrice.toFixed(2)},
         snap_address:self.data.addressData.info.data[0],
         type:1,
       };
@@ -115,6 +116,24 @@ Page({
     }   
   },
 
+  distributionGet(){
+    const self = this;
+    const postData = {};
+    postData.token = wx.getStorageSync('token');
+    postData.searchItem = {
+      child_no:wx.getStorageSync('info').user_no
+    }
+    const callback = (res)=>{
+      self.data.distributionData = res;
+      self.setData({
+        web_distributionData:self.data.distributionData,
+      });
+      wx.hideLoading();
+    };
+    console.log('distri');
+    api.distributionGet(postData,callback);
+  },
+
 
 
   pay(order_id){
@@ -128,10 +147,45 @@ Page({
       wxPay:self.data.mainData.price,
       wxPayStatus:0
     };
+    
     const callback = (res)=>{
       wx.hideLoading();
-
+      res.info.saveAfter = [];
       if(res.solely_code==100000){
+        if(self.data.distributionData.info.data.length>0){
+          var transitionArray = self.data.distributionData.info.data;
+          for (var i = 0; i < transitionArray.length; i++) {
+            if(transitionArray[i].level==1){
+              res.info.saveAfter.push(
+                {
+                  tableName:'FlowLog',
+                  FuncName:'add',
+                  data:{
+                    count:wx.getStorageSync('info').thirdApp.custom_rule.firstClass,
+                    trade_info:'下级消费佣金奖励',
+                    user_no:transitionArray[i].parent_no,
+                    type:2,
+                    thirdapp_id:getApp().globalData.thirdapp_id
+                  }
+                }
+              );
+            }else if(transitionArray[i].level==2){
+              res.info.saveAfter.push(
+                {
+                  tableName:'flowlog',
+                  FuncName:'add',
+                  data:{
+                    count:wx.getStorageSync('info').thirdApp.custom_rule.secondClass,
+                    trade_info:'下级消费佣金奖励',
+                    user_no:transitionArray[i].parent_no,
+                    type:2,
+                    thirdapp_id:getApp().globalData.thirdapp_id
+                  }
+                }
+              );
+            }
+          }       
+        };
         const payCallback=(payData)=>{
             setTimeout(function(){
               api.pathTo('/pages/userOrder/userOrder','redi');
@@ -172,11 +226,10 @@ Page({
     const self = this;
     var totalPrice = 0;
     totalPrice += self.data.mainData.count*parseFloat(self.data.mainData.price);
+    self.data.totalPrice = totalPrice;
     self.setData({
-      web_totalPrice:totalPrice.toFixed(2)
+      web_totalPrice:self.data.totalPrice.toFixed(2)
     });
-    console.log(self.data.mainData.count) 
-    console.log(parseFloat(self.data.mainData.price))
   },
 
   getartData(){
