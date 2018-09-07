@@ -123,14 +123,14 @@ Page({
     postData.token = wx.getStorageSync('token');
     postData.searchItem = {
       child_no:wx.getStorageSync('info').user_no
-    }
+    };
     const callback = (res)=>{
       if(res){
         self.data.distributionData = res;
         self.setData({
           web_distributionData:self.data.distributionData,
         });
-        self.userUpdate()
+        
       }
       wx.hideLoading();
     };
@@ -162,12 +162,10 @@ Page({
             },800)  
           };   
         };
-        api.realPay(res.info,payCallback); 
-        
+        api.realPay(res.info,payCallback);  
       }else{
         api.showToast('发起微信支付失败','fail')
-      }
-         
+      };
     };
     api.pay(postData,callback);
   },
