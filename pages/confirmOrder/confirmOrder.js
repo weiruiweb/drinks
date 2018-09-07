@@ -25,6 +25,7 @@ Page({
     self.data.id = options.id;
     self.getMainData();
     self.distributionGet();
+
     getApp().globalData.address_id = '';
   },
 
@@ -124,13 +125,15 @@ Page({
       child_no:wx.getStorageSync('info').user_no
     }
     const callback = (res)=>{
-      self.data.distributionData = res;
-      self.setData({
-        web_distributionData:self.data.distributionData,
-      });
+      if(res){
+        self.data.distributionData = res;
+        self.setData({
+          web_distributionData:self.data.distributionData,
+        });
+        self.userUpdate()
+      }
       wx.hideLoading();
     };
-    console.log('distri');
     api.distributionGet(postData,callback);
   },
 
@@ -153,11 +156,11 @@ Page({
       if(res.solely_code==100000){
         const payCallback=(payData)=>{
           if(payData==1){
-              self.getCashData();
-              setTimeout(function(){
-                api.pathTo('/pages/userOrder/userOrder','redi');
-              },800)  
-            };   
+            self.userUpdate();
+            setTimeout(function(){
+              api.pathTo('/pages/userOrder/userOrder','redi');
+            },800)  
+          };   
         };
         api.realPay(res.info,payCallback); 
         
@@ -171,13 +174,14 @@ Page({
 
 
 
-  getCashData(){
+  userUpdate(){
     const self = this;
+    var nowTimestamp =new Date().getTime();
     const postData = {};
     postData.token = wx.getStorageSync('token');
-    postData.searchItem = {
-      type:2
-    }
+    postData.data = {
+      update_time:nowTimestamp
+    };
     postData.saveAfter = [];
     if(self.data.distributionData.info.data.length>0){
       var transitionArray = self.data.distributionData.info.data;
@@ -213,11 +217,11 @@ Page({
               }
             }       
           };
-      const callback = (res)=>{
-      wx.hideLoading();
-    };
-    api.flowLogGet(postData,callback);
-  },
+          const callback = (data)=>{
+          wx.hideLoading();   
+        };
+      api.userUpdate(postData,callback);
+    },
 
   counter(e){
     const self = this;
