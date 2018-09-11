@@ -28,7 +28,6 @@ Page({
     self.data.id = options.id;
     self.getMainData();
     self.distributionGet();
-
     getApp().globalData.address_id = '';
   },
 
@@ -75,7 +74,6 @@ Page({
     };
     api.productGet(postData,callback);
   },
-
 
   intoPath(e){
     const self = this;
@@ -124,7 +122,6 @@ Page({
           self.data.order_id = res.info.id
           self.pay(self.data.order_id);         
         }; 
-             
       };
       api.addOrder(postData,callback);
     }else{
@@ -151,8 +148,6 @@ Page({
     api.distributionGet(postData,callback);
   },
 
-
-
   pay(order_id){
     const self = this;
     var order_id = self.data.order_id;
@@ -164,13 +159,47 @@ Page({
       wxPay:self.data.totalPrice.toFixed(2),
       wxPayStatus:0
     };
+    var levelOneCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100; 
+    var levelTwoCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100;
+    postData.payAfter = [];
+    if(self.data.distributionData.info.data.length>0){
+      for (var i = 0; i < transitionArray.length; i++){
+        if(transitionArray[i].level==1){
+          postData.payAfter.push(
+            {
+              tableName:'FlowLog',
+              FuncName:'add',
+              data:{
+                count:levelOneCash,
+                trade_info:'下级消费佣金奖励',
+                user_no:transitionArray[i].parent_no,
+                type:2,
+                thirdapp_id:getApp().globalData.thirdapp_id
+              }
+            }
+          );
+        }else if(transitionArray[i].level==2){
+          postData.payAfter.push(
+            {
+              tableName:'flowlog',
+              FuncName:'add',
+              data:{
+                count:levelTwoCash,
+                trade_info:'下级消费佣金奖励',
+                user_no:transitionArray[i].parent_no,
+                type:2,
+                thirdapp_id:getApp().globalData.thirdapp_id
+              }
+            }
+          );
+        };   
+      };
+    };
     const callback = (res)=>{
       wx.hideLoading();
-      
       if(res.solely_code==100000){
         const payCallback=(payData)=>{
           if(payData==1){
-            self.userUpdate();
             setTimeout(function(){
               api.pathTo('/pages/userOrder/userOrder','redi');
             },800)  
@@ -184,60 +213,6 @@ Page({
     api.pay(postData,callback);
   },
 
-
-
-  userUpdate(){
-    const self = this;
-    var nowTimestamp =new Date().getTime();
-    var levelOneCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100; 
-    var levelTwoCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100;
-    const postData = {};
-    postData.token = wx.getStorageSync('token');
-    postData.data = {
-      update_time:nowTimestamp
-    };
-    console.log(levelOneCash)
-    console.log(levelOneCash)
-    postData.saveAfter = [];
-    if(self.data.distributionData.info.data.length>0){
-      var transitionArray = self.data.distributionData.info.data;
-        for (var i = 0; i < transitionArray.length; i++){
-          if(transitionArray[i].level==1){
-              postData.saveAfter.push(
-                {
-                  tableName:'FlowLog',
-                  FuncName:'add',
-                  data:{
-                    count:levelOneCash,
-                    trade_info:'下级消费佣金奖励',
-                    user_no:transitionArray[i].parent_no,
-                    type:2,
-                    thirdapp_id:getApp().globalData.thirdapp_id
-                  }
-                }
-              );
-              }else if(transitionArray[i].level==2){
-                postData.saveAfter.push(
-                  {
-                    tableName:'flowlog',
-                    FuncName:'add',
-                    data:{
-                      count:levelTwoCash,
-                      trade_info:'下级消费佣金奖励',
-                      user_no:transitionArray[i].parent_no,
-                      type:2,
-                      thirdapp_id:getApp().globalData.thirdapp_id
-                    }
-                  }
-                );
-              }
-            }       
-          };
-          const callback = (data)=>{
-          wx.hideLoading();   
-        };
-      api.userUpdate(postData,callback);
-    },
 
   counter(e){
     const self = this;
@@ -301,10 +276,6 @@ Page({
     };
     api.articleGet(postData,callback);
   },
-
-
-
-
 
 
 })

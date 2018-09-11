@@ -1,7 +1,7 @@
 import {Api} from '../../utils/api.js';
 var api = new Api();
 const app = getApp()
-
+import {Token} from '../../utils/token.js';
 
 Page({
 
@@ -25,7 +25,17 @@ Page({
   onLoad(){
     const self = this;
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
-    self.getMainData();
+    wx.showLoading();
+    if(self.data.searchItem.parent_no&&self.data.searchItem.parent_no!=undefined){
+      self.getMainData();
+    }else{
+      var token = new Token();
+      const callback = (res)=>{
+        self.getMainData(false,res)
+      };
+      token.getUserInfo({},callback);
+    };
+    
     self.setData({
       fonts:app.globalData.font
     });
@@ -42,15 +52,21 @@ Page({
     self.getMainData(true);
   },
 
-  getMainData(isNew){
+  getMainData(isNew,res){
     const self = this;
     if(isNew){
       api.clearPageIndex(self);  
     };
+
     const postData = {};
     postData.paginate = api.cloneForm(self.data.paginate);
     postData.token = wx.getStorageSync('token');
+    console.log(self.data.searchItem);
     postData.searchItem = api.cloneForm(self.data.searchItem);
+    if(res){
+      postData.searchItem.parent_no = res.data.info.user_no;
+      postData.token = res.data.token;
+    };
     postData.order = {
       create_time:'desc'
     }
@@ -83,6 +99,10 @@ Page({
         web_mainData:self.data.mainData,
         web_total:res.info.total
       });  
+    };
+    if(!postData.searchItem.parent_no){
+      api.showToast('网络故障','fail');
+      return;
     };
     api.distributionGet(postData,callback);
   },

@@ -91,10 +91,16 @@ class Token {
                             wx.setStorageSync('info',res.data.info);
                             wx.setStorageSync('token', res.data.token);
                             wx.setStorageSync('openid', res.data.openid);
-                            if(params&&callback){
+                            if(JSON.stringify(params)!='{}'&&callback){
+                                console.log('params',params)
                                 params.data.token = res.data.token;
                                 callback && callback(params);
-                            }      
+                                console.log('callback1')
+                            }else{
+                                console.log('res',res);
+                                callback && callback(res);
+                                console.log('callback2')
+                            };      
                         }else{
                             wx.showToast({
                                 title: '获取token失败',

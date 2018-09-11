@@ -82,14 +82,20 @@ Page({
     if(options.parentNo){
       var scene = options.parentNo
     };
-    console.log('111',scene)
+    
     if(scene){
       var token = new Token({parent_no:scene});
-      
+      token.getUserInfo();
+      console.log('getToken',scene)
     }else{
-      var token = new Token();
+      if(!wx.getStorageSync('token')){
+        var token = new Token();
+        token.getUserInfo();
+        console.log('getToken')
+      };
+      
     };
-    token.getUserInfo();
+    
   },
   
   
