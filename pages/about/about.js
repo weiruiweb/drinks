@@ -1,6 +1,8 @@
 import {Api} from '../../utils/api.js';
 var api = new Api();
 const app = getApp();
+import {Token} from '../../utils/token.js';
+const token = new Token();
 
 
 Page({
@@ -16,7 +18,21 @@ Page({
     });
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     self.getArtData();
-    self.getArtTwoData()
+    self.getArtTwoData();
+    if(options.scene){
+      var scene = decodeURIComponent(options.scene)
+    };
+    if(options.parentNo){
+      var scene = options.parentNo
+    };
+    console.log('111',scene)
+    if(scene){
+      var token = new Token({parent_no:scene});
+      
+    }else{
+      var token = new Token();
+    };
+    token.getUserInfo();
   },
   
   

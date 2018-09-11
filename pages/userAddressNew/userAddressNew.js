@@ -126,8 +126,10 @@ Page({
           self.addressAdd();
         }
         setTimeout(function(){
-          api.pathTo('/pages/userAddress/userAddress','redi')
-        },1000);  
+          wx.navigateBack({
+            delta: 1
+          });
+        },300);  
       }
     }else{
       api.showToast('请补全信息','fail');

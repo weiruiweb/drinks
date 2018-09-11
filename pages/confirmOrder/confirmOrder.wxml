@@ -58,7 +58,7 @@
 <view class="user_message">
 	<view class="flexRowBetween">
 		<text class="text1">买家留言</text>
-		<textarea placeholder="选填:填写内容已和卖家协商确认" auto-height="true">
+		<textarea placeholder="选填:填写内容已和卖家协商确认" auto-height="true" data-key="passage1" bindblur="changeBind" value="{{web_submitData.passage1}}">
 		</textarea>
 	</view>
 </view>

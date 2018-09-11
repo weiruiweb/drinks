@@ -1,0 +1,72 @@
+.User_cont{background:#f2f2f2}
+.user_top{position:relative;}
+
+.user_top image{width:750rpx;height:300rpx}
+.user_info{position:absolute;left:300rpx;top:85rpx;height:200rpx;text-align:center;}
+.userinfo-avatar {
+  
+  overflow:hidden;
+  display: block;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  width:145rpx;
+  height: 145rpx;
+  margin:0rpx auto 22rpx;
+}
+
+.userName{
+	font-size:32rpx;
+	color:#fff;}
+.userInfo{
+	padding:20rpx 0rpx;
+}
+
+.userdetail_list image{margin-top:38rpx;}
+
+.yanzheng_btn {
+  width: 207rpx;
+  background: #ef4f4f;
+  height: 75rpx;
+  margin-top: 15rpx;
+  text-align: center;
+  line-height: 75rpx;
+  border-radius: 15rpx;
+  color: #fff;
+  font-size: 30rpx;
+  padding: 0 10rpx;
+}
+.input_note{width:23%;
+  color:#363636;
+  font-size:32rpx;
+}
+.users_detail{
+  width:100%;
+  align-items:center;
+}
+.user_input{
+  height:90rpx;
+  line-height:90rpx;
+  border-bottom:solid 1px #e0e0e0;
+  padding:0px 25rpx;
+  align-items:center;
+  }
+.user_input input{
+  height:32rpx;
+  line-height:32rpx;
+  color:#b2b2b2;
+  font-size:30rpx;
+  width:77%;
+  align-items:center;
+}
+.user_input image{
+  width:11rpx;
+  height:20rpx;
+}
+.address_right text{color:#b2b2b2;font-size:28rpx;}
+.address_right image{margin-left:15rpx;}
+.address_set{width:200rpx;}
+.submit_info{
+  position:absolute;
+  bottom:280rpx;
+}

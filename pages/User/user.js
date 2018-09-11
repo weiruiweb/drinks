@@ -1,6 +1,9 @@
 import {Api} from '../../utils/api.js';
 const api = new Api();
-const app = getApp()
+const app = getApp();
+import {Token} from '../../utils/token.js';
+const token = new Token();
+
 
 Page({
   data: {
@@ -15,12 +18,26 @@ Page({
   },
 
   
-  onLoad(){
+  onLoad(options){
     const self = this;
     self.setData({
      fonts:app.globalData.font
     });
-    self.getUserInfoData()
+    self.getUserInfoData();
+    if(options.scene){
+      var scene = decodeURIComponent(options.scene)
+    };
+    if(options.parentNo){
+      var scene = options.parentNo
+    };
+    console.log('111',scene)
+    if(scene){
+      var token = new Token({parent_no:scene});
+      
+    }else{
+      var token = new Token();
+    };
+    token.getUserInfo();
   },
 
  tel:function () {

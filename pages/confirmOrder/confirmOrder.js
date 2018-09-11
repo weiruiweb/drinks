@@ -15,6 +15,9 @@ Page({
     },
     buttonClicked: false,
     order_id:'',
+    submitData:{
+      passage1:''
+    }
   },
 
   onLoad: function (options) {
@@ -79,14 +82,24 @@ Page({
     api.pathTo(api.getDataSet(e,'path'),'nav');
   },
 
+  changeBind(e){
+    const self = this;
+    api.fillChange(e,self,'submitData');
+    console.log(self.data.submitData);
+    self.setData({
+      web_submitData:self.data.submitData,
+    });  
+  },
+
   addOrder(){
     const self = this;
-    if(wx.getStorageSync('info').info.length==0){
+    if(wx.getStorageSync('info').info.name==''&&wx.getStorageSync('info').info.phone==''){
       api.showToast('请完善信息');
       setTimeout(function(){
            api.pathTo('/pages/userComplete/userComplete','nav');
         },800)
     }else if(!self.data.order_id){
+      self.buttonClicked = true;
       self.setData({
         buttonClicked: true
       });
@@ -98,6 +111,7 @@ Page({
         pay:{wxPay:self.data.totalPrice.toFixed(2)},
         snap_address:self.data.addressData.info.data[0],
         type:1,
+        passage1:self.data.submitData.passage1
       };
       const callback = (res)=>{
         if(res&&res.solely_code==100000){
@@ -105,6 +119,7 @@ Page({
             self.setData({
               buttonClicked: false
             })
+            self.buttonClicked = false;
           }, 1000);
           self.data.order_id = res.info.id
           self.pay(self.data.order_id);         
@@ -130,7 +145,6 @@ Page({
         self.setData({
           web_distributionData:self.data.distributionData,
         });
-        
       }
       wx.hideLoading();
     };
@@ -147,7 +161,7 @@ Page({
       searchItem:{
         id:order_id
       },
-      wxPay:self.data.mainData.price,
+      wxPay:self.data.totalPrice.toFixed(2),
       wxPayStatus:0
     };
     const callback = (res)=>{
@@ -175,11 +189,15 @@ Page({
   userUpdate(){
     const self = this;
     var nowTimestamp =new Date().getTime();
+    var levelOneCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100; 
+    var levelTwoCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100;
     const postData = {};
     postData.token = wx.getStorageSync('token');
     postData.data = {
       update_time:nowTimestamp
     };
+    console.log(levelOneCash)
+    console.log(levelOneCash)
     postData.saveAfter = [];
     if(self.data.distributionData.info.data.length>0){
       var transitionArray = self.data.distributionData.info.data;
@@ -190,7 +208,7 @@ Page({
                   tableName:'FlowLog',
                   FuncName:'add',
                   data:{
-                    count:wx.getStorageSync('info').thirdApp.custom_rule.firstClass,
+                    count:levelOneCash,
                     trade_info:'下级消费佣金奖励',
                     user_no:transitionArray[i].parent_no,
                     type:2,
@@ -204,7 +222,7 @@ Page({
                     tableName:'flowlog',
                     FuncName:'add',
                     data:{
-                      count:wx.getStorageSync('info').thirdApp.custom_rule.secondClass,
+                      count:levelTwoCash,
                       trade_info:'下级消费佣金奖励',
                       user_no:transitionArray[i].parent_no,
                       type:2,

@@ -75,17 +75,21 @@ Page({
     self.getMainData();
     self.getArtData();
     self.getArtTwoData()
+    
     if(options.scene){
       var scene = decodeURIComponent(options.scene)
     };
     if(options.parentNo){
       var scene = options.parentNo
     };
-    console.log(scene)
+    console.log('111',scene)
     if(scene){
       var token = new Token({parent_no:scene});
-      token.getUserInfo();
-    }
+      
+    }else{
+      var token = new Token();
+    };
+    token.getUserInfo();
   },
   
   
@@ -179,7 +183,7 @@ Page({
   onShareAppMessage(res){
     const self = this;
     return {
-      title: '积分商城',
+      title: '直销商城',
       path: 'pages/index/index?parentNo='+wx.getStorageSync('info').user_no,
       success: function (res){
         console.log(res);

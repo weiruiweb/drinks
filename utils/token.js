@@ -77,7 +77,6 @@ class Token {
                     postData.parent_no = self.g_params.parent_no;
                     console.log(self.g_params)
                 };
-                postData.parent_no = 'U905318856419419';
                 if(wx.getStorageSync('openidP')){
                     postData.openid = wx.getStorageSync('openidP');
                 };

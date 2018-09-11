@@ -22,6 +22,10 @@ Page({
       fonts:app.globalData.font
     });
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
+  },
+
+  onShow(){
+    const self = this;
     self.getMainData();
   },
 
