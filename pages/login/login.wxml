@@ -1,0 +1,19 @@
+<view wx:if="{{web_show}}">
+<view class="login">
+
+	<view class="login_item flexRowBetween">
+		<text class="nameInput" style="width:20%;">登录名:</text>
+		<input class="login_input"  data-key="login_name" bindinput="bindInputChange" ></input>
+	</view>
+	<view class="login_item flexRowBetween">
+		<text class="nameInput"  style="width:20%;">密码:</text>
+		<input type="password" class="login_input" data-key="password" bindinput="bindInputChange" ></input>
+	</view>
+
+	<button class="submit_input" bindtap="submit" style="background:linear-gradient(to right,rgba(113,36,36,1.00),rgba(169,103,103,1.00));color:#fff;margin-top:100px">登录</button>
+
+
+	
+</view>
+</view>
+

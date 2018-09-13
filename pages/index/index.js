@@ -82,9 +82,19 @@ Page({
     if(options.parentNo){
       var scene = options.parentNo
     };
+    if(options.passage1){
+      var scene = options.passage1
+    };
     
     if(scene){
-      var token = new Token({parent_no:scene});
+      var num = scene.search('_');
+      var sceneNew = scene.substring(0,scene.length-1);
+
+      if(num==-1){
+        var token = new Token({parent_no:scene}); 
+      }else{
+        var token = new Token({passage1:sceneNew}); 
+      }   
       token.getUserInfo();
       console.log('getToken',scene)
     }else{

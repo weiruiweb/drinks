@@ -1,0 +1,35 @@
+.login{padding:46rpx 26rpx;margin-top:50rpx}
+.nameInput{
+	width:100rpx;
+	height:80rpx;
+	line-height:80rpx;
+	color:#2e2e2e;
+	font-size:30rpx;}
+.login_input{
+	padding-left:4%;
+	width:76%;
+	height:80rpx;
+	background:#f4f4f4;
+	line-height:80rpx;
+	border-radius:10rpx;}
+.login_item{
+	margin-bottom:30rpx;
+}
+.login_item button{
+	color:#fff;
+	font-size:22rpx;
+	width:180rpx;
+	height:80rpx;
+	text-align:center;
+	line-height:80rpx;
+	background:#ef4f4f;
+	border-radius:10rpx;
+	margin-left:30rpx;
+}
+.notice_reg{font-size:24rpx;
+	color:#666;
+	margin-top:30rpx;
+	text-align:center;
+}
+
+.userInfo{padding:0rpx;}

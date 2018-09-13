@@ -6,12 +6,15 @@ var app = getApp()
 
 Page({
   data: {
-   num:1,
+   num:3,
    mainData:[],
    searchItem:{
-      thirdapp_id:getApp().globalData.thirdapp_id,
-    },
-    buttonClicked: false
+    user_type:0,
+    pay_status :1,
+    transport_status :0,
+    order_step :0
+   },
+   buttonClicked: false
   },
 
 
@@ -23,9 +26,17 @@ Page({
     this.setData({
       fonts:app.globalData.font
     });
+    self.setData({
+      num: self.data.num
+    });
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
-    self.getMainData()
+    
   },
+
+  onShow(){
+   const self = this;
+   self.getMainData(true)
+  },  
 
 
   getMainData(isNew){
@@ -35,11 +46,22 @@ Page({
     };
     const postData = {};
     postData.paginate = api.cloneForm(self.data.paginate);
-    postData.token = wx.getStorageSync('token');
+    postData.token = wx.getStorageSync('threeToken');
     postData.searchItem = api.cloneForm(self.data.searchItem)
     postData.order = {
       create_time:'desc'
-    }
+    };
+    postData.getBefore = {
+      user:{
+        tableName:'user',
+        searchItem:{
+          passage1:['=',[wx.getStorageSync('threeInfo').user_no]],
+        },
+        middleKey:'user_no',
+        key:'user_no',
+        condition:'in',
+      },
+    };
     const callback = (res)=>{
       if(res.info.data.length>0){
         self.data.mainData.push.apply(self.data.mainData,res.info.data);
@@ -102,108 +124,46 @@ Page({
       wxPay:price,
       wxPayStatus:0
     };
-    var levelOneCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100; 
-    var levelTwoCash = (wx.getStorageSync('info').thirdApp.custom_rule.secondClass*self.data.totalPrice.toFixed(2))/100;
-    var agentRewardCash = (wx.getStorageSync('info').thirdApp.custom_rule.agentReward*self.data.totalPrice.toFixed(2))/100;
-    var commmonRewardCash = Number(wx.getStorageSync('info').thirdApp.custom_rule.commonReward);
-    console.log(wx.getStorageSync('info').thirdApp.custom_rule.commonReward)
-    console.log((wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100)
-    postData.payAfter = [];
-    if(self.data.distributionData.info.data.length>0){
-      var transitionArray = self.data.distributionData.info.data;
-      for (var i = 0; i < transitionArray.length; i++){
-        if(transitionArray[i].userInfo.level==1){
-          postData.payAfter.push(
-            {
-              tableName:'FlowLog',
-              FuncName:'add',
-              data:{
-                count:levelOneCash+commmonRewardCash,
-                trade_info:'下级消费佣金奖励(包含3元固定奖励)',
-                user_no:transitionArray[i].parent_no,
-                type:2,
-                thirdapp_id:getApp().globalData.thirdapp_id
-              }
-            }
-          );
-        }else if(transitionArray[i].level==2){
-          postData.payAfter.push(
-            {
-              tableName:'flowlog',
-              FuncName:'add',
-              data:{
-                count:levelTwoCash+commmonRewardCash,
-                trade_info:'下级消费佣金奖励(包含3元固定奖励)',
-                user_no:transitionArray[i].parent_no,
-                type:2,
-                thirdapp_id:getApp().globalData.thirdapp_id
-              }
-            }
-          );
-        };   
-      };
-    };
-    if(self.data.userData.passage1&&self.data.userData.passage1!=''){
-      postData.payAfter.push(
-        {
-          tableName:'Flow_Log',
-          FuncName:'add',
-          data:{
-            count:agentRewardCash,
-            trade_info:'下级消费佣金奖励',
-            user_no:self.data.userData.passage1,
-            type:2,
-            thirdapp_id:getApp().globalData.thirdapp_id
-          }
-        }
-      );
-    }
     const callback = (res)=>{
       wx.hideLoading();
-      if(res.solely_code==100000){
+      
       const payCallback=(payData)=>{
-        if(payData==1){
-         self.getMainData(true)
-        };   
+          self.getMainData(true)  
       };
-        api.realPay(res.info,payCallback);  
-      }else{
-        api.showToast('发起微信支付失败','fail')
-      };
+      api.realPay(res.info,payCallback);   
     };
     api.pay(postData,callback);
   },
 
-  
 
   menuClick: function (e) {
     const self = this;
     self.setData({
-        buttonClicked: true
-      });
+      buttonClicked: true
+    });
     const num = e.currentTarget.dataset.num;
+   
     self.changeSearch(num);
   },
 
   changeSearch(num){
     const self = this;
-    this.setData({
+    self.setData({
       num: num
     });
     self.data.searchItem = {};
-    if(num=='1'){
-
-    }else if(num=='2'){
-      self.data.searchItem.pay_status = '0';
+    if(num=='3'){
+      self.data.searchItem.pay_status = '1';
+      self.data.searchItem.transport_status = '0';
       self.data.searchItem.order_step = '0';
-    }else if(num=='3'){
+    }else if(num=='4'){
       self.data.searchItem.pay_status = '1';
       self.data.searchItem.transport_status = '1';
       self.data.searchItem.order_step = '0';
-    }else if(num=='4'){
-      self.data.searchItem.order_step = '3';
     }else if(num=='5'){
-      self.data.searchItem.order_step = '2';
+      self.data.searchItem.pay_status = '1';
+      self.data.searchItem.transport_status = '2';
+      self.data.searchItem.order_step = '0';
     }
     self.setData({
       web_mainData:[],
@@ -218,6 +178,11 @@ Page({
       self.data.paginate.currentPage++;
       self.getMainData();
     };
+  },
+
+  intoPath(e){
+    const self = this;
+    api.pathTo(api.getDataSet(e,'path'),'nav');
   },
 
 

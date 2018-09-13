@@ -71,7 +71,7 @@
         </view>
       </view>
 
-      <view class="order_handle" style="justify-content:flex-end;">
+      <view class="order_handle" style="justify-content:flex-end;border-bottom:solid 1px #e0e0e0;" >
         <view class="order_del" data-id="{{item.id}}" data-price="{{item.price}}" bindtap="pay">
             <view class="del_btn" style="{{fonts[3].font}}" wx:if="{{item.pay_status == '0'&&item.order_step=='0'}}">去支付</view>
         </view>
@@ -80,15 +80,21 @@
             <view class="del_btn" style="{{fonts[3].font}}">删除</view>
         </view>
 
-        <view class="order_del" style="text-align:left">
-            <view  style="{{fonts[3].font}}" wx:if="{{item.pay_status == '1'&&item.order_step=='0'&&item.transport_status =='1'}}">物流信息:{{item.express_info}}</view>
-        </view>
+        
         <view class="order_del" style="text-align:left">
             <view class="del_btn" style="{{fonts[3].font}}" data-id="{{item.id}}"  bindtap='orderUpdate' wx:if="{{item.pay_status == '1'&&item.order_step=='0'&&item.transport_status =='1'}}">确认收货</view>
         </view>
-
-
       </view>
+
+      <view class="order_handle" style="justify-content:flex-start;" wx:if="{{item.pay_status == '1'&&item.order_step=='0'&&item.transport_status =='1'}}">
+        
+
+        <view class="order_del" style="text-align:left" >
+            <view  style="{{fonts[3].font}}" wx:if="{{item.pay_status == '1'&&item.order_step=='0'&&item.transport_status =='1'}}">物流信息:{{item.express_info}}</view>
+        </view>
+     
+      </view>
+
     </view>
   </block>
 </view>

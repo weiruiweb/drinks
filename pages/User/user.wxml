@@ -13,7 +13,7 @@
 		 <view class="user_word flexRowBetween">
 		 	<view class="top_left">
 			 	<view class="user_name"><open-data type="userNickName" lang="zh_CN"></open-data></view>
-			 	
+			 	<view class="phone">{{web_userData.info.data[0].level=='1'?'普通会员':'合伙人'}}</view>
 			 </view>
 			 <view class="top_right" bindtap="userCredit">
 			 	<view class="user_money">
@@ -60,7 +60,7 @@
 	<view class="user_all">
 		<view class="user_infor flexRowBetween" bindtap="intoPath" data-path="/pages/userComplete/userComplete">
 			<view class="user_left flexRowBetween">
-				<image src="/images/user_icon2.png"></image>
+				<image src="/images/icon100.png"></image>
 				<text>完善信息</text>
 			</view>
 			<view class="next_page">
@@ -85,7 +85,7 @@
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
-		<view class="user_infor flexRowBetween"  bindtap="intoPath" data-path="/pages/address/address">
+		<view class="user_infor flexRowBetween"  bindtap="intoPath" data-path="/pages/userAddress/userAddress">
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon4.png"></image>
 				<text>收货地址</text>
@@ -112,6 +112,17 @@
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
+
+		<view class="user_infor flexRowBetween" bindtap="intoPath" data-path="/pages/login/login" style="margin-top:20rpx;border-top:1px solid #dcdcdc">
+			<view class="user_left flexRowBetween">
+				<image src="/images/icon200.png"></image>
+				<text>代理商登录</text>
+			</view>
+			<view class="next_page">
+				<image src="/images/next_page.jpg"></image>
+			</view>
+		</view>
+
 	</view>
 </view>
 <view class="mask" style="{{isShow?'display:block':'display:none'}}">

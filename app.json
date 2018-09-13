@@ -16,7 +16,16 @@
     "pages/userMessage/userMessage",
     "pages/userComplete/userComplete",
     "pages/userCredit/userCredit",
-    "pages/viewMore/viewMore"
+    "pages/viewMore/viewMore",
+    "pages/login/login",
+    "pages/merchant/merchant",
+    "pages/agentComplete/agentComplete",
+    "pages/agentGroup/agentGroup",
+    "pages/agentGroupInfo/agentGroupInfo",
+    "pages/agentShare/agentShare",
+    "pages/agentCredit/agentCredit",
+    "pages/agentOrder/agentOrder",
+    "pages/agentOrderInfo/agentOrderInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,66 @@
+<!--user.wxml-->
+
+
+	
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note" style="width:20%">收货人:</view>
+				<view style="width:100%"><input  value="{{web_mainData.snap_address.name}}" disabled="true"></input></view>
+			</view>
+		</view>
+
+		<view class="user_input" style="height:150rpx">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note">收货地址:</view>
+				
+			</view>
+			<input  value="{{web_mainData.snap_address.detail}}" disabled="true"></input>
+		</view>	
+
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note" style="width:27%">联系电话:</view>
+				<input  value="{{web_mainData.snap_address.phone}}"  disabled="true"></input>
+			</view>
+		</view>	
+
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note" style="width:27%">下单时间:</view>
+				<input  value="{{web_mainData.create_time}}" disabled="true"></input>
+			</view>
+		</view>	
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note"  style="width:42%">购买产品名称:</view>
+				<input  value="{{web_mainData.products[0].snap_product.title}}" ></input>
+			</view>
+		</view>
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note" style="width:42%">购买产品单价:</view>
+				<input  value="{{web_mainData.products[0].snap_product.price}}" disabled="true"></input>
+			</view>
+		</view>
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note" style="width:42%">购买产品数量:</view>
+				<input  value="{{web_mainData.products[0].snap_product.count}}" disabled="true"></input>
+			</view>
+		</view>
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note" style="width:27%">实付金额:</view>
+				<input  value="{{web_mainData.pay.wxPay}}" disabled="true"></input>
+			</view>
+		</view>
+
+		<view style="width:100%;height:50px;margin:0 auto;line-height:50px;padding:0 3.3%;font-size:30rpx;display:flex">
+	<text style="line-height:50px;font-size:30rpx">物流信息:</text>
+	<textarea value="{{web_sForm.express_info}}" placeholder="请在输入物流信息" style="border:1px solid #E5E5E5;height:200rpx;border-radius:15rpx;width:250px;margin:17px 10px;#999" class='user_textarea' data-key="express_info" bindinput="changeBind"></textarea>
+</view>
+
+	<button class="submit_info" style="border-radius:50rpx;" bindtap="orderUpdate">
+	确认发货
+	</button>
+

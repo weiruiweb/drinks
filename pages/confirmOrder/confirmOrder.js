@@ -2,7 +2,8 @@
 //获取应用实例
 import {Api} from '../../utils/api.js';
 const api = new Api();
-const app = getApp()
+const app = getApp();
+import {Token} from '../../utils/token.js';
 
 
 Page({
@@ -28,6 +29,7 @@ Page({
     self.data.id = options.id;
     self.getMainData();
     self.distributionGet();
+    self.userGet();
     getApp().globalData.address_id = '';
   },
 
@@ -91,42 +93,51 @@ Page({
 
   addOrder(){
     const self = this;
-    if(wx.getStorageSync('info').info.name==''&&wx.getStorageSync('info').info.phone==''){
+    if(wx.getStorageSync('info')&&wx.getStorageSync('info').thirdApp.custom_rule.firstClass&&wx.getStorageSync('info').thirdApp.custom_rule.secondClass){
+       if(wx.getStorageSync('info').info.name==''&&wx.getStorageSync('info').info.phone==''){
       api.showToast('请完善信息');
       setTimeout(function(){
            api.pathTo('/pages/userComplete/userComplete','nav');
         },800)
-    }else if(!self.data.order_id){
-      self.buttonClicked = true;
-      self.setData({
-        buttonClicked: true
-      });
-      const postData = {
-        token:wx.getStorageSync('token'),
-        product:[
-          {id:self.data.id,count:self.data.mainData.count}
-        ],
-        pay:{wxPay:self.data.totalPrice.toFixed(2)},
-        snap_address:self.data.addressData.info.data[0],
-        type:1,
-        passage1:self.data.submitData.passage1
-      };
-      const callback = (res)=>{
-        if(res&&res.solely_code==100000){
-          setTimeout(function(){
-            self.setData({
-              buttonClicked: false
-            })
-            self.buttonClicked = false;
-          }, 1000);
-          self.data.order_id = res.info.id
-          self.pay(self.data.order_id);         
-        }; 
-      };
-      api.addOrder(postData,callback);
+      }else if(!self.data.order_id){
+        self.buttonClicked = true;
+        self.setData({
+          buttonClicked: true
+        });
+        const postData = {
+          token:wx.getStorageSync('token'),
+          product:[
+            {id:self.data.id,count:self.data.mainData.count}
+          ],
+          pay:{wxPay:self.data.totalPrice.toFixed(2)},
+          snap_address:self.data.addressData.info.data[0],
+          type:1,
+          passage1:self.data.submitData.passage1
+        };
+        const callback = (res)=>{
+          if(res&&res.solely_code==100000){
+            setTimeout(function(){
+              self.setData({
+                buttonClicked: false
+              })
+              self.buttonClicked = false;
+            }, 1000);
+            self.data.order_id = res.info.id
+            self.pay(self.data.order_id);         
+          }; 
+        };
+        api.addOrder(postData,callback);
+      }else{
+        self.pay(self.data.order_id)
+      }   
     }else{
-      self.pay(self.data.order_id)
-    }   
+      var token = new Token();
+      const callback = (res)=>{
+        self.addOrder(res)
+      };
+      token.getUserInfo({},callback);
+    };
+   
   },
 
   distributionGet(){
@@ -136,6 +147,18 @@ Page({
     postData.searchItem = {
       child_no:wx.getStorageSync('info').user_no
     };
+    postData.getAfter = {
+      userInfo:{
+        tableName:'user_info',
+        middleKey:'parent_no',
+        key:'user_no',
+        searchItem:{
+          status:1
+        },
+        condition:'=',
+        info:['level']
+      }
+    }
     const callback = (res)=>{
       if(res){
         self.data.distributionData = res;
@@ -146,6 +169,19 @@ Page({
       wx.hideLoading();
     };
     api.distributionGet(postData,callback);
+  },
+
+  userGet(){
+    const self = this;
+    const postData = {};
+    postData.token = wx.getStorageSync('token');
+    const callback = (res)=>{
+      if(res.info.data.length>0){
+        self.data.userData = res.info.data[0]
+      }   
+      wx.hideLoading();
+    };
+    api.userGet(postData,callback);
   },
 
   pay(order_id){
@@ -160,18 +196,23 @@ Page({
       wxPayStatus:0
     };
     var levelOneCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100; 
-    var levelTwoCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100;
+    var levelTwoCash = (wx.getStorageSync('info').thirdApp.custom_rule.secondClass*self.data.totalPrice.toFixed(2))/100;
+    var agentRewardCash = (wx.getStorageSync('info').thirdApp.custom_rule.agentReward*self.data.totalPrice.toFixed(2))/100;
+    var commmonRewardCash = Number(wx.getStorageSync('info').thirdApp.custom_rule.commonReward);
+    console.log(wx.getStorageSync('info').thirdApp.custom_rule.commonReward)
+    console.log((wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100)
     postData.payAfter = [];
     if(self.data.distributionData.info.data.length>0){
+      var transitionArray = self.data.distributionData.info.data;
       for (var i = 0; i < transitionArray.length; i++){
-        if(transitionArray[i].level==1){
+        if(transitionArray[i].userInfo.level==1){
           postData.payAfter.push(
             {
               tableName:'FlowLog',
               FuncName:'add',
               data:{
-                count:levelOneCash,
-                trade_info:'下级消费佣金奖励',
+                count:levelOneCash+commmonRewardCash,
+                trade_info:'下级消费佣金奖励(包含3元固定奖励)',
                 user_no:transitionArray[i].parent_no,
                 type:2,
                 thirdapp_id:getApp().globalData.thirdapp_id
@@ -184,8 +225,8 @@ Page({
               tableName:'flowlog',
               FuncName:'add',
               data:{
-                count:levelTwoCash,
-                trade_info:'下级消费佣金奖励',
+                count:levelTwoCash+commmonRewardCash,
+                trade_info:'下级消费佣金奖励(包含3元固定奖励)',
                 user_no:transitionArray[i].parent_no,
                 type:2,
                 thirdapp_id:getApp().globalData.thirdapp_id
@@ -195,6 +236,21 @@ Page({
         };   
       };
     };
+    if(self.data.userData.passage1&&self.data.userData.passage1!=''){
+      postData.payAfter.push(
+        {
+          tableName:'Flow_Log',
+          FuncName:'add',
+          data:{
+            count:agentRewardCash,
+            trade_info:'下级消费佣金奖励',
+            user_no:self.data.userData.passage1,
+            type:2,
+            thirdapp_id:getApp().globalData.thirdapp_id
+          }
+        }
+      );
+    }
     const callback = (res)=>{
       wx.hideLoading();
       if(res.solely_code==100000){

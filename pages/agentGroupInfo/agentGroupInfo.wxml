@@ -1,0 +1,39 @@
+<!--user.wxml-->
+
+	<view class="user_top">
+		<image src="/images/user_top2.jpg" style="height:388rpx;"></image>
+		<view class="user_info">
+			 <view class="userinfo-avatar">
+		      	<image src="{{web_mainData.headImgUrl}}" style="width:150rpx;height:150rpx;"></image>
+		    </view>
+		     <view style="width:100%;height:40rpx;position:absolute;top:85%;text-align:center;font-size:16px;color:#fff">
+     			<span><open-data  type="userNickName" ></open-data></span>
+ 			</view>
+	    </view>
+	</view>
+	
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note">姓名:</view>
+				<input  value="{{web_mainData.info.name}}"  data-key="name" bindblur="changeBind" disabled="true"></input>
+			</view>
+		</view>
+
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note">联系方式:</view>
+				<input  value="{{web_mainData.info.phone}}"  data-key="phone" bindblur="changeBind" disabled="true"></input>
+			</view>
+		</view>	
+
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note">剩余佣金:</view>
+				<input  value="{{web_mainData.info.balance}}"  data-key="balance" bindblur="changeBind" disabled="true"></input>
+			</view>
+		</view>	
+
+	<button class="submit_info" bindtap="userInfoUpdate" style="border-radius:50rpx;">
+	升级为合伙人
+	</button>
+

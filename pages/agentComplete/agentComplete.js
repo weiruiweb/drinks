@@ -8,7 +8,8 @@ Page({
   data: {
     sForm:{
       phone:'',
-      name:'',    
+      name:'',  
+      address:''  
     },
 
     mainData:{},
@@ -25,12 +26,13 @@ Page({
   userInfoGet(){
     const self = this;
     const postData = {};
-    postData.token = wx.getStorageSync('token');
+    postData.token = wx.getStorageSync('threeToken');
     const callback = (res)=>{
       console.log(res)
       self.data.mainData = res;
       self.data.sForm.phone = res.info.data[0].info.phone;
       self.data.sForm.name = res.info.data[0].info.name;
+      self.data.sForm.address = res.info.data[0].info.address;
       self.setData({
         web_sForm:self.data.sForm,
       });
@@ -59,19 +61,18 @@ Page({
   userInfoUpdate(){
     const self = this;
     const postData = {};
-    postData.token = wx.getStorageSync('token');
+    postData.token = wx.getStorageSync('threeToken');
     postData.data = {};
     postData.data = api.cloneForm(self.data.sForm);
     const callback = (data)=>{
       wx.hideLoading();
       if(data.solely_code==100000){
         api.showToast('完善成功','none')
-        token.getUserInfo();
         setTimeout(function(){
           wx.navigateBack({
             delta: 1
           });
-        },300); 
+        },500); 
       }else{
         api.showToast('网络故障','none')
       };

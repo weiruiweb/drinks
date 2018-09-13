@@ -1,0 +1,39 @@
+<!--user.wxml-->
+
+	<view class="user_top">
+		<image src="/images/user_top2.jpg" style="height:388rpx;"></image>
+		<view class="user_info">
+			 <view class="userinfo-avatar">
+		      <open-data  type="userAvatarUrl" style="width:150rpx;height:150rpx;"></open-data>
+		    </view>
+		     <view style="width:100%;height:40rpx;position:absolute;top:85%;text-align:center;font-size:16px;color:#fff">
+     			<span><open-data  type="userNickName" ></open-data></span>
+ 			</view>
+	    </view>
+	</view>
+	
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note">姓名:</view>
+				<input placeholder="请输入姓名" value="{{web_sForm.name}}"  data-key="name" bindblur="changeBind"></input>
+			</view>
+		</view>
+
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note">联系方式:</view>
+				<input placeholder="请输入联系方式" value="{{web_sForm.phone}}"  data-key="phone" bindblur="changeBind"></input>
+			</view>
+		</view>	
+
+		<view class="user_input">
+			<view class="users_detail flexRowBetween">
+				<view class="input_note">门店地址:</view>
+				<input placeholder="请输入门店地址" value="{{web_sForm.address}}"  data-key="address" bindblur="changeBind"></input>
+			</view>
+		</view>	
+
+	<button class="submit_info" open-type="getUserInfo" bindgetuserinfo="submit" style="border-radius:50rpx;">
+	保存
+	</button>
+

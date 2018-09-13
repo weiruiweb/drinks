@@ -126,10 +126,10 @@ overflow:hidden;}
 	color:#666;
 }
 .phone{
-	font-size:20rpx;
-	color:#fff;
+	font-size:24rpx;
 	display:flex;
 	align-items:center;
+
 }
 
 #user{background:#f5f5f5;oerflow:hidden;padding-top:12rpx;}
@@ -237,7 +237,7 @@ overflow:hidden;}
 	height:20rpx;
 }
 .user_all{
-	background:#fff;
+
 	margin-top:12rpx;
 }
 .mask{

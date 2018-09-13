@@ -1,0 +1,9 @@
+<!--userPoster.wxml-->
+<view class="poster">
+  <view class="poster_txt1" style="{{fonts[4].font}}">
+     分享二维码，领取佣金
+  </view>
+  <view class="poster_img">
+    <image src="{{web_QrData.info.url}}"></image>
+  </view>
+</view>

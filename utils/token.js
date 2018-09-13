@@ -66,6 +66,7 @@ class Token {
             success: function (res) {
                 console.log(res)
                 var postData = {};
+                postData.data = {};
                 postData.thirdapp_id = getApp().globalData.thirdapp_id;
                 postData.code = res.code;
                 if(data.nickName&&data.avatarUrl){
@@ -75,6 +76,10 @@ class Token {
                 };
                 if(self.g_params&&self.g_params.parent_no){
                     postData.parent_no = self.g_params.parent_no;
+                    console.log(self.g_params)
+                };
+                if(self.g_params&&self.g_params.passage1){
+                    postData.data.passage1 = self.g_params.passage1;
                     console.log(self.g_params)
                 };
                 if(wx.getStorageSync('openidP')){
@@ -128,7 +133,7 @@ class Token {
                 password:wx.getStorageSync('login').password,
             }
             wx.request({
-                url: 'https://dmgnm.com/scoreshop/public/index.php/api/v1/Func/Common/loginByUp',
+                url: 'https://dselling.yisuiyanghuoguo.com/public/index.php/api/v1/Func/Common/loginByUp',
                 method:'POST',
                 data:postData,
                 success:function(res){
