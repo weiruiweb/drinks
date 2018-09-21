@@ -89,6 +89,16 @@ class Base{
         return res;           
     };
 
+    checkArrayEqual(array1,array2){
+        
+        if(array1.sort().toString() == array2.sort().toString()){
+            return true;
+        }else{
+            return false;
+        }
+        
+    };
+
     fillForm(form,pform){
         var res =  JSON.parse(JSON.stringify(form));
         for( var key in form){
