@@ -26,6 +26,11 @@ Page({
     self.getUserInfoData()
   },
 
+  intoPath(e){
+    const self = this;
+    api.pathTo(api.getDataSet(e,'path'),'nav');
+  },
+
 
   onPullDownRefresh(){
     const self = this;

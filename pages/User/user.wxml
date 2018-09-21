@@ -13,7 +13,7 @@
 		 <view class="user_word flexRowBetween">
 		 	<view class="top_left">
 			 	<view class="user_name"><open-data type="userNickName" lang="zh_CN"></open-data></view>
-			 	<view class="phone">{{web_userData.info.data[0].level=='1'?'普通会员':'合伙人'}}</view>
+			 	<view class="phone">{{web_userData.info.data[0].level=='2'?'合伙人':'普通会员'}}</view>
 			 </view>
 			 <view class="top_right" bindtap="userCredit">
 			 	<view class="user_money">
@@ -94,7 +94,7 @@
 				<image src="/images/next_page.jpg"></image>
 			</view>
 		</view>
-		<view class="user_infor flexRowBetween"  bindtap="intoPath" data-path="/pages/userContact/userContact">
+		<view class="user_infor flexRowBetween"  bindtap="userContact" >
 			<view class="user_left flexRowBetween">
 				<image src="/images/user_icon5.png"></image>
 				<text>联系我们 </text>

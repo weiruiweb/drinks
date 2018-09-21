@@ -28,11 +28,11 @@ Page({
     wx.showLoading();
     if(self.data.searchItem.passage1&&self.data.searchItem.passage1!=undefined){
       self.getMainData();
-    }else{
+    }/*else{
       setTimeout(function(){
         api.pathTo('/pages/login/login','redi');
       },800)  
-    };  
+    };  */
     self.setData({
       fonts:app.globalData.font
     });

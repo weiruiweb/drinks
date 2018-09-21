@@ -19,7 +19,7 @@ Page({
 
   onShow(){
     const self = this;
-    if(wx.getStorageSync('threeInfo')){
+    if(wx.getStorageSync('threeInfo')&&wx.getStorageSync('threeToken')){
         self.setData({
           web_show:false
         });

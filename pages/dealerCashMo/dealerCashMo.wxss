@@ -1,0 +1,18 @@
+.cash_top{
+	width:100%;
+}
+.top_left{
+	width:50%;
+	text-align:center;
+	height:120rpx;
+	line-height:120rpx;
+}
+.top_left .submit_info{
+	width:100%;
+	font-size:28rpx;
+	color:#fff;
+}
+.cash_list{
+	height:100rpx;
+	border-bottom:solid 1px #e0e0e0;
+}

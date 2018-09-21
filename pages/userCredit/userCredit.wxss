@@ -13,7 +13,6 @@
 }
 .user_cre{
 	width:50%;
-	text-align:right;
 }
 .user_img{
 	width:140rpx;
@@ -24,7 +23,6 @@
 }
 .user_info{
 	display:flex;
-	justify-content:center;
 	align-items:center;
 }
 .user_name{

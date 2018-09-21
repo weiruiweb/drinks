@@ -96,7 +96,7 @@ Page({
         var token = new Token({passage1:sceneNew}); 
       }   
       token.getUserInfo();
-      console.log('getToken',scene)
+      console.log('getToken',sceneNew)
     }else{
       if(!wx.getStorageSync('token')){
         var token = new Token();

@@ -187,7 +187,7 @@ Page({
 
   changeSearch(num){
     const self = this;
-    this.setData({
+    self.setData({
       num: num
     });
     self.data.searchItem = {};

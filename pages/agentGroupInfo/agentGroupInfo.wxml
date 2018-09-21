@@ -33,7 +33,10 @@
 			</view>
 		</view>	
 
-	<button class="submit_info" bindtap="userInfoUpdate" style="border-radius:50rpx;">
+	<button class="submit_info" bindtap="userInfoUpdate" style="border-radius:50rpx;" wx:if="{{web_mainData.info.level==1}}">
 	升级为合伙人
 	</button>
 
+	<button class="submit_info"  style="border-radius:50rpx;" wx:else style="background:#999">
+	已成为合伙人
+	</button>

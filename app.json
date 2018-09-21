@@ -16,6 +16,7 @@
     "pages/userMessage/userMessage",
     "pages/userComplete/userComplete",
     "pages/userCredit/userCredit",
+    "pages/dealerCashMo/dealerCashMo",
     "pages/viewMore/viewMore",
     "pages/login/login",
     "pages/merchant/merchant",
