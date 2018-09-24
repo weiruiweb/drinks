@@ -12,18 +12,20 @@ Page({
     startTime:'',
     endTime:'',
     searchItem:{
-      type:2
-        
+      type:2  
     },
+    complete_api:[]
   },
 
   
   onLoad(options){
     const self = this;
+    wx.showLoading();
     self.setData({
      fonts:app.globalData.font
     });
     self.getUserInfoData();
+    self.getArtData();
     if(options.scene){
       var scene = decodeURIComponent(options.scene)
     };
@@ -38,27 +40,24 @@ Page({
       var token = new Token();
     };
     token.getUserInfo();
-    self.getArtData()
+    
   },
 
- tel() {
-  const self = this;
-    wx.makePhoneCall({
-      phoneNumber:self.data.artData.description,
-    })
-  },
+
 
   getUserInfoData(){
     const self = this;
     const postData = {};
     postData.token = wx.getStorageSync('token');
     const callback = (res)=>{
-      self.data.userData = res;
+      if(res.info.data.length>0){
+        self.data.userData = res;
+        self.data.complete_api.push('getUserInfoData')
+      }
       self.setData({
         web_userData:self.data.userData,
-      });
-     
-      wx.hideLoading();
+      });    
+      self.checkLoadComplete()
     };
     api.userInfoGet(postData,callback);   
   },
@@ -72,11 +71,13 @@ Page({
     };
     const callback = (res)=>{
       if(res.info.data.length>0){
-        self.data.artData = res.info.data[0]
+        self.data.artData = res.info.data[0];
+        self.data.complete_api.push('getArtData')
       }
       self.setData({
         web_artData:self.data.artData,
       });  
+      self.checkLoadComplete()
     };
     api.labelGet(postData,callback);
   },
@@ -103,4 +104,21 @@ Page({
     const self = this;
     api.pathTo(api.getDataSet(e,'path'),'redi');
   },
+
+  tel() {
+    const self = this;
+    wx.makePhoneCall({
+      phoneNumber:self.data.artData.description,
+    })
+  },
+
+  checkLoadComplete(){
+    const self = this;
+    var complete = api.checkArrayEqual(self.data.complete_api,['getUserInfoData','getArtData']);
+    console.log(self.data.complete_api)
+    if(complete){
+      wx.hideLoading();
+    };
+  },
+
 })

@@ -17,8 +17,13 @@ Page({
 
   onLoad(){
     const self = this;
-    self.getQrData();
-    this.setData({
+    wx.showLoading();
+    if(wx.getStorageSync('threeToken')&&wx.getStorageSync('threeToken')){
+       self.getQrData();
+    }else{
+      api.logOff();
+    };  
+    self.setData({
       fonts:app.globalData.font
     })
   },
@@ -35,12 +40,12 @@ Page({
     postData.output = 'url';
     postData.ext = 'png';
     const callback = (res)=>{
-      console.log(res);
-      self.data.QrData = res;
+      if(res){
+        self.data.QrData = res;
+      }  
       self.setData({
         web_QrData:self.data.QrData,
       });
-     
       wx.hideLoading();
     };
     api.getQrCode(postData,callback);

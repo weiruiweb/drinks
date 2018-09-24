@@ -34,9 +34,13 @@ Page({
   },
 
   onShow(){
-   const self = this;
-   wx.showLoading();
-   self.getMainData(true);
+    const self = this;
+    wx.showLoading();
+    if(wx.getStorageSync('threeToken')&&wx.getStorageSync('threeInfo')){
+      self.getMainData(true);
+    }else{
+      api.logOff();
+    };  
   },  
 
 
@@ -139,6 +143,7 @@ Page({
 
   menuClick: function (e) {
     const self = this;
+    wx.showLoading();
     self.setData({
       buttonClicked: true
     });

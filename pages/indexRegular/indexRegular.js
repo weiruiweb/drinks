@@ -18,6 +18,7 @@ Page({
 
   onLoad(options){
     const self = this;
+    wx.showLoading();
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     self.data.id = options.id;
     self.getMainData();
@@ -32,9 +33,11 @@ Page({
     };
     postData.searchItem.id = self.data.id;
     const callback = (res)=>{
-      self.data.mainData = res
+      if(res.info.data.length>0){
+        self.data.mainData = res;
+        self.data.mainData.content = api.wxParseReturn(res.info.data[0].content).nodes;
+      }   
       wx.hideLoading();
-      self.data.mainData.content = api.wxParseReturn(res.info.data[0].content).nodes;
       self.setData({
         web_mainData:self.data.mainData,
       });  

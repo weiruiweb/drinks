@@ -26,8 +26,10 @@ Page({
     const self = this;
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     wx.showLoading();
-    if(self.data.searchItem.passage1&&self.data.searchItem.passage1!=undefined){
+    if(wx.getStorageSync('threeInfo').user_no&&wx.getStorageSync('threeInfo').user_no!=undefined){
       self.getMainData();
+    }else{
+      api.logOff();
     }
     self.setData({
       fonts:app.globalData.font

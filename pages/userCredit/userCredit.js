@@ -13,6 +13,7 @@ Page({
       type:2,
       status:['in',[0,1]]
     },
+    complete_api:[]
   },
 
   
@@ -51,7 +52,10 @@ Page({
     const postData = {};
     postData.token = wx.getStorageSync('token');
     const callback = (res)=>{
-      self.data.userData = res;
+      if(res.info.data.length>0){
+        self.data.userData = res;
+        self.data.complete_api.push('getUserInfoData')
+      }
       self.setData({
         web_userData:self.data.userData,
       });
@@ -78,6 +82,7 @@ Page({
     const callback = (res)=>{
       if(res.info.data.length>0){
         self.data.mainData.push.apply(self.data.mainData,res.info.data);
+        self.data.complete_api.push('getMainData');
       }else{
         self.data.isLoadAll = true;
         api.showToast('没有更多了','fail');
@@ -90,7 +95,6 @@ Page({
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
       },300);
-      wx.hideLoading();
     };
     api.flowLogGet(postData,callback);
   },
@@ -119,6 +123,14 @@ Page({
       self.data.searchItem.create_time = ['<',self.data.endTimestap];
     };
     self.getMainData(true);   
+  },
+
+  checkLoadComplete(){
+    const self = this;
+    var complete = api.checkArrayEqual(self.data.complete_api,['getMainData','getUserInfoData']);
+    if(complete){
+      wx.hideLoading();
+    };
   },
 
 

@@ -23,7 +23,7 @@ Page({
   },
   //事件处理函数
  
-  onLoad: function (options) {
+  onLoad(options) {
     const self = this;
     this.setData({
       fonts:app.globalData.font
@@ -32,7 +32,7 @@ Page({
       web_num: self.data.num
     });
     self.data.id = options.id;
-    console.log(self.data.id)
+
     self.getMainData();
   },
 
@@ -43,7 +43,9 @@ Page({
       id:self.data.id
     }
     const callback = (res)=>{
-      self.data.mainData = res.info.data[0]
+      if(res.info.data.length>0){
+        self.data.mainData = res.info.data[0]  
+      }
       wx.hideLoading();
       self.data.mainData.content = api.wxParseReturn(res.info.data[0].content).nodes;
       self.setData({
@@ -60,66 +62,7 @@ Page({
   },
 
 
-  addOrder(){
-    const self = this;
-    if(wx.getStorageSync('info').info.length==0){
-      api.showToast('请完善信息');
-      setTimeout(function(){
-           api.pathTo('/pages/userComplete/userComplete','nav');
-        },800)
-    }else if(!self.data.order_id){
-      self.setData({
-        buttonClicked: true
-      });
-      const postData = {
-        token:wx.getStorageSync('token'),
-        product:[
-          {id:self.data.id,count:1}
-        ],
-        pay:{score:self.data.mainData.price},
-      };
-      const callback = (res)=>{
-        if(res&&res.solely_code==100000){
-          setTimeout(function(){
-            self.setData({
-              buttonClicked: false
-            })
-          }, 1000)         
-        }; 
-        self.data.order_id = res.info
-        self.pay(self.data.order_id);     
-      };
-      api.addOrder(postData,callback);
-    }else{
-       api.showToast('支付失败','fail')
-    }   
-  },
-
-
-
-
-  pay(order_id){
-    const self = this;
-    var order_id = self.data.order_id;
-    const postData = {
-      token:wx.getStorageSync('token'),
-      searchItem:{
-        id:order_id
-      },
-      score:self.data.mainData.price
-    };
-    const callback = (res)=>{
-      wx.hideLoading();
-      if(res.solely_code==100000){
-        api.showToast('订单已兑换','fail'),
-        self.show()
-      }else{
-        api.showToast('支付失败','fail')
-      }
-         
-    };
-    api.pay(postData,callback);
-  },
+  
 
   menuClick: function (e) {
     const self = this;

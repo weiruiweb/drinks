@@ -18,6 +18,7 @@ Page({
 
   onLoad(options){
     const self = this;
+    wx.showLoading();
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     self.data.id = options.id;
     self.getMainData();

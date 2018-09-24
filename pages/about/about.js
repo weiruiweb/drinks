@@ -9,10 +9,12 @@ Page({
   data: {
     artTwoData:[],
     artData:[],
+    complete_api:[],
   },
 
   onLoad(options) {
     const self = this;
+    wx.showLoading();
     self.setData({
       fonts:app.globalData.font
     });
@@ -25,7 +27,6 @@ Page({
     if(options.parentNo){
       var scene = options.parentNo
     };
-    console.log('111',scene)
     if(scene){
       var token = new Token({parent_no:scene});
       
@@ -56,11 +57,15 @@ Page({
       },
     };
     const callback = (res)=>{
-      self.data.artData = res;
-      self.data.text = res.info.data[0].description;
+      if(res.info.data.length>0){
+        self.data.artData = res;
+        self.data.text = res.info.data[0].description;  
+      }
+      self.data.complete_api.push('getArtData'); 
       self.setData({
         web_artData:self.data.artData,
-      });  
+      });
+      self.checkLoadComplete();      
     };
     api.articleGet(postData,callback);
   },
@@ -88,14 +93,24 @@ Page({
         if(res.info.data.length>2){
           self.data.artTwoData = self.data.artTwoData.slice(0,2) 
         }
+        self.data.complete_api.push('getArtTwoData'); 
       }else{
         self.data.isLoadAll = true;
       };
       self.setData({
         web_artTwoData:self.data.artTwoData,
-      });  
+      });
+      self.checkLoadComplete();      
     };
     api.articleGet(postData,callback);
+  },
+
+   checkLoadComplete(){
+    const self = this;
+    var complete = api.checkArrayEqual(self.data.complete_api,['getArtData','getArtTwoData']);
+    if(complete){
+      wx.hideLoading();
+    };
   },
 
   intoPath(e){

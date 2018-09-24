@@ -12,21 +12,37 @@ Page({
       score:'',
 
     }
-
-
-
   },
 
 
 
   onLoad(){
     const self = this;
+    wx.showLoading();
+    if(wx.getStorageSync('threeToken')){
+      self.data.token = wx.getStorageSync('threeToken')
+      self.data.info = wx.getStorageSync('threeInfo')
+    }else{
+      self.data.token = wx.getStorageSync('token')
+      self.data.info = wx.getStorageSync('info')
+    };
     self.getUserInfoData();
   },
 
 
 
-
+  getUserInfoData(){
+    const self = this;
+    const postData = {};
+    postData.token = self.data.token;
+    const callback = (res)=>{
+      if(res.info.data.length>0){
+        self.data.userData = res.info.data[0].balance
+      }
+      wx.hideLoading();
+    };
+    api.userInfoGet(postData,callback);   
+  },
 
   changeBind(e){
     const self = this;
@@ -51,14 +67,14 @@ Page({
   flowLogAdd(){
     const self = this;
     const postData = {
-        token:wx.getStorageSync('threeToken'),
-        data:{
-          user_no:wx.getStorageSync('info').user_no,
-          count:-self.data.submitData.score,
-          trade_info:self.data.submitData.trade_info,
-          status:0,
-          type:2
-        }
+      token:self.data.token,
+      data:{
+        user_no:self.data.info.user_no,
+        count:-self.data.submitData.score,
+        trade_info:self.data.submitData.trade_info,
+        status:0,
+        type:2
+      }
     };
     const callback = (res)=>{
       api.showToast('申请成功','fail'); 
@@ -69,22 +85,12 @@ Page({
     api.flowLogAdd(postData,callback)
   },
 
-  getUserInfoData(){
-    const self = this;
-    const postData = {};
-    postData.token = wx.getStorageSync('threeToken');
-    const callback = (res)=>{
-      if(res.info.data.length>0){
-        self.data.userData = res.info.data[0].balance
-      }
-      wx.hideLoading();
-    };
-    api.userInfoGet(postData,callback);   
-  },
+
   
 
   submit(){
     const self = this;
+    wx.showLoading();
     var num = self.data.submitData.score;
     const pass = api.checkComplete(self.data.submitData);
     if(pass){  

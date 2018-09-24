@@ -18,6 +18,7 @@ Page({
 
   onLoad(){
     const self = this;
+    wx.showLoading();
     self.userInfoGet();
   },
 
@@ -27,10 +28,11 @@ Page({
     const postData = {};
     postData.token = wx.getStorageSync('token');
     const callback = (res)=>{
-      console.log(res)
-      self.data.mainData = res;
-      self.data.sForm.phone = res.info.data[0].info.phone;
-      self.data.sForm.name = res.info.data[0].info.name;
+      if(res){
+        self.data.mainData = res;
+        self.data.sForm.phone = res.info.data[0].info.phone;
+        self.data.sForm.name = res.info.data[0].info.name; 
+      }
       self.setData({
         web_sForm:self.data.sForm,
       });

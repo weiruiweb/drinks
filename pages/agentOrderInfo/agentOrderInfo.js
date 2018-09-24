@@ -17,10 +17,13 @@ Page({
 
   onLoad(options){
     const self = this;
+    wx.showLoading();
     self.data.id = options.id;
-    if(options.id){
-      self.getMainData();
-    }   
+    if(wx.getStorageSync('threeToken')&&wx.getStorageSync('threeToken')){
+       self.getMainData();
+    }else{
+      api.logOff();
+    };  
   },
 
 

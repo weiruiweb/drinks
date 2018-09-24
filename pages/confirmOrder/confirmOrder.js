@@ -112,7 +112,6 @@ Page({
   },
 
   distributionGet(){
-    
     const self = this;
     const postData = {};
     postData.token = wx.getStorageSync('token');
@@ -197,7 +196,6 @@ Page({
       };
       token.getUserInfo({},callback);
     };
-   
   },
 
 
@@ -206,7 +204,6 @@ Page({
 
   pay(order_id){
     const self = this;
-    
     const postData = {
       token:self.data.token,
       searchItem:{
@@ -215,113 +212,16 @@ Page({
       wxPay:self.data.totalPrice.toFixed(2),
       wxPayStatus:0
     };
-  /*  if(self.data.token==wx.getStorageSync('threeToken')){
+    if(self.data.token==wx.getStorageSync('threeToken')){
       postData.openid = wx.getStorageSync('info').openid
-    };*/
+    };
     var levelOneCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100; 
     var levelTwoCash = (wx.getStorageSync('info').thirdApp.custom_rule.secondClass*self.data.totalPrice.toFixed(2))/100;
     var agentRewardCash = (wx.getStorageSync('info').thirdApp.custom_rule.agentReward*self.data.totalPrice.toFixed(2))/100;
     var commmonRewardCash = Number(wx.getStorageSync('info').thirdApp.custom_rule.commonReward);
     
     postData.payAfter = [];
-    if(self.data.distributionData.info.data.length>0){
-      var transitionArray = self.data.distributionData.info.data;
-      for (var i = 0; i < transitionArray.length; i++){
-        if(self.data.userData.info.level==1){
-          if(transitionArray[i].userInfo.level==1){
-            postData.payAfter.push(
-              {
-                tableName:'FlowLog',
-                FuncName:'add',
-                data:{
-                  count:commmonRewardCash,
-                  trade_info:'下级消费佣金奖励(包含3元固定奖励)',
-                  user_no:transitionArray[i].parent_no,
-                  type:2,
-                  thirdapp_id:getApp().globalData.thirdapp_id
-                }
-              }
-            );
-          }else if(transitionArray[i].level==2){
-            postData.payAfter.push(
-              {
-                tableName:'flowlog',
-                FuncName:'add',
-                data:{
-                  count:levelTwoCash+commmonRewardCash,
-                  trade_info:'下级消费佣金奖励(包含3元固定奖励)',
-                  user_no:transitionArray[i].parent_no,
-                  type:2,
-                  thirdapp_id:getApp().globalData.thirdapp_id
-                }
-              }
-            );
-          };    
-        }else if(self.data.userData.info.level==2){
-          if(transitionArray[i].userInfo.level==1){
-            postData.payAfter.push(
-              {
-                tableName:'FlowLog',
-                FuncName:'add',
-                data:{
-                  count:commmonRewardCash,
-                  trade_info:'下级消费佣金奖励(包含3元固定奖励)',
-                  user_no:transitionArray[i].parent_no,
-                  type:2,
-                  thirdapp_id:getApp().globalData.thirdapp_id
-                }
-              }
-            );
-          }else if(transitionArray[i].level==2){
-            postData.payAfter.push(
-              {
-                tableName:'flowlog',
-                FuncName:'add',
-                data:{
-                  count:commmonRewardCash,
-                  trade_info:'下级消费佣金奖励(包含3元固定奖励)',
-                  user_no:transitionArray[i].parent_no,
-                  type:2,
-                  thirdapp_id:getApp().globalData.thirdapp_id
-                }
-              }
-            );
-          };     
-        }
-      };
-    };
-    if(self.data.userData.passage1&&self.data.userData.passage1!=''){
-      postData.payAfter.push(
-        {
-          tableName:'Flow_Log',
-          FuncName:'add',
-          data:{
-            count:agentRewardCash+commmonRewardCash,//12.5
-            trade_info:'下级消费佣金奖励',
-            user_no:self.data.userData.passage1,
-            type:2,
-            thirdapp_id:getApp().globalData.thirdapp_id
-          }
-        }
-      );
-    };
-    
-    if(self.data.userData.info.level==2){
-      postData.payAfter.push(
-        {
-          tableName:'flow_log',
-          FuncName:'add',
-          data:{
-            count:levelTwoCash,
-            trade_info:'合伙人优惠奖励',
-            user_no:self.data.userData.user_no,
-            type:2,
-            thirdapp_id:getApp().globalData.thirdapp_id
-          }
-        }
-      );
-    };
-    if(wx.getStorageSync('threeToken')){
+    if(self.data.token==wx.getStorageSync('threeToken')){
       postData.payAfter.push(
         {
           tableName:'flow_log',
@@ -335,8 +235,105 @@ Page({
           }
         }
       );
+    }else{
+      if(self.data.distributionData.info.data.length>0){
+        var transitionArray = self.data.distributionData.info.data;
+        for (var i = 0; i < transitionArray.length; i++){
+          if(self.data.userData.info.level==1){
+            if(transitionArray[i].userInfo.level==1){
+              postData.payAfter.push(
+                {
+                  tableName:'FlowLog',
+                  FuncName:'add',
+                  data:{
+                    count:commmonRewardCash,
+                    trade_info:'下级消费佣金奖励(包含3元固定奖励)',
+                    user_no:transitionArray[i].parent_no,
+                    type:2,
+                    thirdapp_id:getApp().globalData.thirdapp_id
+                  }
+                }
+              );
+            }else if(transitionArray[i].level==2){
+              postData.payAfter.push(
+                {
+                  tableName:'flowlog',
+                  FuncName:'add',
+                  data:{
+                    count:levelTwoCash+commmonRewardCash,
+                    trade_info:'下级消费佣金奖励(包含3元固定奖励)',
+                    user_no:transitionArray[i].parent_no,
+                    type:2,
+                    thirdapp_id:getApp().globalData.thirdapp_id
+                  }
+                }
+              );
+            };    
+          }else if(self.data.userData.info.level==2){
+            if(transitionArray[i].userInfo.level==1){
+              postData.payAfter.push(
+                {
+                  tableName:'FlowLog',
+                  FuncName:'add',
+                  data:{
+                    count:commmonRewardCash,
+                    trade_info:'下级消费佣金奖励(包含3元固定奖励)',
+                    user_no:transitionArray[i].parent_no,
+                    type:2,
+                    thirdapp_id:getApp().globalData.thirdapp_id
+                  }
+                }
+              );
+            }else if(transitionArray[i].level==2){
+              postData.payAfter.push(
+                {
+                  tableName:'flowlog',
+                  FuncName:'add',
+                  data:{
+                    count:commmonRewardCash,
+                    trade_info:'下级消费佣金奖励(包含3元固定奖励)',
+                    user_no:transitionArray[i].parent_no,
+                    type:2,
+                    thirdapp_id:getApp().globalData.thirdapp_id
+                  }
+                }
+              );
+            };     
+          }
+        };
+      };
+      if(self.data.userData.passage1&&self.data.userData.passage1!=''){
+        postData.payAfter.push(
+          {
+            tableName:'Flow_Log',
+            FuncName:'add',
+            data:{
+              count:agentRewardCash+commmonRewardCash,//12.5
+              trade_info:'下级消费佣金奖励',
+              user_no:self.data.userData.passage1,
+              type:2,
+              thirdapp_id:getApp().globalData.thirdapp_id
+            }
+          }
+        );
+      };
+      
+      if(self.data.userData.info.level==2){
+        postData.payAfter.push(
+          {
+            tableName:'flow_log',
+            FuncName:'add',
+            data:{
+              count:levelTwoCash,
+              trade_info:'合伙人优惠奖励',
+              user_no:self.data.userData.user_no,
+              type:2,
+              thirdapp_id:getApp().globalData.thirdapp_id
+            }
+          }
+        );
+      };
     };
-    
     const callback = (res)=>{
       wx.hideLoading();
       if(res.solely_code==100000){

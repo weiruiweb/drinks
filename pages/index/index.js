@@ -17,8 +17,8 @@ Page({
     orientation: 'left',//滚动方向
     interval: 20,
     shareBtn:'',
-    isshare:''// 时间间隔
-    
+    isshare:'',// 时间间隔
+    complete_api:[]
   },
   //事件处理函数
  
@@ -65,6 +65,7 @@ Page({
 
   onLoad(options) {
     const self = this;
+    wx.showLoading();
     self.setData({
       fonts:app.globalData.font
     });
@@ -103,9 +104,7 @@ Page({
         token.getUserInfo();
         console.log('getToken')
       };
-      
-    };
-    
+    }; 
   },
   
   
@@ -123,11 +122,14 @@ Page({
       thirdapp_id:getApp().globalData.thirdapp_id
     };
     const callback = (res)=>{
-      self.data.mainData = res;
-      wx.hideLoading();
+      if(res.info.data.length>0){
+        self.data.mainData = res; 
+        self.data.complete_api.push('getMainData');
+      } 
       self.setData({
         web_mainData:self.data.mainData,
-      });     
+      }); 
+      self.checkLoadComplete();    
     };
     api.productGet(postData,callback);
   },
@@ -150,11 +152,15 @@ Page({
       },
     };
     const callback = (res)=>{
-      self.data.artData = res;
-      self.data.text = res.info.data[0].description;
+      if(res.info.data.length>0){
+        self.data.artData = res;
+        self.data.text = res.info.data[0].description;
+        self.data.complete_api.push('getArtData');
+      }
       self.setData({
         web_artData:self.data.artData,
-      });  
+      });
+      self.checkLoadComplete();  
     };
     api.articleGet(postData,callback);
   },
@@ -177,10 +183,14 @@ Page({
       },
     };
     const callback = (res)=>{
-      self.data.artTwoData = res;
+      if(res.info.data.length>0){
+        self.data.artTwoData = res; 
+        self.data.complete_api.push('getArtTwoData'); 
+      }
       self.setData({
         web_artTwoData:self.data.artTwoData,
-      });  
+      }); 
+      self.checkLoadComplete(); 
     };
     api.articleGet(postData,callback);
   },
@@ -205,7 +215,16 @@ Page({
         console.log(res);
       }
     }
-  }
+  },
+
+  checkLoadComplete(){
+    const self = this;
+    var complete = api.checkArrayEqual(self.data.complete_api,['getMainData','getArtTwoData','getArtData']);
+    console.log(self.data.complete_api)
+    if(complete){
+      wx.hideLoading();
+    };
+  },
 
 
 })

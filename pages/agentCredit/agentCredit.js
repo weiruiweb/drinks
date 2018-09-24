@@ -10,25 +10,25 @@ Page({
     startTime:'',
     endTime:'',
     searchItem:{
-      type:2
-        
+      type:2    
     },
+    complete_api:[],
   },
 
   
   onLoad(){
     const self = this;
+    wx.showLoading();
     self.setData({
      fonts:app.globalData.font
     });
-    if(wx.getStorageSync('ThreeToken')){
-
-    }else{
-      
-    };
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
-    self.getMainData();
-    self.getUserInfoData()
+    if(wx.getStorageSync('threeToken')&&wx.getStorageSync('threeToken')){
+      self.getMainData();
+      self.getUserInfoData()
+    }else{
+      api.logOff();
+    }; 
   },
 
 
@@ -50,12 +50,14 @@ Page({
     const postData = {};
     postData.token = wx.getStorageSync('ThreeToken');
     const callback = (res)=>{
-      self.data.userData = res;
+      if(res.info.data.length>0){
+        self.data.userData = res.info.data[0]; 
+        self.data.complete_api.push('getUserInfoData');
+      }
       self.setData({
         web_userData:self.data.userData,
       });
-     
-      wx.hideLoading();
+      self.checkLoadComplete();    
     };
     api.userInfoGet(postData,callback);   
   },
@@ -77,6 +79,7 @@ Page({
     const callback = (res)=>{
       if(res.info.data.length>0){
         self.data.mainData.push.apply(self.data.mainData,res.info.data);
+        self.data.complete_api.push('getMainData');
       }else{
         self.data.isLoadAll = true;
         api.showToast('没有更多了','fail');
@@ -89,7 +92,7 @@ Page({
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
       },300);
-      wx.hideLoading();
+      self.checkLoadComplete();    
     };
     api.flowLogGet(postData,callback);
   },
@@ -118,6 +121,20 @@ Page({
       self.data.searchItem.create_time = ['<',self.data.endTimestap];
     };
     self.getMainData(true);   
+  },
+
+  checkLoadComplete(){
+    const self = this;
+    var complete = api.checkArrayEqual(self.data.complete_api,['getMainData','userGet','distributionGet']);
+    if(complete){
+      wx.hideLoading();
+      self.data.buttonClicked = false;
+    };
+  },
+
+  intoPath(e){
+    const self = this;
+    api.pathTo(api.getDataSet(e,'path'),'nav');
   },
 
 

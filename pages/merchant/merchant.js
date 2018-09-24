@@ -29,24 +29,17 @@ Page({
         web_show:true
       })
     }else{
-      wx.redirectTo({
-        url: '/pages/login/login'
-      })
+      api.logOff();
     } 
   },
 
   intoPath(e){
-
     const self = this;
     api.pathTo(api.getDataSet(e,'path'),'nav');
-
   },
 
  
 
-  removeStorageSync(){
-    api.logOff();
-  },
 
   onShareAppMessage(res){
     const self = this;

@@ -26,6 +26,7 @@ Page({
 
   onShow(){
     const self = this;
+    wx.showLoading();
     self.getMainData();
   },
 
@@ -46,6 +47,7 @@ Page({
         self.data.isLoadAll = true;
         api.showToast('没有更多了','fail');
       };
+      wx.hideLoading();
       self.setData({
         web_mainData:self.data.mainData,
       });

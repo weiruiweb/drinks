@@ -10,6 +10,7 @@ Page({
 
   onLoad(options) {
     const self = this;
+    wx.showLoading();
     self.setData({
       fonts:app.globalData.font
     });
@@ -42,6 +43,7 @@ Page({
         self.data.isLoadAll = true;
         api.showToast('没有更多了','fail');
       };
+      wx.hideLoading();
       self.setData({
         web_mainData:self.data.mainData,
       });  

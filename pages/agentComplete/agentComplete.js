@@ -19,7 +19,12 @@ Page({
 
   onLoad(){
     const self = this;
-    self.userInfoGet();
+    wx.showLoading();
+    if(wx.getStorageSync('threeToken')&&wx.getStorageSync('threeToken')){
+      self.userInfoGet()
+    }else{
+      api.logOff();
+    };
   },
 
 
