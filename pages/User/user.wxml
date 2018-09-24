@@ -132,7 +132,7 @@
 		<view class="text1">联系我们</view>
 		<view class="text2 flexRowBetween">
 			<image src="/images/phone.jpg"></image>
-			<view class="text3">18888888888</view>
+			<view class="text3">{{web_artData.description}}</view>
 		</view>
 		<view class="call flexRowBetween">
 			<view class="call1" bindtap="tel">确定</view>
@@ -147,7 +147,7 @@
 </view>
 <view class="navbar">
     
-      <view class="navbar_item" bindtap="index">
+      <view class="navbar_item" bindtap="intoPathRedi" data-path="/pages/index/index">
       
           <view class="nav_img">
             <image src="/images/navbar1.png" style="width:50rpx;height:48rpx;"></image>
@@ -156,7 +156,7 @@
 
       </view>
     
-    <view class="navbar_item" bindtap="sort">
+    <view class="navbar_item" bindtap="intoPathRedi" data-path="/pages/about/about">
    
         <view class="nav_img">
            <image src="/images/navbar2.png" style="width:50rpx;height:48rpx;"></image>

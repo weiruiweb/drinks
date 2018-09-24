@@ -42,6 +42,11 @@ Page({
     }else{
       self.data.searchItem.isdefault = 1;
     };
+    if(wx.getStorageSync('threeToken')){
+      self.data.token = wx.getStorageSync('threeToken')
+    }else{
+      self.data.token = wx.getStorageSync('token')
+    };
     self.getAddressData();
   },
 
@@ -159,7 +164,7 @@ Page({
 
         self.data.buttonClicked = true;
         const postData = {
-          token:wx.getStorageSync('token'),
+          token:self.data.token,
           product:[
             {id:self.data.id,count:self.data.mainData.count}
           ],
@@ -201,14 +206,16 @@ Page({
     const self = this;
     
     const postData = {
-      token:wx.getStorageSync('token'),
+      token:self.data.token,
       searchItem:{
         id:order_id,
       },
       wxPay:self.data.totalPrice.toFixed(2),
       wxPayStatus:0
     };
-
+  /*  if(self.data.token==wx.getStorageSync('threeToken')){
+      postData.openid = wx.getStorageSync('info').openid
+    };*/
     var levelOneCash = (wx.getStorageSync('info').thirdApp.custom_rule.firstClass*self.data.totalPrice.toFixed(2))/100; 
     var levelTwoCash = (wx.getStorageSync('info').thirdApp.custom_rule.secondClass*self.data.totalPrice.toFixed(2))/100;
     var agentRewardCash = (wx.getStorageSync('info').thirdApp.custom_rule.agentReward*self.data.totalPrice.toFixed(2))/100;

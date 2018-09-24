@@ -19,8 +19,8 @@ Page({
     const self = this;
     if(options.num){
       self.changeSearch(options.num)
-    }
-    this.setData({
+    };
+    self.setData({
       fonts:app.globalData.font
     });
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);

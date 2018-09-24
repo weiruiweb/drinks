@@ -7,7 +7,7 @@ const token = new Token();
 
 Page({
   data: {
-
+    artData:[], 
     userData:[],
     startTime:'',
     endTime:'',
@@ -38,11 +38,13 @@ Page({
       var token = new Token();
     };
     token.getUserInfo();
+    self.getArtData()
   },
 
- tel:function () {
+ tel() {
+  const self = this;
     wx.makePhoneCall({
-      phoneNumber: '15888888888',
+      phoneNumber:self.data.artData.description,
     })
   },
 
@@ -61,58 +63,25 @@ Page({
     api.userInfoGet(postData,callback);   
   },
  
-  userCredit:function(){
-    wx.navigateTo({
-      url:'/pages/userCredit/userCredit'
-    })
+  getArtData(){
+    const self = this;
+    const postData = {};
+    postData.searchItem = {
+      thirdapp_id:getApp().globalData.thirdapp_id,
+      title:'联系我们'
+    };
+    const callback = (res)=>{
+      if(res.info.data.length>0){
+        self.data.artData = res.info.data[0]
+      }
+      self.setData({
+        web_artData:self.data.artData,
+      });  
+    };
+    api.labelGet(postData,callback);
   },
-  userMessage:function(){
-    wx.navigateTo({
-      url:'/pages/userMessage/userMessage'
-    })
-  },
-  userGroup:function(){
-    wx.navigateTo({
-      url:'/pages/userGroup/userGroup'
-    })
-  },
-  userContact:function(){
-    wx.navigateTo({
-      url:'/pages/userContact/userContact'
-    })
-  },
-  address:function(){
-    wx.navigateTo({
-      url:'/pages/userAddress/userAddress'
-    })
-  }, 
-  order:function(){
-    wx.navigateTo({
-      url:'/pages/userOrder/userOrder'
-    })
-  }, 
-  
-  userShare:function(){
-    wx.navigateTo({
-      url:'/pages/userShare/userShare'
-    })
-  }, 
-  
-  sort:function(){
-     wx.redirectTo({
-      url:'/pages/about/about'
-    })
-  },
-  index:function(){
-     wx.redirectTo({
-      url:'/pages/index/index'
-    })
-  },
-  User:function(){
-     wx.redirectTo({
-      url:'/pages/User/user'
-    })
-  },
+
+
   userContact:function(){
     var isShow = !this.data.isShow;
     this.setData({
@@ -128,5 +97,10 @@ Page({
   intoPath(e){
     const self = this;
     api.pathTo(api.getDataSet(e,'path'),'nav');
+  },
+
+  intoPathRedi(e){
+    const self = this;
+    api.pathTo(api.getDataSet(e,'path'),'redi');
   },
 })
