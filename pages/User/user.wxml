@@ -15,7 +15,7 @@
 			 	<view class="user_name"><open-data type="userNickName" lang="zh_CN"></open-data></view>
 			 	<view class="phone">{{web_userData.info.data[0].level=='2'?'合伙人':'普通会员'}}</view>
 			 </view>
-			 <view class="top_right" bindtap="userCredit">
+			 <view class="top_right"  bindtap="intoPath" data-path="/pages/userCredit/userCredit">
 			 	<view class="user_money">
 			 		<image src="/images/user_icon10.png"></image>
 			 		<view class="text">¥{{web_userData.info.data[0].balance}}</view>

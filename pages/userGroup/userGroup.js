@@ -35,10 +35,10 @@ Page({
       };
       token.getUserInfo({},callback);
     };
-    
     self.setData({
       fonts:app.globalData.font
     });
+    
   },
 
   onPullDownRefresh(){

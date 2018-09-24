@@ -21,6 +21,11 @@ Page({
     self.setData({
      fonts:app.globalData.font
     });
+    if(wx.getStorageSync('ThreeToken')){
+
+    }else{
+      
+    };
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     self.getMainData();
     self.getUserInfoData()

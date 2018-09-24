@@ -10,14 +10,15 @@ Page({
     startTime:'',
     endTime:'',
     searchItem:{
-      type:2
-        
+      type:2,
+      status:['in',[0,1]]
     },
   },
 
   
   onLoad(){
     const self = this;
+    wx.showLoading();
     self.setData({
      fonts:app.globalData.font
     });

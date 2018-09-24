@@ -35,7 +35,8 @@ Page({
 
   onShow(){
    const self = this;
-   self.getMainData(true)
+   wx.showLoading();
+   self.getMainData(true);
   },  
 
 

@@ -7,6 +7,7 @@ import {Token} from '../../utils/token.js';
 
 
 Page({
+
   data: {
     mainData:[],
     addressData:[],
@@ -68,7 +69,6 @@ Page({
     api.addressGet(postData,callback);
   },
 
-
   getMainData(){
     const self = this;
     const postData = {};
@@ -112,6 +112,7 @@ Page({
   },
 
   distributionGet(){
+    
     const self = this;
     const postData = {};
     postData.token = wx.getStorageSync('token');
@@ -129,7 +130,7 @@ Page({
         condition:'=',
         info:['level']
       }
-    }
+    };
     const callback = (res)=>{
       if(res){
         self.data.distributionData = res;
@@ -141,6 +142,7 @@ Page({
       self.checkLoadComplete();
     };
     api.distributionGet(postData,callback);
+
   },
 
 
