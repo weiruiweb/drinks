@@ -88,7 +88,7 @@ Page({
         self.data.complete_api.push('getMainData');
       }else{
         self.data.isLoadAll = true;
-        api.showToast('没有更多了','fail');
+        api.showToast('没有更多了','none');
       };
       self.setData({
         buttonClicked: false,
@@ -108,7 +108,7 @@ Page({
         self.data.userData = res.info.data[0];
         self.data.complete_api.push('userGet');
       }else{
-        api.showToast('用户信息有误','fail');
+        api.showToast('用户信息有误','none');
         return;
       }; 
       self.checkLoadComplete();  
@@ -141,7 +141,7 @@ Page({
     postData.searchItem = {};
     postData.searchItem.id = api.getDataSet(e,'id');
     const callback  = res=>{
-      api.showToast('已确认收货','fail');
+      api.showToast('已确认收货','none');
       self.getMainData(true);
     };
     api.orderUpdate(postData,callback);
@@ -297,7 +297,7 @@ Page({
         };
         api.realPay(res.info,payCallback);  
       }else{
-        api.showToast('发起微信支付失败','fail')
+        api.showToast('发起微信支付失败','none')
       };
     };
     api.pay(postData,callback);
@@ -307,9 +307,10 @@ Page({
 
   menuClick: function (e) {
     const self = this;
+    wx.showLoading();
     self.setData({
-        buttonClicked: true
-      });
+      buttonClicked: true
+    });
     const num = e.currentTarget.dataset.num;
     self.changeSearch(num);
   },
@@ -327,16 +328,21 @@ Page({
       self.data.searchItem.order_step = '0';
     }else if(num=='3'){
       self.data.searchItem.pay_status = '1';
-      self.data.searchItem.transport_status = '1';
+      self.data.searchItem.transport_status = '0';
       self.data.searchItem.order_step = '0';
     }else if(num=='4'){
-      self.data.searchItem.order_step = '3';
+      self.data.searchItem.pay_status = '1';
+      self.data.searchItem.transport_status = '1';
+      self.data.searchItem.order_step = '0';
     }else if(num=='5'){
-      self.data.searchItem.order_step = '2';
+      self.data.searchItem.pay_status = '1';
+      self.data.searchItem.transport_status = '2';
+      self.data.searchItem.order_step = '0';
     }
     self.setData({
       web_mainData:[],
     });
+    wx.hideLoading();
     self.getMainData(true);
   },
 

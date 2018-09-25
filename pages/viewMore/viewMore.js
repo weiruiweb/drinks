@@ -41,7 +41,7 @@ Page({
         self.data.artTwoData.push.apply(self.data.artTwoData,res.info.data);
       }else{
         self.data.isLoadAll = true;
-        api.showToast('没有更多了','fail');
+        api.showToast('没有更多了','none');
       };
       wx.hideLoading();
       self.setData({

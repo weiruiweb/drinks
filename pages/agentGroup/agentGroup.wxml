@@ -53,7 +53,7 @@
 </view>
 <view class="team_all">
 	<block wx:for="{{web_mainData}}" wx:key='id'>
-		<view class="team_list" bindtap="intoPath" data-path="/pages/agentGroupInfo/agentGroupInfo?user_no={{item.user_no}}">
+		<view class="team_list" bindtap="intoPath" data-path="/pages/agentGroupInfo/agentGroupInfo?id={{item.user_no}}">
 			<view class="team_item">
 				<view class="team_left">
 					<image src="{{item.headImgUrl}}" style="border-radius:50%"></image>

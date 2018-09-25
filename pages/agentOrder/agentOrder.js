@@ -72,7 +72,7 @@ Page({
         self.data.mainData.push.apply(self.data.mainData,res.info.data);
       }else{
         self.data.isLoadAll = true;
-        api.showToast('没有更多了','fail');
+        api.showToast('没有更多了','none');
       };
       wx.hideLoading();
       self.setData({
@@ -109,7 +109,7 @@ Page({
     postData.searchItem = {};
     postData.searchItem.id = api.getDataSet(e,'id');
     const callback  = res=>{
-      api.showToast('已确认收货','fail');
+      api.showToast('已确认收货','none');
       self.getMainData(true);
     };
     api.orderUpdate(postData,callback);

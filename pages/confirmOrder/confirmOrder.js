@@ -63,7 +63,7 @@ Page({
           web_addressData:self.data.addressData,
         });
       }else{
-        api.showToast('获取地址信息有误','fail');
+        api.showToast('获取地址信息有误','none');
       };
     };
     api.addressGet(postData,callback);
@@ -85,7 +85,7 @@ Page({
         self.countTotalPrice(); 
         self.data.complete_api.push('getMainData');
       }else{
-        api.showToast('商品信息有误','fail');
+        api.showToast('商品信息有误','none');
         return;
       };
       self.checkLoadComplete();
@@ -102,7 +102,7 @@ Page({
         self.data.userData = res.info.data[0];
         self.data.complete_api.push('userGet');
       }else{
-        api.showToast('用户信息有误','fail');
+        api.showToast('用户信息有误','none');
         return;
       }; 
       self.checkLoadComplete();  
@@ -150,7 +150,7 @@ Page({
     const self = this;
 
     if(self.data.buttonClicked){
-      api.showToast('数据有误请稍等','fail');
+      api.showToast('数据有误请稍等','none');
       return;
     };
 
@@ -162,7 +162,6 @@ Page({
         },800);
         return;
       }else if(!self.data.order_id){
-
         self.data.buttonClicked = true;
         const postData = {
           token:self.data.token,
@@ -224,7 +223,7 @@ Page({
     if(self.data.token==wx.getStorageSync('threeToken')){
       postData.payAfter.push(
         {
-          tableName:'flow_log',
+          tableName:'FlowLog',
           FuncName:'add',
           data:{
             count:agentRewardCash,//62.5%
@@ -243,7 +242,7 @@ Page({
             if(transitionArray[i].userInfo.level==1){
               postData.payAfter.push(
                 {
-                  tableName:'FlowLog',
+                  tableName:i==0?'FlowLog':'flowlog',
                   FuncName:'add',
                   data:{
                     count:commmonRewardCash,
@@ -254,10 +253,10 @@ Page({
                   }
                 }
               );
-            }else if(transitionArray[i].level==2){
+            }else if(transitionArray[i].userInfo.level==2){
               postData.payAfter.push(
                 {
-                  tableName:'flowlog',
+                  tableName:i==0?'FlowLog':'flowlog',
                   FuncName:'add',
                   data:{
                     count:levelTwoCash+commmonRewardCash,
@@ -273,7 +272,7 @@ Page({
             if(transitionArray[i].userInfo.level==1){
               postData.payAfter.push(
                 {
-                  tableName:'FlowLog',
+                  tableName:i==0?'FlowLog':'flowlog',
                   FuncName:'add',
                   data:{
                     count:commmonRewardCash,
@@ -284,10 +283,10 @@ Page({
                   }
                 }
               );
-            }else if(transitionArray[i].level==2){
+            }else if(transitionArray[i].userInfo.level==2){
               postData.payAfter.push(
                 {
-                  tableName:'flowlog',
+                  tableName:i==0?'FlowLog':'flowlog',
                   FuncName:'add',
                   data:{
                     count:commmonRewardCash,
@@ -308,7 +307,7 @@ Page({
             tableName:'Flow_Log',
             FuncName:'add',
             data:{
-              count:agentRewardCash+commmonRewardCash,//12.5
+              count:levelOneCash,//12.5
               trade_info:'下级消费佣金奖励',
               user_no:self.data.userData.passage1,
               type:2,
@@ -321,7 +320,7 @@ Page({
       if(self.data.userData.info.level==2){
         postData.payAfter.push(
           {
-            tableName:'flow_log',
+            tableName:'Flowlog',
             FuncName:'add',
             data:{
               count:levelTwoCash,
@@ -346,7 +345,7 @@ Page({
         };
         api.realPay(res.info,payCallback);  
       }else{
-        api.showToast('发起微信支付失败','fail')
+        api.showToast('发起微信支付失败','none')
       };
     };
     api.pay(postData,callback);

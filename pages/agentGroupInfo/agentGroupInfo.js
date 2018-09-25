@@ -15,10 +15,11 @@ Page({
 
   onLoad(options){
     const self = this;
+    self.data.id = options.id
+    console.log(options.id)
     wx.showLoading();
     if(wx.getStorageSync('threeInfo')&&wx.getStorageSync('threeToken')){
-      self.userInfoGet();
-      self.data.user_no = options.user_no
+       self.userInfoGet();
     }else{
       api.logOff();
     }
@@ -32,7 +33,7 @@ Page({
     const postData = {};
     postData.token = wx.getStorageSync('threeToken')
     postData.searchItem = {
-      user_no:self.data.user_no,
+      user_no:self.data.id,
       user_type:0
     }
     const callback = (res)=>{
@@ -62,7 +63,7 @@ Page({
     const postData = {};
     postData.token = wx.getStorageSync('threeToken');
     postData.searchItem = {
-      user_no:self.data.user_no,
+      user_no:self.data.id,
       user_type:0
     }
     postData.data = {

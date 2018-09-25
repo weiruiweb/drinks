@@ -1,20 +1,20 @@
 <!--userOrder.wxml-->
 <view class="order_sort" style="{{fonts[5].font}}">
-  <view class="order_click" data-num="1"  bindtap="menuClick" >
+  <view class="order_click" data-num="1"  bindtap="{{!buttonClicked?'menuClick':''}}">
       <view class="sort_txt"  style="{{num==1?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}" >全部</view>
   </view>
-   <view class="order_click" data-num="2"  bindtap="menuClick" style="{{num==2?'color:#00c6f7':''}}">
+   <view class="order_click" data-num="2"  bindtap="{{!buttonClicked?'menuClick':''}}" style="{{num==2?'color:#00c6f7':''}}">
       
       <view class="sort_txt"  style="{{num==2?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">待付款</view>
   </view>
-  <view class="order_click" data-num="3"  bindtap="menuClick" style="{{num==3?'color:#00c6f7':''}}">
-      <view class="sort_txt"  style="{{num==3?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">待收货</view>
+  <view class="order_click" data-num="3"  bindtap="{{!buttonClicked?'menuClick':''}}" style="{{num==3?'color:#00c6f7':''}}">
+      <view class="sort_txt"  style="{{num==3?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">待发货</view>
   </view>
-  <view class="order_click" data-num="4"  bindtap="menuClick" style="{{num==4?'color:#00c6f7':''}}">
-      <view class="sort_txt"  style="{{num==4?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">已完成</view>
+  <view class="order_click" data-num="4"  bindtap="{{!buttonClicked?'menuClick':''}}" style="{{num==4?'color:#00c6f7':''}}">
+      <view class="sort_txt"  style="{{num==4?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">待收货</view>
   </view>
-  <view class="order_click" data-num="5"  bindtap="menuClick" style="{{num==5?'color:#00c6f7':''}}">
-      <view class="sort_txt"  style="{{num==5?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">已取消</view>
+  <view class="order_click" data-num="5"  bindtap="{{!buttonClicked?'menuClick':''}}" style="{{num==5?'color:#00c6f7':''}}">
+      <view class="sort_txt"  style="{{num==5?'color:#550f0f;border-bottom:solid 2px #550f0f':'border-bottom:solid 2px #fff'}}">已完成</view>
   </view>
 </view>
 <view id="order">
@@ -26,8 +26,8 @@
           <view class="order_data" style="{{fonts[3].font}}">
             交易时间:{{item.create_time}}
           </view>
-          <view class="order_data" style="{{fonts[2].font}}" wx:if="{{item.pay_status == '0'&&item.order_step=='2'}}">
-            已取消
+          <view class="order_data" style="{{fonts[2].font}}" wx:if="{{item.pay_status == '1'&&item.transport_status =='0'}}">
+            等待卖家发货
           </view>
           <view class="order_data" style="{{fonts[2].font}}" wx:if="{{item.pay_status == '0'}}">
             等待买家付款

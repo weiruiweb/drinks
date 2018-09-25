@@ -48,7 +48,7 @@ Page({
   getUserInfoData(){
     const self = this;
     const postData = {};
-    postData.token = wx.getStorageSync('ThreeToken');
+    postData.token = wx.getStorageSync('threeToken');
     const callback = (res)=>{
       if(res.info.data.length>0){
         self.data.userData = res.info.data[0]; 
@@ -82,7 +82,7 @@ Page({
         self.data.complete_api.push('getMainData');
       }else{
         self.data.isLoadAll = true;
-        api.showToast('没有更多了','fail');
+        api.showToast('没有更多了','none');
       };
       self.setData({
         web_mainData:self.data.mainData,
@@ -125,10 +125,9 @@ Page({
 
   checkLoadComplete(){
     const self = this;
-    var complete = api.checkArrayEqual(self.data.complete_api,['getMainData','userGet','distributionGet']);
+    var complete = api.checkArrayEqual(self.data.complete_api,['getMainData','getUserInfoData']);
     if(complete){
       wx.hideLoading();
-      self.data.buttonClicked = false;
     };
   },
 

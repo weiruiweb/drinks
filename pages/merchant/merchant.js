@@ -45,7 +45,7 @@ Page({
     const self = this;
     return {
       title: '直销商城',
-      path: 'pages/index/index?passage1='+wx.getStorageSync('ThreeInfo').user_no+'_',
+      path: 'pages/index/index?passage1='+wx.getStorageSync('threeInfo').user_no+'_',
       success: function (res){
         console.log(res);
       }

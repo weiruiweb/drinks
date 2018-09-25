@@ -17,6 +17,7 @@ Page({
 
   onLoad(){
     const self = this;
+    wx.showLoading();
     self.getQrData();
     this.setData({
       fonts:app.globalData.font
@@ -35,8 +36,11 @@ Page({
     postData.output = 'url';
     postData.ext = 'png';
     const callback = (res)=>{
-      console.log(res);
-      self.data.QrData = res;
+      if(res){
+        self.data.QrData = res; 
+      }else{
+        api.showToast('网络故障','none')
+      }
       self.setData({
         web_QrData:self.data.QrData,
       });

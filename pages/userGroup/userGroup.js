@@ -86,7 +86,7 @@ Page({
         self.data.mainData.push.apply(self.data.mainData,res.info.data);
       }else{
         self.data.isLoadAll = true;
-        api.showToast('没有更多了','fail');
+        api.showToast('没有更多了','none');
       };
       setTimeout(function()
       {
@@ -100,7 +100,7 @@ Page({
       });  
     };
     if(!postData.searchItem.parent_no){
-      api.showToast('网络故障','fail');
+      api.showToast('网络故障','none');
       return;
     };
     api.distributionGet(postData,callback);

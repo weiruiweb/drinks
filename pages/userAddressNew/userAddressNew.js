@@ -116,7 +116,7 @@ Page({
     const pass = api.checkComplete(self.data.sForm);
     if(pass){
       if(phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)){
-        api.showToast('手机格式不正确','fail')
+        api.showToast('手机格式不正确','none')
       }else{
         if(self.data.id){
           wx.showLoading();     
@@ -132,7 +132,7 @@ Page({
         },300);  
       }
     }else{
-      api.showToast('请补全信息','fail');
+      api.showToast('请补全信息','none');
     };
   },
 

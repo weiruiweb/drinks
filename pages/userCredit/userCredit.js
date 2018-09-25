@@ -85,7 +85,7 @@ Page({
         self.data.complete_api.push('getMainData');
       }else{
         self.data.isLoadAll = true;
-        api.showToast('没有更多了','fail');
+        api.showToast('没有更多了','none');
       };
       self.setData({
         web_mainData:self.data.mainData,

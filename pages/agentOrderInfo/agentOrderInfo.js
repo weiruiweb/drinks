@@ -40,7 +40,7 @@ Page({
         self.data.mainData= res.info.data[0]
       }else{
         self.data.isLoadAll = true;
-        api.showToast('没有更多了','fail');
+        api.showToast('没有更多了','none');
       };
       wx.hideLoading();
       self.setData({

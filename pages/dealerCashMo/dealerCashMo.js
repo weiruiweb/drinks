@@ -77,7 +77,7 @@ Page({
       }
     };
     const callback = (res)=>{
-      api.showToast('申请成功','fail'); 
+      api.showToast('申请成功','none'); 
       wx.navigateBack({
         delta: 1
       }) 
@@ -96,15 +96,15 @@ Page({
     if(pass){  
       if(self.data.userData &&self.data.userData >=num){
         if(!(/(^[1-9]\d*$)/.test(num))){
-         api.showToast('请输入正整数','fail')
+         api.showToast('请输入正整数','none')
         }else{
           self.flowLogAdd();
         }   
       }else{
-        api.showToast('佣金不足','fail');  
+        api.showToast('佣金不足','none');  
       }   
     }else{
-      api.showToast('请补全信息','fail');
+      api.showToast('请补全信息','none');
     };
   },
 

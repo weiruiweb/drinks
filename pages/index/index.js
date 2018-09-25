@@ -18,7 +18,13 @@ Page({
     interval: 20,
     shareBtn:'',
     isshare:'',// 时间间隔
-    complete_api:[]
+    complete_api:[],
+    indicatorDots: true,
+    vertical: false,
+    autoplay: true,
+    circular: false,
+    intervalOne:2000,
+    duration: 1000,
   },
   //事件处理函数
  
