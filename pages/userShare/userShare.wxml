@@ -1,9 +1,6 @@
 <!--userPoster.wxml-->
-<view class="poster">
-  <view class="poster_txt1" style="{{fonts[4].font}}">
-     分享二维码，领取佣金
-  </view>
-  <view class="poster_img">
-    <image src="{{web_QrData.info.url}}"></image>
-  </view>
-</view>
+<canvas canvas-id="shareCanvas" style="width:370px;height:555px" ></canvas>
+
+  <button class="submit_input" bindtap="save" style="background:linear-gradient(to right,rgba(113,36,36,1.00),rgba(169,103,103,1.00));color:#fff;border-radius:0;margin-top:2px;position:fixed;bottom:0;width:100%">保存至相册</button>
+
+

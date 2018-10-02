@@ -59,8 +59,7 @@ Page({
       self.setData({
         web_userData:self.data.userData,
       });
-     
-      wx.hideLoading();
+      self.checkLoadComplete();
     };
     api.userInfoGet(postData,callback);   
   },
@@ -90,11 +89,11 @@ Page({
       self.setData({
         web_mainData:self.data.mainData,
       });
-      setTimeout(function()
-      {
+      setTimeout(function(){
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
       },300);
+      self.checkLoadComplete();
     };
     api.flowLogGet(postData,callback);
   },

@@ -52,12 +52,12 @@
             <view class="orderProname"  style="{{fonts[3].font}};color:#666">
               {{item.products[0].snap_product.description}}
             </view>
-            <view class="order_attr">
-              <view class="order_number"  style="{{fonts[3].font}}">
+            <view class="order_attr" >
+              <view class="order_number"  style="{{fonts[3].font}};" style="width:50%">
                 X{{item.products[0].count}}
               </view>
 
-              <view class="order_credit"  >
+              <view class="order_credit" style="width:50%">
                 <view class="order_credit2" style="{{fonts[3].font}}">单价：{{item.products[0].snap_product.price}}</view>
               </view>
             </view>

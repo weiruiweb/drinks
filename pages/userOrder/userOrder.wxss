@@ -95,7 +95,7 @@ page{
 }
 .order_credit{
 	width:30%;
-	display:flex;
+
 	align-items:center;
 	color:#e62c2c;
 	text-align:right;

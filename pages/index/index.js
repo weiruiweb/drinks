@@ -82,7 +82,8 @@ Page({
     self.getMainData();
     self.getArtData();
     self.getArtTwoData()
-    
+ 
+
     if(options.scene){
       var scene = decodeURIComponent(options.scene)
     };
@@ -108,7 +109,6 @@ Page({
       if(!wx.getStorageSync('token')){
         var token = new Token();
         token.getUserInfo();
-        console.log('getToken')
       };
     }; 
   },

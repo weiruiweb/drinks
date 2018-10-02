@@ -69,6 +69,7 @@ class Token {
                 postData.data = {};
                 postData.thirdapp_id = getApp().globalData.thirdapp_id;
                 postData.code = res.code;
+                postData.parent_info = ['passage1'];
                 if(data.nickName&&data.avatarUrl){
                     postData.nickname = data.nickName;
                     postData.headImgUrl = data.avatarUrl;

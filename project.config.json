@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 16,
+			"current": 17,
 			"list": [
 				{
 					"id": -1,
@@ -136,6 +136,11 @@
 					"name": "comfirmorder",
 					"pathName": "pages/confirmOrder/confirmOrder",
 					"query": "id=8"
+				},
+				{
+					"id": -1,
+					"name": "分享",
+					"pathName": "pages/userShare/userShare"
 				}
 			]
 		}

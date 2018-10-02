@@ -44,7 +44,7 @@
 
   <view class="changeCont" style="{{web_num ==0?'display:block':''}}">
       <view class="detail_list flexRowBetween1">
-        <view class="content ql-editor" style="color:#666;font-size:26rpx">
+        <view class="content ql-editor" >
           <import src="../../wxParse/wxParse.wxml"/>
           <template is="wxParse" data="{{wxParseData:web_mainData.content}}"/>
         </view> 
@@ -53,7 +53,7 @@
 
   <view class="changeCont" style="{{web_num ==1?'display:block':''}}">
       <view class="detail_list flexRowBetween1">
-        <view class="content ql-editor" style="color:#666;font-size:26rpx">
+        <view class="content ql-editor" >
           <import src="../../wxParse/wxParse.wxml"/>
           <template is="wxParse" data="{{wxParseData:web_artData.content}}"/>
         </view> 

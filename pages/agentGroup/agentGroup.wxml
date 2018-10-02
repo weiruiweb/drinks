@@ -56,11 +56,11 @@
 		<view class="team_list" bindtap="intoPath" data-path="/pages/agentGroupInfo/agentGroupInfo?id={{item.user_no}}">
 			<view class="team_item">
 				<view class="team_left">
-					<image src="{{item.headImgUrl}}" style="border-radius:50%"></image>
+					<image src="{{item.headImgUrl?item.headImgUrl:'/images/headImg.png'}}" style="border-radius:50%"></image>
 				</view>
 				<view class="team_right">
 					<view class="team_user flexRowBetween">
-						<view class="tuser_name" style="{{fonts[4].font}}">{{item.nickname}}</view>
+						<view class="tuser_name" style="{{fonts[4].font}}">{{item.nickname?item.nickname:'用户暂未授权'}}</view>
 						<view class="tuser_name" style="{{fonts[2].font}};color:#444;">{{item.create_time}}</view>
 					</view>
 					<view class="teat_add" style="{{fonts[1].font}}">

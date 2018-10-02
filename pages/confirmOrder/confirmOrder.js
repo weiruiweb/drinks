@@ -319,8 +319,8 @@ Page({
       
       if(self.data.userData.info.level==2){
         postData.payAfter.push(
-          {
-            tableName:'Flowlog',
+          { 
+            tableName:'flow_Log',
             FuncName:'add',
             data:{
               count:levelTwoCash,

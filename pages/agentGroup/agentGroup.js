@@ -26,7 +26,7 @@ Page({
     const self = this;
     self.data.paginate = api.cloneForm(getApp().globalData.paginate);
     wx.showLoading();
-    if(wx.getStorageSync('threeInfo').user_no&&wx.getStorageSync('threeInfo').user_no!=undefined){
+    if(self.data.searchItem.passage1&&self.data.searchItem.passage1!=undefined){
       self.getMainData();
     }else{
       api.logOff();

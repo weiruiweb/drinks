@@ -81,6 +81,7 @@ Page({
         info:['nickname','headImgUrl']
       },
     }
+    console.log('postData',postData)
     const callback = (res)=>{
       if(res.info.data.length>0){
         self.data.mainData.push.apply(self.data.mainData,res.info.data);
