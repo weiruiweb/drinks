@@ -15,3 +15,6 @@
 .poster_txt2{
 	color:#666;
 }
+page{
+	height:100%;
+}

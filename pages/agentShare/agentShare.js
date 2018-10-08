@@ -21,6 +21,7 @@ Page({
     wx.showLoading();
     if(wx.getStorageSync('threeToken')&&wx.getStorageSync('threeToken')){
        self.getQrData();
+       self.getArtData();
     }else{
       api.logOff();
     };  
@@ -43,11 +44,12 @@ Page({
     const callback = (res)=>{
       if(res){
         self.data.QrData = res;
+        self.data.complete_api.push('getQrData') 
       }  
       self.setData({
         web_QrData:self.data.QrData,
       });
-      wx.hideLoading();
+      self.checkLoadComplete();
     };
     api.getQrCode(postData,callback);
  },
@@ -76,9 +78,7 @@ Page({
     const self = this;
     var complete = api.checkArrayEqual(self.data.complete_api,['getArtData','getQrData']);
     if(complete){
-      
-      
-      self.getImageInfo()
+      self.getImageInfo();
     };
   },
 

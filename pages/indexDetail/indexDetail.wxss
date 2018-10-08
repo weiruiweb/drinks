@@ -108,3 +108,9 @@ swiper{
 .changeCont{
 	display:none;
 }
+
+
+.testFlexDemo{
+	display:flex;
+	justify-content:center;
+}

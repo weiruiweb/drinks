@@ -20,7 +20,7 @@
           <text class="txt1">¥</text>
           <text class="txt2">{{web_mainData.price}}</text>
         </view>
-        <view class="yuan">¥{{web_mainData.passage1}}</view>
+        <!--<view class="yuan">¥{{web_mainData.passage1}}</view>-->
       </view>
     </view>
     <view class="pro_price" data-path="/pages/confirmOrder/confirmOrder?id={{web_mainData.id}}" bindtap="intoPath">
@@ -43,7 +43,7 @@
   </view>
 
   <view class="changeCont" style="{{web_num ==0?'display:block':''}}">
-      <view class="detail_list flexRowBetween1">
+      <view class="detail_list testFlexDemo">
         <view class="content ql-editor" >
           <import src="../../wxParse/wxParse.wxml"/>
           <template is="wxParse" data="{{wxParseData:web_mainData.content}}"/>
@@ -52,7 +52,7 @@
   </view>
 
   <view class="changeCont" style="{{web_num ==1?'display:block':''}}">
-      <view class="detail_list flexRowBetween1">
+      <view class="detail_list testFlexDemo">
         <view class="content ql-editor" >
           <import src="../../wxParse/wxParse.wxml"/>
           <template is="wxParse" data="{{wxParseData:web_artData.content}}"/>

@@ -1,3 +1,10 @@
-<!--userPoster.wxml-->
-<canvas canvas-id="shareCanvas" style="width:375px;height:555px" ></canvas>
-  <button class="submit_input" bindtap="save" style="background:linear-gradient(to right,rgba(113,36,36,1.00),rgba(169,103,103,1.00));color:#fff;border-radius:0;margin-top:1px">保存至相册</button>
+<view style="width:100%;">
+	<view style="margin:0 auto;">
+		<canvas canvas-id="shareCanvas" style="width:370px;height:555px;margin:0 auto;z-index:1" >
+		</canvas>
+		<view style="width:100%;height:100rpx;"></view>
+	</view>
+</view>
+<cover-view  bindtap="save" style="background:rgba(113,36,36,1.00);color:#fff;border-radius:0;margin-top:2px;position:fixed;bottom:0;width:100%;height:46px;line-height:46px;text-align:center;">
+	保存至相册
+</cover-view>

@@ -49,12 +49,12 @@
             <view class="product_buy">
                 <view class="product_price">
                   <view class="pro_price flexRowBetween">
-                    <text>原价{{web_mainData.info.data[0].passage1}}</text>
-                    <text>原价{{web_mainData.info.data[0].passage1}}</text>
+                    <!--<text>原价{{web_mainData.info.data[0].passage1}}</text>
+                    <text>原价{{web_mainData.info.data[0].passage1}}</text>-->
                   </view>
                   <view class="price_bg">
                     <image src="/images/index_icon2.png"></image>
-                    <view class="sale_price">促销价</view>
+                    <!--<view class="sale_price">促销价</view>-->
                   </view>
                 </view>
 

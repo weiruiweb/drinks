@@ -15,6 +15,7 @@ Page({
   onLoad(options) {
     const self = this;
     wx.showLoading();
+    self.getLabelData();
     self.setData({
       fonts:app.globalData.font
     });
@@ -70,6 +71,27 @@ Page({
     api.articleGet(postData,callback);
   },
 
+
+  getLabelData(){
+    const self = this;
+    const postData = {};
+    postData.searchItem = {
+      thirdapp_id:getApp().globalData.thirdapp_id,
+      title:'关于我们',
+    };
+   
+    const callback = (res)=>{
+      if(res.info.data.length>0){ 
+        self.setData({
+          web_labelUrl:res.info.data[0]['mainImg'][0]['url'],
+        });
+        self.data.complete_api.push('getLabelData'); 
+      };
+      self.checkLoadComplete();      
+    };
+    api.labelGet(postData,callback);
+  },
+
   getArtTwoData(){
     const self = this;
     const postData = {};
@@ -107,7 +129,7 @@ Page({
 
    checkLoadComplete(){
     const self = this;
-    var complete = api.checkArrayEqual(self.data.complete_api,['getArtData','getArtTwoData']);
+    var complete = api.checkArrayEqual(self.data.complete_api,['getArtData','getArtTwoData','getLabelData']);
     if(complete){
       wx.hideLoading();
     };
